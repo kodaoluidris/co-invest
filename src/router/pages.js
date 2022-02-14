@@ -229,43 +229,51 @@ const pages = [
     },
   },
   {
-    path: '/censis/module-manager',
-    name: 'censis-module-manager',
-    component: () => import('@/views/censis/setup/modules/datatable/Datatable.vue'),
+    path: '/core/module-manager',
+    name: 'core-module-manager',
+    component: () => import('@/views/core/setup/modules/datatable/Datatable.vue'),
     meta: {
       layout: 'content',
     },
   },
 
   {
-    path: '/censis/customisation',
-    name: 'censis-setup-customisation',
-    component: () => import('@/views/censis/setup/modules/Modules.vue'),
+    path: '/core/customisation',
+    name: 'core-setup-customisation',
+    component: () => import('@/views/core/setup/modules/Modules.vue'),
     meta: {
       layout: 'content',
     },
   },
   {
-    path: '/censis/manageproperties/properties',
-    name: 'censis-manageproperties-properties',
-    component: () => import('@/views/censis/manageproperty/properties/Index.vue'),
+    path: '/checking-ui',
+    name: 'checking-ui',
+    component: () => import('@/views/forms/form-elements/file-input/FileInput.vue'),
     meta: {
       layout: 'content',
     },
   },
   {
-    path: '/censis/manageproperties/types',
-    name: 'censis-manageproperties-types',
-    component: () => import('@/views/censis/manageproperty/property_types/Index.vue'),
+    path: '/core/manageproperties/properties',
+    name: 'core-manageproperties-properties',
+    component: () => import('@/views/core/manageproperty/properties/Index.vue'),
+    meta: {
+      layout: 'content',
+    },
+  },
+  {
+    path: '/core/manageproperties/types',
+    name: 'core-manageproperties-types',
+    component: () => import('@/views/core/manageproperty/property_types/Index.vue'),
     meta: {
       layout: 'content',
     },
   },
 
   {
-    path: '/censis/manageproperties/main',
-    name: 'censis-manageproperties-main',
-    component: () => import('@/views/censis/manageproperty/main/Index.vue'),
+    path: '/core/manageproperties/main',
+    name: 'core-manageproperties-main',
+    component: () => import('@/views/core/manageproperty/main/Index.vue'),
     meta: {
       layout: 'content',
     },

@@ -1,6 +1,6 @@
 <template>
   <div>
-      <v-row class="mb-5">
+    <v-row class="mb-5">
       <v-col
         cols="12"
         sm="6"
@@ -12,7 +12,7 @@
               <h2 class="font-weight-semibold mb-1">
                 123
               </h2>
-              <span>Colleges</span>
+              <span>Properties</span>
             </div>
 
             <v-avatar
@@ -21,10 +21,10 @@
             >
               <v-icon
                 size="25"
-                 color="primary"
+                color="primary"
                 class="rounded-0"
               >
-               {{ icons.mdiSchool }}
+                {{ icons.mdiSchool }}
               </v-icon>
             </v-avatar>
           </v-card-text>
@@ -42,28 +42,26 @@
               <h2 class="font-weight-semibold mb-1">
                 123
               </h2>
-              <span>Departments</span>
+              <span>Property types</span>
             </div>
 
-           <v-avatar
+            <v-avatar
               color="success"
               :class="`v-avatar-light-bg success--text`"
             >
               <v-icon
                 size="25"
-                 color="success"
+                color="success"
                 class="rounded-0"
               >
-               {{ icons.mdiSchool }}
+                {{ icons.mdiSchool }}
               </v-icon>
             </v-avatar>
           </v-card-text>
         </v-card>
       </v-col>
 
-
-
-         <v-col
+      <v-col
         cols="12"
         sm="6"
         md="3"
@@ -74,26 +72,26 @@
               <h2 class="font-weight-semibold mb-1">
                 123
               </h2>
-              <span>Programmes</span>
+              <span>Main properties</span>
             </div>
 
-           <v-avatar
+            <v-avatar
               color="success"
               :class="`v-avatar-light-bg info--text`"
             >
               <v-icon
                 size="25"
-                 color="info"
+                color="info"
                 class="rounded-0"
               >
-               {{ icons.mdiSchool }}
+                {{ icons.mdiSchool }}
               </v-icon>
             </v-avatar>
           </v-card-text>
         </v-card>
       </v-col>
 
-       <v-col
+      <v-col
         cols="12"
         sm="6"
         md="3"
@@ -104,28 +102,24 @@
               <h2 class="font-weight-semibold mb-1">
                 123
               </h2>
-              <span>Courses</span>
+              <span>Users</span>
             </div>
 
-           <v-avatar
+            <v-avatar
               color="success"
               :class="`v-avatar-light-bg secondary--text`"
             >
               <v-icon
                 size="25"
-                 color="secondary"
+                color="secondary"
                 class="rounded-0"
               >
-               {{ icons.mdiSchool }}
+                {{ icons.mdiSchool }}
               </v-icon>
             </v-avatar>
           </v-card-text>
         </v-card>
       </v-col>
-
-
-
-
     </v-row>
 
     <v-row class="match-height">
@@ -165,148 +159,178 @@
       </v-col>
     </v-row>
     <v-row class="ml-2">
-        Modules
+      Modules
     </v-row>
-     <v-row>
+    <v-row>
       <!-- horizontal statistics card -->
       <v-col
         cols="12"
         md="3"
         sm="6"
       >
-       <a href="" style="text-decoration: none">
+        <a
+          href=""
+          style="text-decoration: none"
+        >
           <statistics-card-horizontal
-          color="primary"
-          :icon="icons.mdiAccountOutline"
-          statistics="Admissions"
-        ></statistics-card-horizontal>
-       </a>
+            color="primary"
+            :icon="icons.mdiAccountOutline"
+            statistics="Admissions"
+          ></statistics-card-horizontal>
+        </a>
       </v-col>
 
-       <v-col
+      <v-col
         cols="12"
         md="3"
         sm="6"
       >
-       <a href="" style="text-decoration: none">
+        <a
+          href=""
+          style="text-decoration: none"
+        >
           <statistics-card-horizontal
-          color="success"
-          :icon="icons.mdiCurrencyUsd"
-          statistics="Bursary"
-        ></statistics-card-horizontal>
-       </a>
+            color="success"
+            :icon="icons.mdiCurrencyUsd"
+            statistics="Bursary"
+          ></statistics-card-horizontal>
+        </a>
       </v-col>
 
-       <v-col
+      <v-col
         cols="12"
         md="3"
         sm="6"
       >
-       <a href="" style="text-decoration: none">
+        <a
+          href=""
+          style="text-decoration: none"
+        >
           <statistics-card-horizontal
-          color="info"
-          :icon="icons.mdiAccountPlus"
-          statistics="Registration"
-        ></statistics-card-horizontal>
-       </a>
+            color="info"
+            :icon="icons.mdiAccountPlus"
+            statistics="Registration"
+          ></statistics-card-horizontal>
+        </a>
       </v-col>
 
-       <v-col
+      <v-col
         cols="12"
         md="3"
         sm="6"
       >
-       <a href="" style="text-decoration: none">
+        <a
+          href=""
+          style="text-decoration: none"
+        >
           <statistics-card-horizontal
-          color="warning"
-          :icon="icons.mdiBookAccount"
-          statistics="Result"
-        ></statistics-card-horizontal>
-       </a>
+            color="warning"
+            :icon="icons.mdiBookAccount"
+            statistics="Result"
+          ></statistics-card-horizontal>
+        </a>
       </v-col>
 
-       <v-col
+      <v-col
         cols="12"
         md="3"
         sm="6"
       >
-       <a href="" style="text-decoration: none">
+        <a
+          href=""
+          style="text-decoration: none"
+        >
           <statistics-card-horizontal
-          color="info"
-          :icon="icons.mdiLaptop"
-          statistics="E-Learning"
-        ></statistics-card-horizontal>
-       </a>
+            color="info"
+            :icon="icons.mdiLaptop"
+            statistics="E-Learning"
+          ></statistics-card-horizontal>
+        </a>
       </v-col>
 
-       <v-col
+      <v-col
         cols="12"
         md="3"
         sm="6"
       >
-       <a href="" style="text-decoration: none">
+        <a
+          href=""
+          style="text-decoration: none"
+        >
           <statistics-card-horizontal
-          color="success"
-          :icon="icons.mdiBookCheck"
-          statistics="E-Assessment"
-        ></statistics-card-horizontal>
-       </a>
+            color="success"
+            :icon="icons.mdiBookCheck"
+            statistics="E-Assessment"
+          ></statistics-card-horizontal>
+        </a>
       </v-col>
 
-       <v-col
+      <v-col
         cols="12"
         md="3"
         sm="6"
       >
-       <a href="" style="text-decoration: none">
+        <a
+          href=""
+          style="text-decoration: none"
+        >
           <statistics-card-horizontal
-          color="warning"
-          :icon="icons.mdiAccountGroup"
-          statistics="Senate Decision"
-        ></statistics-card-horizontal>
-       </a>
+            color="warning"
+            :icon="icons.mdiAccountGroup"
+            statistics="Senate Decision"
+          ></statistics-card-horizontal>
+        </a>
       </v-col>
 
-        <v-col
+      <v-col
         cols="12"
         md="3"
         sm="6"
       >
-       <a href="" style="text-decoration: none">
+        <a
+          href=""
+          style="text-decoration: none"
+        >
           <statistics-card-horizontal
-          color="secondary"
-          :icon="icons.mdiBottleTonicPlus"
-          statistics="Health Center"
-        ></statistics-card-horizontal>
-       </a>
+            color="secondary"
+            :icon="icons.mdiBottleTonicPlus"
+            statistics="Health Center"
+          ></statistics-card-horizontal>
+        </a>
       </v-col>
 
-        <v-col
+      <v-col
         cols="12"
         md="3"
         sm="6"
       >
-       <a href="" style="text-decoration: none">
+        <a
+          href=""
+          style="text-decoration: none"
+        >
           <statistics-card-horizontal
-          color="error"
-          :icon="icons.mdiCertificate"
-          statistics="O'Level Service"
-        ></statistics-card-horizontal>
-       </a>
+            color="error"
+            :icon="icons.mdiCertificate"
+            statistics="O'Level Service"
+          ></statistics-card-horizontal>
+        </a>
       </v-col>
 
-        <v-col
+      <v-col
         cols="12"
         md="3"
         sm="6"
       >
-       <a href="" style="text-decoration: none">
+        <a
+          href=""
+          style="text-decoration: none"
+        >
           <statistics-card-horizontal
-          color="primary"
-          :icon="icons.mdiCastEducation"
-          statistics="Teaching Practice"
-        ></statistics-card-horizontal>
-       </a>
+            color="primary"
+            :icon="icons.mdiCastEducation"
+            statistics="Teaching Practice"
+          ></statistics-card-horizontal>
+        </a>
       </v-col>
 
       <!--/ horizontal statistics card -->
@@ -315,17 +339,28 @@
 </template>
 
 <script>
+import {
+  mdiSchool,
+  mdiAccountOutline,
+  mdiCurrencyUsd,
+  mdiTrendingUp,
+  mdiPoll,
+  mdiAccountPlus,
+  mdiBookAccount,
+  mdiLaptop,
+  mdiBookCheck,
+  mdiAccountGroup,
+  mdiBottleTonicPlus,
+  mdiCertificate,
+  mdiCastEducation,
+} from '@mdi/js'
+import StatisticsCardHorizontal from '@/@core/components/statistics-card/StatisticsCardHorizontal.vue'
 import TotalProfit from '../../pages/cards/card-chart/cards/TotalProfit.vue'
 import TotalVisitors from '../../pages/cards/card-chart/cards/TotalVisitors.vue'
 import WeeklySales from '../../pages/cards/card-chart/cards/WeeklySales.vue'
 import TotalRevenue from '../../pages/cards/card-chart/cards/TotalRevenue.vue'
 import WeeklyOverview from '../../pages/cards/card-chart/cards/WeeklyOverview.vue'
-import { mdiSchool, mdiAccountOutline, mdiCurrencyUsd, mdiTrendingUp, mdiPoll,mdiAccountPlus, mdiBookAccount, mdiLaptop, mdiBookCheck, mdiAccountGroup, mdiBottleTonicPlus, mdiCertificate, mdiCastEducation } from '@mdi/js'
-import StatisticsCardHorizontal from '@/@core/components/statistics-card/StatisticsCardHorizontal.vue'
 import StatisticsCard from '../../pages/cards/card-statistics/CardStatisticsCard.vue'
-
-
-
 
 export default {
   components: {
@@ -335,10 +370,10 @@ export default {
     TotalRevenue,
     WeeklyOverview,
     StatisticsCardHorizontal,
-    StatisticsCard
+    StatisticsCard,
   },
-    setup() {
-      // transparent background card
+  setup() {
+    // transparent background card
     const newCustomerOptions = {
       icon: mdiAccountOutline,
       color: 'primary',
@@ -371,8 +406,6 @@ export default {
       color: 'warning',
     }
 
-
-
     // card with images
     const ratingsOptions = {
       statTitle: 'Ratings',
@@ -384,19 +417,25 @@ export default {
       avatarWidth: '112',
     }
 
-
-
     return {
       icons: {
         mdiSchool,
-         mdiAccountOutline, mdiCurrencyUsd, mdiAccountPlus,mdiBookAccount, mdiLaptop, mdiBookCheck, mdiAccountGroup,mdiBottleTonicPlus, mdiCertificate, mdiCastEducation
+        mdiAccountOutline,
+        mdiCurrencyUsd,
+        mdiAccountPlus,
+        mdiBookAccount,
+        mdiLaptop,
+        mdiBookCheck,
+        mdiAccountGroup,
+        mdiBottleTonicPlus,
+        mdiCertificate,
+        mdiCastEducation,
       },
-       newCustomerOptions,
+      newCustomerOptions,
       totalRevenueOptions,
       newTransactions,
       totalProfit,
     }
   },
-
 }
 </script>

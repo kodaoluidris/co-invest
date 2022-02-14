@@ -2,7 +2,7 @@ import { mdiCheckboxBlankCircleOutline } from '@mdi/js'
 
 const themeConfig = {
   app: {
-    name: 'Lifecard',
+    name: 'Co Invest',
     logo: require('@/assets/images/logo.png'),
     isDark: false,
     isRtl: false,

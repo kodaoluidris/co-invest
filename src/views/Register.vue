@@ -140,26 +140,26 @@
                       hide-details="auto"
                       class="mb-6"
                     ></v-text-field>
-                    <v-text-field
+                    <v-select
                       v-model="form.country"
-                      outlined
-                      label="Country"
                       :error-messages="errorMessages.country"
                       :rules="[validators.required]"
-                      placeholder="Country"
-                      hide-details="auto"
+                      :items="data"
+                      label="Country"
+                      placeholder="select a Country"
                       class="mb-6"
-                    ></v-text-field>
-                    <v-text-field
-                      v-model="form.gender"
                       outlined
-                      label="Gender"
+                    ></v-select>
+                    <v-select
+                      v-model="form.gender"
                       :error-messages="errorMessages.gender"
                       :rules="[validators.required]"
-                      placeholder="male, female"
-                      hide-details="auto"
+                      :items="['male', 'female']"
+                      label="Gender"
+                      placeholder="select gender"
                       class="mb-6"
-                    ></v-text-field>
+                      outlined
+                    ></v-select>
                     <v-text-field
                       v-model="password"
                       outlined
@@ -244,6 +244,7 @@ import { ref, getCurrentInstance } from '@vue/composition-api'
 import axios from '@axios'
 import { useRouter } from '@core/utils'
 import themeConfig from '@themeConfig'
+import countriesData from '@/@fake-db/data/other/countries.js'
 
 export default {
   setup() {
@@ -368,6 +369,7 @@ export default {
   data() {
     return {
       form: {},
+      data: [...countriesData],
     }
   },
 }
