@@ -2,24 +2,24 @@ import { mdiCogOutline } from '@mdi/js'
 
 export default [
   {
-    subheader: 'CENSIS',
+    subheader: 'Core',
   },
 
   {
-    title: 'Manage Property',
+    title: 'Property',
     icon: mdiCogOutline,
     children: [
       {
         title: 'Properties',
-        to: 'censis-manageproperties-properties',
+        to: 'core-manageproperties-properties',
       },
       {
         title: 'Property Types',
-        to: 'censis-manageproperties-types',
+        to: 'core-manageproperties-types',
       },
       {
         title: 'Main Properties',
-        to: 'censis-manageproperties-main',
+        to: 'core-manageproperties-main',
       },
 
     ],
