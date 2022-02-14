@@ -2,8 +2,8 @@ import { mdiCheckboxBlankCircleOutline } from '@mdi/js'
 
 const themeConfig = {
   app: {
-    name: 'TAMS PRO',
-    logo: require('@/assets/images/tams.png'),
+    name: 'Lifecard',
+    logo: require('@/assets/images/logo.png'),
     isDark: false,
     isRtl: false,
     contentLayoutNav: 'vertical', // vertical, horizontal

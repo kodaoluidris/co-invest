@@ -53,6 +53,16 @@ const routes = [
     },
   },
   {
+    path: '/dashboard',
+    name: 'dashboard',
+    component: () => import('@/views/dashboards/analytics/Analytics.vue'),
+    meta: {
+      layout: 'blank',
+      resource: 'Public',
+      redirectIfLoggedIn: true,
+    },
+  },
+  {
     path: '/forgot-password',
     name: 'auth-forgot-password',
     component: () => import('@/views/ForgotPassword.vue'),

@@ -220,7 +220,6 @@ const pages = [
     },
   },
 
-
   {
     path: '/pages/account-settings',
     name: 'pages-account-settings',
@@ -246,139 +245,27 @@ const pages = [
       layout: 'content',
     },
   },
+  {
+    path: '/censis/manageproperties/properties',
+    name: 'censis-manageproperties-properties',
+    component: () => import('@/views/censis/manageproperty/properties/Index.vue'),
+    meta: {
+      layout: 'content',
+    },
+  },
+  {
+    path: '/censis/manageproperties/types',
+    name: 'censis-manageproperties-types',
+    component: () => import('@/views/censis/manageproperty/property_types/Index.vue'),
+    meta: {
+      layout: 'content',
+    },
+  },
 
   {
-    path: '/censis/academics/department',
-    name: 'censis-academics-department',
-    component: () => import('@/views/censis/academics/Department.vue'),
-    meta: {
-      layout: 'content',
-    },
-  },
-  {
-    path: '/censis/academics/programme',
-    name: 'censis-academics-programme',
-    component: () => import('@/views/censis/academics/Programme.vue'),
-    meta: {
-      layout: 'content',
-    },
-  },
-  {
-    path: '/censis/academics/specialization',
-    name: 'censis-academics-specialization',
-    component: () => import('@/views/censis/academics/Specialisation.vue'),
-    meta: {
-      layout: 'content',
-    },
-  },
-  {
-    path: '/censis/academics/college',
-    name: 'censis-academics-college',
-    component: () => import('@/views/censis/academics/College.vue'),
-    meta: {
-      layout: 'content',
-    },
-  },
-  {
-    path: '/censis/setup/institution',
-    name: 'censis-setup-institution',
-    component: () => import('@/views/censis/setup/Institution.vue'),
-    meta: {
-      layout: 'content',
-    },
-  },
-  {
-    path: '/censis/setup/campus',
-    name: 'censis-setup-campus',
-    component: () => import('@/views/censis/setup/Campus.vue'),
-    meta: {
-      layout: 'content',
-    },
-  },
-  {
-    path: '/censis/setup/study_programme',
-    name: 'censis-setup-study-programme',
-    component: () => import('@/views/censis/StudyProgramme/Index.vue'),
-    meta: {
-      layout: 'content',
-    },
-    },
-
-    {
-      path: '/censis/coursemanager/curriculum',
-      name: 'censis-coursemanager-curriculum',
-      component: () => import('@/views/censis/coursemanager/Curriculum.vue'),
-      meta: {
-        layout: 'content',
-      },
-    },
-
-    {
-      path: '/censis/coursemanager/coursebank',
-      name: 'censis-coursemanager-coursebank',
-      component: () => import('@/views/censis/coursemanager/CourseBank.vue'),
-      meta: {
-        layout: 'content',
-      },
-    },
-
-    {
-      path: '/censis/coursemanager/programmecurriculum',
-      name: 'censis-coursemanager-programmecurriculum',
-      component: () => import('@/views/censis/coursemanager/ProgrammeCurriculum.vue'),
-      meta: {
-        layout: 'content',
-      },
-    },
-  // {
-  //   path: '/censis/users/prospective',
-  //   name: 'censis-users-prospective',
-  //   component: () => import('@/views/censis/users/prospective.vue'),
-  // },
-  {
-    path: '/censis/setup/schoolsetup',
-    name: 'censis-setup-schoolsetup',
-    component: () => import('@/views/censis/setup/school-setup/EntryMode.vue'),
-    meta: {
-      layout: 'content',
-    },
-  },
-  {
-    path: '/censis/users/staff',
-    name: 'censis-users-staff',
-    component: () => import('@/views/censis/users/staff.vue'),
-    meta: {
-      layout: 'content',
-    },
-  },
-  {
-    path: '/censis/users/students',
-    name: 'censis-users-students',
-    component: () => import('@/views/censis/users/students.vue'),
-    meta: {
-      layout: 'content',
-    },
-  },
-  {
-    path: '/censis/users/prospective',
-    name: 'censis-users-prospective',
-    component: () => import('@/views/censis/users/prospective.vue'),
-    meta: {
-      layout: 'content',
-    },
-  },
-  {
-    path: '/censis/acl/roles',
-    name: 'censis-acl-roles',
-    component: () => import('@/views/censis/acl/Roles.vue'),
-    meta: {
-      layout: 'content',
-    },
-  },
-  {
-    path: '/censis/acl/permissions',
-    name: 'censis-acl-permissions',
-    component: () => import('@/views/censis/acl/Permissions.vue'),
+    path: '/censis/manageproperties/main',
+    name: 'censis-manageproperties-main',
+    component: () => import('@/views/censis/manageproperty/main/Index.vue'),
     meta: {
       layout: 'content',
     },

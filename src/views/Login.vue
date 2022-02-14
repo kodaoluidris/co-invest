@@ -49,12 +49,12 @@
                 max-width="100%"
                 height="692"
                 class="auth-3d-group"
-                :src="require(`@/assets/images/3d-characters/group-${$vuetify.theme.dark ? 'dark' : 'light'}.png`)"
+                src="https://lifecardcompany.ng/img/about.jpg"
               ></v-img>
             </div>
           </div>
         </v-col>
-
+        <!-- require(`@/assets/images/3d-characters/group-${$vuetify.theme.dark ? 'dark' : 'light'}.png`) -->
         <v-col
           lg="4"
           class="d-flex align-center auth-bg pa-10 pb-0"
@@ -70,14 +70,14 @@
               <v-card flat>
                 <v-card-text>
                   <p class="text-2xl font-weight-semibold text--primary mb-2">
-                    Welcome to Materio! 👋🏻
+                    Welcome to back!
                   </p>
                   <p class="mb-2">
-                    Please sign-in to your account and start the adventure
+                    Please sign-in to your account to continue
                   </p>
                 </v-card-text>
 
-                <v-card-text>
+                <!-- <v-card-text>
                   <v-alert
                     text
                     color="primary"
@@ -89,7 +89,7 @@
                       Client Email: <strong>client@materio.com</strong> / Pass: <strong>client</strong>
                     </small>
                   </v-alert>
-                </v-card-text>
+                </v-card-text> -->
 
                 <!-- login form -->
                 <v-card-text>

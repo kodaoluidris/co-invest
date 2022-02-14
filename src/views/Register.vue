@@ -70,10 +70,7 @@
               <v-card flat>
                 <v-card-text>
                   <p class="text-2xl font-weight-semibold text--primary my-2">
-                    Adventure starts here 🚀
-                  </p>
-                  <p class="mb-2">
-                    Make your app management easy and fun!
+                    Create an account to continue
                   </p>
                 </v-card-text>
 
@@ -84,18 +81,47 @@
                     @submit.prevent="handleFormSubmit"
                   >
                     <v-text-field
-                      v-model="username"
+                      v-model="form.fname"
                       outlined
-                      label="Username"
-                      :error-messages="errorMessages.username"
+                      label="First name"
+                      :error-messages="errorMessages.fname"
                       :rules="[validators.required, validators.alphaValidator]"
-                      placeholder="Username"
+                      placeholder="First name"
                       hide-details="auto"
                       class="mb-6"
                     ></v-text-field>
-
                     <v-text-field
-                      v-model="email"
+                      v-model="form.lname"
+                      outlined
+                      label="Last name"
+                      :error-messages="errorMessages.lname"
+                      :rules="[validators.required, validators.alphaValidator]"
+                      placeholder="Last name"
+                      hide-details="auto"
+                      class="mb-6"
+                    ></v-text-field>
+                    <v-text-field
+                      v-model="form.mname"
+                      outlined
+                      label="Middle name"
+                      :error-messages="errorMessages.mname"
+                      :rules="[validators.required, validators.alphaValidator]"
+                      placeholder="Middle name"
+                      hide-details="auto"
+                      class="mb-6"
+                    ></v-text-field>
+                    <v-text-field
+                      v-model="form.username"
+                      outlined
+                      label="User name"
+                      :error-messages="errorMessages.username"
+                      :rules="[validators.required, validators.alphaValidator]"
+                      placeholder="Middle name"
+                      hide-details="auto"
+                      class="mb-6"
+                    ></v-text-field>
+                    <v-text-field
+                      v-model="form.email"
                       outlined
                       :error-messages="errorMessages.email"
                       :rules="[validators.required, validators.emailValidator]"
@@ -104,7 +130,36 @@
                       hide-details="auto"
                       class="mb-6"
                     ></v-text-field>
-
+                    <v-text-field
+                      v-model="form.phone"
+                      outlined
+                      label="Phone number"
+                      :error-messages="errorMessages.phone"
+                      :rules="[validators.required]"
+                      placeholder="Phone number"
+                      hide-details="auto"
+                      class="mb-6"
+                    ></v-text-field>
+                    <v-text-field
+                      v-model="form.country"
+                      outlined
+                      label="Country"
+                      :error-messages="errorMessages.country"
+                      :rules="[validators.required]"
+                      placeholder="Country"
+                      hide-details="auto"
+                      class="mb-6"
+                    ></v-text-field>
+                    <v-text-field
+                      v-model="form.gender"
+                      outlined
+                      label="Gender"
+                      :error-messages="errorMessages.gender"
+                      :rules="[validators.required]"
+                      placeholder="male, female"
+                      hide-details="auto"
+                      class="mb-6"
+                    ></v-text-field>
                     <v-text-field
                       v-model="password"
                       outlined
@@ -308,6 +363,11 @@ export default {
 
       // Template Refs
       registerForm,
+    }
+  },
+  data() {
+    return {
+      form: {},
     }
   },
 }

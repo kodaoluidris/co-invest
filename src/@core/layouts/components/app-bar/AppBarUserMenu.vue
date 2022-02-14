@@ -92,7 +92,7 @@
       </v-list-item>
 
       <!-- Email -->
-      <v-list-item :to="{ name: 'apps-email' }">
+      <!-- <v-list-item :to="{ name: 'apps-email' }">
         <v-list-item-icon class="me-2">
           <v-icon size="22">
             {{ icons.mdiEmailOutline }}
@@ -101,10 +101,10 @@
         <v-list-item-content>
           <v-list-item-title>Inbox</v-list-item-title>
         </v-list-item-content>
-      </v-list-item>
+      </v-list-item> -->
 
       <!-- Chat -->
-      <v-list-item :to="{ name: 'apps-chat' }">
+      <!-- <v-list-item :to="{ name: 'apps-chat' }">
         <v-list-item-icon class="me-2">
           <v-icon size="22">
             {{ icons.mdiChatOutline }}
@@ -122,12 +122,12 @@
           >
           </v-badge>
         </v-list-item-action>
-      </v-list-item>
+      </v-list-item> -->
 
-      <v-divider class="my-2"></v-divider>
+      <!-- <v-divider class="my-2"></v-divider> -->
 
       <!-- Settings -->
-      <v-list-item :to="{ name: 'page-account-settings' }">
+      <!-- <v-list-item :to="{ name: 'page-account-settings' }">
         <v-list-item-icon class="me-2">
           <v-icon size="22">
             {{ icons.mdiCogOutline }}
@@ -136,10 +136,10 @@
         <v-list-item-content>
           <v-list-item-title>Settings</v-list-item-title>
         </v-list-item-content>
-      </v-list-item>
+      </v-list-item> -->
 
       <!-- Pricing -->
-      <v-list-item :to="{ name: 'page-pricing' }">
+      <!-- <v-list-item :to="{ name: 'page-pricing' }">
         <v-list-item-icon class="me-2">
           <v-icon size="22">
             {{ icons.mdiCurrencyUsd }}
@@ -148,10 +148,10 @@
         <v-list-item-content>
           <v-list-item-title>Pricing</v-list-item-title>
         </v-list-item-content>
-      </v-list-item>
+      </v-list-item> -->
 
       <!-- FAQ -->
-      <v-list-item :to="{ name: 'page-faq' }">
+      <!-- <v-list-item :to="{ name: 'page-faq' }">
         <v-list-item-icon class="me-2">
           <v-icon size="22">
             {{ icons.mdiHelpCircleOutline }}
@@ -160,7 +160,7 @@
         <v-list-item-content>
           <v-list-item-title>FAQ</v-list-item-title>
         </v-list-item-content>
-      </v-list-item>
+      </v-list-item> -->
 
       <v-divider class="my-2"></v-divider>
 
