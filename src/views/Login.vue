@@ -2,18 +2,8 @@
   <div class="auth-wrapper auth-v2">
     <div class="auth-inner">
       <!-- brand logo -->
-      <router-link
-        to="/"
-        class="brand-logo d-flex align-center"
-      >
-        <v-img
-          :src="appLogo"
-          max-height="30px"
-          max-width="30px"
-          alt="logo"
-          contain
-          class="me-3 "
-        ></v-img>
+      <router-link to="/" class="brand-logo d-flex align-center">
+        <v-img :src="appLogo" max-height="30px" max-width="30px" alt="logo" contain class="me-3"></v-img>
 
         <h2 class="text--primary">
           {{ appName }}
@@ -22,25 +12,17 @@
       <!--/ brand logo -->
 
       <v-row class="auth-row ma-0">
-        <v-col
-          lg="8"
-          class="d-none d-lg-block position-relative overflow-hidden pa-0"
-        >
+        <v-col lg="8" class="d-none d-lg-block position-relative overflow-hidden pa-0">
           <div class="auth-illustrator-wrapper">
             <!-- triangle bg -->
             <img
               height="362"
               class="auth-mask-bg"
-              :src="require(`@/assets/images/misc/mask-v2-${$vuetify.theme.dark ? 'dark':'light'}.png`)"
+              :src="require(`@/assets/images/misc/mask-v2-${$vuetify.theme.dark ? 'dark' : 'light'}.png`)"
             />
 
             <!-- tree -->
-            <v-img
-              height="226"
-              width="300"
-              class="auth-tree"
-              src="@/assets/images/misc/tree-4.png"
-            ></v-img>
+            <v-img height="226" width="300" class="auth-tree" src="@/assets/images/misc/tree-4.png"></v-img>
 
             <!-- 3d character -->
             <div class="d-flex align-center h-full pa-16 pe-0">
@@ -55,26 +37,13 @@
           </div>
         </v-col>
         <!-- require(`@/assets/images/3d-characters/group-${$vuetify.theme.dark ? 'dark' : 'light'}.png`) -->
-        <v-col
-          lg="4"
-          class="d-flex align-center auth-bg pa-10 pb-0"
-        >
+        <v-col lg="4" class="d-flex align-center auth-bg pa-10 pb-0">
           <v-row>
-            <v-col
-              cols="12"
-              sm="8"
-              md="6"
-              lg="12"
-              class="mx-auto"
-            >
+            <v-col cols="12" sm="8" md="6" lg="12" class="mx-auto">
               <v-card flat>
                 <v-card-text>
-                  <p class="text-2xl font-weight-semibold text--primary mb-2">
-                    Welcome to back!
-                  </p>
-                  <p class="mb-2">
-                    Please sign-in to your account to continue
-                  </p>
+                  <p class="text-2xl font-weight-semibold text--primary mb-2">Welcome back!</p>
+                  <p class="mb-2">Please sign-in to your account to continue</p>
                 </v-card-text>
 
                 <!-- <v-card-text>
@@ -93,10 +62,7 @@
 
                 <!-- login form -->
                 <v-card-text>
-                  <v-form
-                    ref="loginForm"
-                    @submit.prevent="handleFormSubmit"
-                  >
+                  <v-form ref="loginForm" @submit.prevent="handleFormSubmit">
                     <v-text-field
                       v-model="email"
                       outlined
@@ -115,7 +81,7 @@
                       label="Password"
                       :error-messages="errorMessages.password"
                       placeholder="Password"
-                      :append-icon="isPasswordVisible ? icons.mdiEyeOffOutline:icons.mdiEyeOutline"
+                      :append-icon="isPasswordVisible ? icons.mdiEyeOffOutline : icons.mdiEyeOutline"
                       :rules="[validators.required]"
                       hide-details="auto"
                       class="mb-2"
@@ -123,41 +89,20 @@
                     ></v-text-field>
 
                     <div class="d-flex align-center justify-space-between flex-wrap">
-                      <v-checkbox
-                        hide-details
-                        label="Remember Me"
-                        class="mt-0"
-                      >
-                      </v-checkbox>
+                      <v-checkbox hide-details label="Remember Me" class="mt-0"> </v-checkbox>
 
                       <!-- forget link -->
-                      <router-link
-                        :to="{name:'auth-forgot-password'}"
-                        class="ms-3"
-                      >
-                        Forgot Password?
-                      </router-link>
+                      <router-link :to="{ name: 'auth-forgot-password' }" class="ms-3"> Forgot Password? </router-link>
                     </div>
 
-                    <v-btn
-                      block
-                      color="primary"
-                      type="submit"
-                      class="mt-6"
-                    >
-                      Login
-                    </v-btn>
+                    <v-btn block color="primary" type="submit" class="mt-6"> Login </v-btn>
                   </v-form>
                 </v-card-text>
 
                 <!-- create new account  -->
                 <v-card-text class="d-flex align-center justify-center flex-wrap mt-2">
-                  <p class="mb-0 me-2">
-                    New on our platform?
-                  </p>
-                  <router-link :to="{name:'auth-register'}">
-                    Create an account
-                  </router-link>
+                  <p class="mb-0 me-2">New on our platform?</p>
+                  <router-link :to="{ name: 'auth-register' }"> Create an account </router-link>
                 </v-card-text>
 
                 <!-- divider -->
@@ -169,13 +114,8 @@
 
                 <!-- socail links -->
                 <v-card-actions class="d-flex justify-center">
-                  <v-btn
-                    v-for="link in socialLink"
-                    :key="link.icon"
-                    icon
-                    class="ms-1"
-                  >
-                    <v-icon :color="$vuetify.theme.dark ? link.colorInDark:link.color">
+                  <v-btn v-for="link in socialLink" :key="link.icon" icon class="ms-1">
+                    <v-icon :color="$vuetify.theme.dark ? link.colorInDark : link.color">
                       {{ link.icon }}
                     </v-icon>
                   </v-btn>
