@@ -23,7 +23,7 @@
 
       <v-row class="auth-row ma-0">
         <v-col
-          lg="8"
+          lg="6"
           class="d-none d-lg-block position-relative overflow-hidden pa-0"
         >
           <div class="auth-illustrator-wrapper">
@@ -56,7 +56,7 @@
         </v-col>
 
         <v-col
-          lg="4"
+          lg="6"
           class="d-flex align-center auth-bg pa-10 pb-0"
         >
           <v-row>
@@ -82,7 +82,6 @@
                   >
                     <v-text-field
                       v-model="form.fname"
-                      outlined
                       label="First name"
                       :error-messages="errorMessages.fname"
                       :rules="[validators.required, validators.alphaValidator]"
@@ -92,7 +91,6 @@
                     ></v-text-field>
                     <v-text-field
                       v-model="form.lname"
-                      outlined
                       label="Last name"
                       :error-messages="errorMessages.lname"
                       :rules="[validators.required, validators.alphaValidator]"
@@ -102,7 +100,6 @@
                     ></v-text-field>
                     <v-text-field
                       v-model="form.mname"
-                      outlined
                       label="Middle name"
                       :error-messages="errorMessages.mname"
                       :rules="[validators.required, validators.alphaValidator]"
@@ -110,19 +107,17 @@
                       hide-details="auto"
                       class="mb-6"
                     ></v-text-field>
-                    <v-text-field
+                    <!-- <v-text-field
                       v-model="form.username"
-                      outlined
                       label="User name"
                       :error-messages="errorMessages.username"
                       :rules="[validators.required, validators.alphaValidator]"
                       placeholder="Middle name"
                       hide-details="auto"
                       class="mb-6"
-                    ></v-text-field>
+                    ></v-text-field> -->
                     <v-text-field
                       v-model="form.email"
-                      outlined
                       :error-messages="errorMessages.email"
                       :rules="[validators.required, validators.emailValidator]"
                       label="Email"
@@ -130,17 +125,16 @@
                       hide-details="auto"
                       class="mb-6"
                     ></v-text-field>
-                    <v-text-field
+                    <!-- <v-text-field
                       v-model="form.phone"
-                      outlined
                       label="Phone number"
                       :error-messages="errorMessages.phone"
                       :rules="[validators.required]"
                       placeholder="Phone number"
                       hide-details="auto"
                       class="mb-6"
-                    ></v-text-field>
-                    <v-select
+                    ></v-text-field> -->
+                    <!-- <v-select
                       v-model="form.country"
                       :error-messages="errorMessages.country"
                       :rules="[validators.required]"
@@ -148,9 +142,8 @@
                       label="Country"
                       placeholder="select a Country"
                       class="mb-6"
-                      outlined
-                    ></v-select>
-                    <v-select
+                    ></v-select> -->
+                    <!-- <v-select
                       v-model="form.gender"
                       :error-messages="errorMessages.gender"
                       :rules="[validators.required]"
@@ -158,11 +151,9 @@
                       label="Gender"
                       placeholder="select gender"
                       class="mb-6"
-                      outlined
-                    ></v-select>
+                    ></v-select> -->
                     <v-text-field
                       v-model="password"
-                      outlined
                       :type="isPasswordVisible ? 'text' : 'password'"
                       label="Password"
                       :error-messages="errorMessages.password"

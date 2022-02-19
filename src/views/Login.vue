@@ -23,7 +23,7 @@
 
       <v-row class="auth-row ma-0">
         <v-col
-          lg="8"
+          lg="6"
           class="d-none d-lg-block position-relative overflow-hidden pa-0"
         >
           <div class="auth-illustrator-wrapper">
@@ -56,20 +56,20 @@
         </v-col>
 
         <v-col
-          lg="4"
+          lg="6"
           class="d-flex align-center auth-bg pa-10 pb-0"
         >
           <v-row>
             <v-col
               cols="12"
-              sm="8"
-              md="6"
+              sm="12"
+              md="12"
               lg="12"
-              class="mx-auto"
+              class="mx-autom"
             >
               <v-card flat>
-                <v-card-text>
-                  <p class="text-2xl font-weight-semibold text--primary mb-2">
+                <v-card-text id="v_card">
+                  <p class="text-3xl font-weight-semibold text--primary mb-2">
                     Welcome to back!
                   </p>
                   <p class="mb-2">
@@ -99,18 +99,18 @@
                   >
                     <v-text-field
                       v-model="email"
-                      outlined
+
                       label="Email"
                       placeholder="email"
                       :error-messages="errorMessages.email"
                       :rules="[validators.required, validators.emailValidator]"
                       hide-details="auto"
-                      class="mb-6"
+                      class="mb-6 form_margin"
                     ></v-text-field>
 
                     <v-text-field
                       v-model="password"
-                      outlined
+
                       :type="isPasswordVisible ? 'text' : 'password'"
                       label="Password"
                       :error-messages="errorMessages.password"
@@ -140,10 +140,11 @@
                     </div>
 
                     <v-btn
+                      x-large
                       block
                       color="primary"
                       type="submit"
-                      class="mt-6"
+                      class="mt-6 form_button_margin"
                     >
                       Login
                     </v-btn>
@@ -321,4 +322,18 @@ export default {
 
 <style lang="scss" scoped>
 @import '@core/preset/preset/pages/auth.scss';
+.auth-wrapper.auth-v2 .auth-inner .auth-bg .v-card {
+  max-width: 100% !important;
+}
+
+#v_card {
+  margin-bottom: 32px !important;
+}
+.form_margin {
+  margin-bottom: 50px !important;
+}
+
+.form_button_margin {
+  margin-top: 70px !important;
+}
 </style>

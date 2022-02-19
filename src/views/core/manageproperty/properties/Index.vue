@@ -224,7 +224,7 @@
                           <v-list-item>
                             <v-list-item-title
                               style="cursor:pointer"
-                              @click="deleteMainProperty(p.id)"
+                              @click="deleteProperty(p.id)"
                             >
                               <i class="mdi mdi-delete-forever-outline mr-1"></i> Delete
                             </v-list-item-title>
