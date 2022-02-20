@@ -4,6 +4,7 @@ import Router from 'vue-router';
 import Layout from '@/components/Layout/Layout';
 import Login from '@/pages/Auth/Login';
 import ForgotPassword from '@/pages/Auth/ForgotPassword';
+import Profile from '@/pages/Auth/Profile';
 import Register from '@/pages/Auth/Register';
 import ErrorPage from '@/pages/Error/Error';
 // Core
@@ -33,6 +34,7 @@ import NotificationsPage from '@/pages/Notifications/Notifications';
 Vue.use(Router);
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
@@ -63,11 +65,21 @@ export default new Router({
       path: '/app',
       name: 'Layout',
       component: Layout,
+      meta: {
+        requiresAuth: true
+      },
       children: [
         {
           path: 'dashboard',
           name: 'AnalyticsPage',
           component: AnalyticsPage,
+         
+        },
+        {
+          path: 'profile',
+          name: 'ProfilePage',
+          component: Profile,
+         
         },
         {
           path: 'manage-properties/properties',

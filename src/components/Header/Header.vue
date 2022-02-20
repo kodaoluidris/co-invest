@@ -38,7 +38,7 @@
           <span class="avatar rounded-circle thumb-sm float-left mr-2">
             <img class="rounded-circle" src="../../assets/people/a7.png" alt="..." />
           </span>
-          <span class="px-2">{{authData.fname + ' ' +  authData.lname}}</span>
+          <span class="px-2">{{authData.username ? authData.username : authData.fname + ' ' +  authData.lname}}</span>
           <!-- <span class="ml-1 mr-2 circle text-white fw-bold avatar-badge">9</span> -->
           <i class='fi flaticon-arrow-down px-2' />
         </template>
@@ -48,7 +48,7 @@
         <template slot="button-content">
           <i class='fi flaticon-settings-10 px-2' />
         </template>
-        <b-dropdown-item><i class='fi flaticon-person px-3 mr-3' /> My Account</b-dropdown-item>
+        <b-dropdown-item @click="navigate"><i class='fi flaticon-person px-3 mr-2' />My Account</b-dropdown-item>
         <b-dropdown-divider />
         <b-dropdown-item><i class='fi flaticon-person px-3 mr-2' />Password</b-dropdown-item>
         <!-- <b-dropdown-item><i class='fi flaticon-email px-3 mr-3' />
@@ -74,8 +74,12 @@ export default {
     ...mapState('layout', ['sidebarClose', 'sidebarStatic']),
     ...mapState('page', ['authData'])
   },
+  mounted() {
+    this.getAuthData()
+  },
   methods: {
     ...mapActions('layout', ['toggleSidebar', 'switchSidebar', 'changeSidebarActive']),
+    ...mapActions('page', ['getAuthData']),
     switchSidebarMethod() {
       if (!this.sidebarClose) {
         this.switchSidebar(true);
@@ -103,6 +107,9 @@ export default {
       window.localStorage.removeItem('auth_user');
       this.$router.push('/login');
     },
+    navigate() {
+      this.$router.push({name: 'ProfilePage'});
+    }
   }
 };
 </script>

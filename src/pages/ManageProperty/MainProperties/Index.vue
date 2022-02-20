@@ -178,7 +178,7 @@
 
         <!-- Modals -->
         <b-modal size="" style="background:white" title="Main Property" id="create" hide-footer>
-            <create :my_model="$bvModal" :property_types="property_types" @submitted="fetchData()"  />
+            <create :my_model="$bvModal" :auth_token="authToken" :property_types="property_types" @submitted="fetchData()"  />
         </b-modal>
         <b-modal size="" style="background:white" title="View Main Property" id="view" hide-footer>
             <viewModal :my_model="$bvModal" :data="current" :property_types="property_types"  />
@@ -187,7 +187,7 @@
             <viewImageModal :my_model="$bvModal" :data="current_img" :main_name="main_name" />
         </b-modal>
         <b-modal size="" style="background:white" title="Edit Main Property" id="edit" hide-footer>
-            <edit :my_model="$bvModal" :data="current" :property_types="property_types" @updated="fetchData()"  />
+            <edit :my_model="$bvModal" :auth_token="authToken" :data="current" :property_types="property_types" @updated="fetchData()"  />
         </b-modal>
         <!-- Modals end -->
         <!-- V Dialog -->
@@ -253,7 +253,7 @@
                 <v-btn
                     color="primary darken-1"
                     text
-                    @click="deleteProperty(del_id);openConfirm2=false"
+                    @click="deleteMainProperty(del_id);openConfirm2=false"
 
 
                 >
@@ -273,6 +273,7 @@ import viewImageModal from "./partials/Images.vue"
 import edit from "./partials/Edit.vue"
 import axios from 'axios'
 import VueElementLoading from 'vue-element-loading'
+import { mapState } from 'vuex';
 
 export default {
     components:{Widget,create,edit,viewModal,VueElementLoading,viewImageModal},
@@ -296,6 +297,9 @@ export default {
 
         }
     },
+    computed:{
+        ...mapState('page',['authToken'])
+    },
     mounted() {
         this.fetchData();
         this.fetchPropertyTypes();
@@ -314,6 +318,11 @@ export default {
       axios
         .post(this.dynamic_route('/main_properties/all'), {
           filters: this.filters,
+        }, {
+            headers:{
+                authorization: `Bearer ${this.authToken}`
+
+            }
         })
         .then(res => {
           this.loading = false
@@ -333,11 +342,19 @@ export default {
         .post(this.dynamic_route('/property_types/all'), {
           not_paginated: true,
           active_only: true,
+        }, {
+            headers:{
+                authorization: `Bearer ${this.authToken}`
+
+            }
         })
         .then(res => {
           this.property_types = res.data.data;
         })
         .catch(err => {
+            if(err.response.status == 401 && err.response.statusText == "Unauthorized") {
+                return this.logoutUser();
+            }
           // eslint-disable-next-line no-console
           console.log(err)
         })
@@ -346,7 +363,12 @@ export default {
     toggle_status(id, status) {
       this.loading = true
       axios
-        .put(this.dynamic_route(`/main_properties/toggle-status/${id}`), { id, status })
+        .put(this.dynamic_route(`/main_properties/toggle-status/${id}`), { id, status }, {
+            headers:{
+                authorization: `Bearer ${this.authToken}`
+
+            }
+        })
         .then(() => {
           this.fetchData()
           this.$toast.success('Status updated successfully!', {
@@ -364,8 +386,11 @@ export default {
             rtl: false,
           })
         })
-        .catch(() => {
-          this.loading = false
+        .catch((err) => {
+          this.loading = false;
+           if(err.response.status == 401 && err.response.statusText == "Unauthorized") {
+            return this.logoutUser();
+          }
           this.$toast.error('An error occurred please try again!', {
             position: 'top-center',
             timeout: 5000,
@@ -385,10 +410,15 @@ export default {
           this.loading = false
         })
     },
-    deleteProperty(id) {
+    deleteMainProperty(id) {
       this.loading = true
       axios
-        .delete(this.dynamic_route(`/main_properties/${id}`))
+        .delete(this.dynamic_route(`/main_properties/${id}`), {
+            headers:{
+                authorization: `Bearer ${this.authToken}`
+
+            }
+        })
         .then(() => {
           this.fetchData()
           this.$toast.success('Deleted successfully!', {
@@ -407,7 +437,10 @@ export default {
           })
         })
         .catch(err => {
-          this.loading = false
+          this.loading = false;
+           if(err.response.status == 401 && err.response.statusText == "Unauthorized") {
+            return this.logoutUser();
+          }
           if (err.response.status == 500) {
             return this.$toast.error('Unable to delete property  it has been used in many places!', {
               position: 'top-center',

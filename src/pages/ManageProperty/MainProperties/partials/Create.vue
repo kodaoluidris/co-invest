@@ -153,7 +153,7 @@ import VueElementLoading from 'vue-element-loading'
 import axios from 'axios'
 
 export default {
-    props:['my_model', 'property_types'],
+    props:['my_model', 'property_types', 'auth_token'],
     components:{ quillEditor,VueElementLoading },
     data() {
         return {
@@ -260,7 +260,12 @@ export default {
             }
             
             axios
-            .post(this.dynamic_route('/main_properties/'), payload)
+            .post(this.dynamic_route('/main_properties/'), payload, {
+                headers:{
+                  authorization: `Bearer ${this.auth_token}`
+
+                }
+            })
             .then(() => {
                 this.loading = false
                 delete this.form.name
@@ -283,8 +288,11 @@ export default {
                     rtl: false,
                 })
             })
-            .catch(() => {
-                this.loading = false
+            .catch((err) => {
+                this.loading = false;
+                if(err.response.status == 401 && err.response.statusText == "Unauthorized") {
+                    return this.logoutUser();
+                }
                 this.$toast.error('An error occurred, try again later!', {
                     position: 'top-center',
                     timeout: 5000,

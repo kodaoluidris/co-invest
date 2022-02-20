@@ -99,7 +99,7 @@ import axios from 'axios'
 import VueElementLoading from 'vue-element-loading'
 
 export default {
-    props:['my_model', 'data', 'properties'],
+    props:['my_model', 'data', 'properties','auth_token'],
     components:{ quillEditor,VueElementLoading },
     data() {
         return {
@@ -136,7 +136,11 @@ export default {
         update() {
             this.loading = true
             axios
-            .post(this.dynamic_route(`/property_types/update/${this.form.id}`), this.form)
+            .post(this.dynamic_route(`/property_types/update/${this.form.id}`), this.form, {
+                headers:{
+                    authorization: `Bearer ${this.auth_token}s`
+                }
+            })
             .then(() => {
                 this.loading = false
                 this.closeMe()
@@ -156,8 +160,11 @@ export default {
                     rtl: false,
                 })
             })
-            .catch(() => {
-                this.loading = false
+            .catch((err) => {
+                this.loading = false;
+                if(err.response.status == 401 && err.response.statusText == "Unauthorized") {
+                    return this.logoutUser();
+                }
                 this.$toast.error('An error occurred, try again later!', {
                     position: 'top-center',
                     timeout: 5000,

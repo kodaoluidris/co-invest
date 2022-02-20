@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue';
@@ -37,9 +38,10 @@ Vue.config.productionTip = false;
 
 //  navigation guards
 router.beforeEach((to, from, next) => {
+  let isLoggedIn = localStorage.getItem('auth_token');
   if (to.matched.some(record => record.meta.requiresAuth)) {
     //  Route requires AUth? Check if logged in. If not, redirect to login page
-    if(store.getters.loggedIn == null || store.getters.loggedIn == undefined) {
+    if(!isLoggedIn || isLoggedIn==null) {
       next({
         name: 'Login'
       })
@@ -69,6 +71,26 @@ Vue.mixin({
       // return `https://api.diimtech.com/api/${endUrl}`;
       return `http://localhost:1000/api/auth${endUrl}`
     },
+
+    logoutUser() {
+      this.$toast.error('Login expired, please login again!', {
+        position: 'top-center',
+        timeout: 5000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: 'button',
+        icon: true,
+        rtl: false,
+      })
+      localStorage.removeItem('auth_token');
+      localStorage.removeItem('auth_user');
+      return this.$router.push({name: 'Login'});
+    }
 
   },
 })
