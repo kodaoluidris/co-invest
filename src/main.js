@@ -1,32 +1,64 @@
-import '@/@fake-db/db'
-import { i18n } from '@/plugins/i18n'
-import '@/plugins/vue-composition-api'
-import '@/styles/styles.scss'
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
-// Import Bootstrap an BootstrapVue CSS files (order is important)
-import 'bootstrap/dist/css/bootstrap.css'
-import Vue from 'vue'
-import Toast from 'vue-toastification'
-// Import the CSS or use your own!
-import 'vue-toastification/dist/index.css'
-import App from './App.vue'
-import './plugins/acl'
+// The Vue build version to load with the `import` command
+// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
+import Vue from 'vue';
+import BootstrapVue from 'bootstrap-vue';
+import * as VueGoogleMaps from 'vue2-google-maps';
+import VueTouch from 'vue-touch';
+import Trend from 'vuetrend';
+// import Toasted from 'vue-toasted';
+import VueApexCharts from 'vue-apexcharts';
+
+import store from './store';
+import router from './Routes';
+import App from './App';
+import layoutMixin from './mixins/layout';
+import Widget from './components/Widget/Widget';
 import vuetify from './plugins/vuetify'
-import router from './router'
-import store from './store'
+import 'vue-toastification/dist/index.css'
+import Toast from 'vue-toastification';
 
 
-
-// Make BootstrapVue available throughout your project
-Vue.use(BootstrapVue)
+Vue.use(BootstrapVue);
 Vue.use(Toast)
 
-// Optionally install the BootstrapVue icon components plugin
-Vue.use(IconsPlugin)
+Vue.use(VueTouch);
+Vue.use(Trend);
+Vue.component('Widget', Widget);
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: 'AIzaSyB7OXmzfQYua_1LEhRdqsoYzyJOPh9hGLg',
+  },
+});
+Vue.component('apexchart', VueApexCharts);
+Vue.mixin(layoutMixin);
+// Vue.use(Toasted, {duration: 10000});
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
+//  navigation guards
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    //  Route requires AUth? Check if logged in. If not, redirect to login page
+    if(store.getters.loggedIn == null || store.getters.loggedIn == undefined) {
+      next({
+        name: 'Login'
+      })
+    } else {
+      next()
+    }
+  } else if (to.matched.some(record => record.meta.requiresVisitor)) {
+    //  Route requires AUth? Check if logged in. If not, redirect to login page
+    if(store.getters.loggedIn) {
+      next({
+        name: 'AnalyticsPage'
+      })
+    } else {
+      next()
+    }
+  } else {
+    next() // make sure to always call next()!
+  }
+});
 Vue.mixin({
   methods: {
     dynamic_route(endUrl) {
@@ -35,16 +67,17 @@ Vue.mixin({
     },
     dynamic_auth_route(endUrl) {
       // return `https://api.diimtech.com/api/${endUrl}`;
-      return `http://localhost:1000/api${endUrl}`
+      return `http://localhost:1000/api/auth${endUrl}`
     },
 
   },
 })
 
+/* eslint-disable no-new */
 new Vue({
-  router,
+  el: '#app',
   store,
-  i18n,
+  router,
   vuetify,
-  render: h => h(App),
-}).$mount('#app')
+  render: h => h(App)
+});
