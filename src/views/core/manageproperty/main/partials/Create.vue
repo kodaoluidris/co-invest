@@ -24,21 +24,31 @@
       @submit.prevent="save"
       @reset="onReset"
     >
-      <input
-        ref="input_file"
+      <div class="mb-3">
+        <v-file-input
+          ref="input_file"
+          v-model="main_data"
+          multiple
+          label="Click to upload images"
+          required
+          @change="onFileChange"
+        ></v-file-input>
+      </div>
+      <!-- <input
+
         type="file"
         placeholder=""
         multiple
         required
         style="visibility:hidden"
-        @change="onFileChange"
+
       />
       <span
         class="btn border-0 border-none w-100 btn-block"
         @click.prevent="handleClick"
       >
         <i class="mdi mdi-cloud-upload"></i> Upload Image
-      </span>
+      </span> -->
 
       <b-form-group
         label="Name"
@@ -180,6 +190,7 @@ export default {
       delta: undefined,
       loading: false,
       image_data: [],
+      main_data: [],
     }
   },
   watch: {
@@ -262,8 +273,8 @@ export default {
         this.show = true
       })
     },
-    onFileChange(e) {
-      const file = e.target.files
+    onFileChange() {
+      const file = this.main_data
       for (let i = 0; i < file.length; i++) {
         this.image_data.push({
           name: file[i].name,
@@ -304,6 +315,7 @@ export default {
       button.forEach((but, i) => {
         but.addEventListener('click', () => {
           this.image_data.splice(i, 1)
+          this.main_data.splice(i, 1)
           this.show_image(this.image_data)
         })
       })
