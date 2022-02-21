@@ -1,0 +1,50 @@
+<template>
+    <div>
+        <nav class="navbar navbar-expand-md bg-white landing-nav navbar-light py-2">
+            <div class="container-fluid contain">
+                <!-- Brand -->
+                <a class="navbar-brand logo" href="#">
+                    <h5><span style="color: #1abc9c">Co</span><span>Invest</span></h5>
+                </a>
+
+                <!-- Toggler/collapsibe Button -->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Navbar links -->
+                <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Signup</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</template>
+
+<script>
+export default {
+    
+}
+</script>
+
+<style scoped>
+.landing-nav, .nav-item a {
+    color: #111111 !important;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 20px 0;
+} 
+.logo h5    {
+    color: #111111 !important;
+    font-size: 20px;
+    font-weight: 600;
+}
+</style>
