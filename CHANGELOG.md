@@ -1,17 +1,66 @@
-### [1.0.2](https://github.com/themeselection/materio-vuetify-vuejs-admin-template/releases/tag/v1.0.2) (2021-11-12)
+# Changelog
 
-#### Fixed
+## [v2.1.8]
 
-- Updated [@vue/composition-api](https://github.com/vuejs/composition-api) package to v1.3.3 to mitigate composition api error
+### Updated
+- Update dependencies
+- Add link to generator in sidebar
 
-### [1.0.1](https://github.com/themeselection/materio-vuetify-vuejs-admin-template/releases/tag/v1.0.1) (2021-10-20)
+## [v2.1.7]
 
-#### Updated
+### Updated
+- Update design
 
-- Uses npm package instead of github repo for forked apexcharts
+## [v2.1.6]
 
-## [1.0.0](https://github.com/themeselection/materio-vuetify-vuejs-admin-template/releases/tag/v1.0.0) (2021-08-09)
+### Updated
+- Update dependencies
+- Fix errors in sidebar and icon page
 
-#### Added
+## [v2.1.5]
 
-- Initial Release
+### Updated
+- Update footer on login page
+
+## [v2.1.4]
+
+### Updated
+- Header: add more space between badge and arrow, clean logo;
+- Dashboard: switch button to badge in main table;
+- Typography: fixed the typos and adaptive;
+- Notifications: fix error notification and 'close' color;
+- Update dependencies and changelog.
+
+## [v2.1.3]
+
+### Updated
+- Navbar: fix adaptive, broken links, add padding;
+- Helper: fix icons and colors;
+- Dashboard: change icon arrow color;
+- Table: fix button margin, add colors to badges;
+- Notifications: fix error notification;
+- Typography: fix mobile view;
+- Charts: fix several colors;
+- Update dependencies.
+
+## [v2.1.2]
+### Updated
+
+- Update dependency
+
+## [v2.1.1]
+### Updated
+
+- Update dependency
+- Fix animation class
+- Fix Echart Donut Chart in charts page 
+
+## [v2.1.0]
+### Updated
+
+- New Design
+
+## [v2.0.0]
+### Updated
+
+- Remove All Jquery

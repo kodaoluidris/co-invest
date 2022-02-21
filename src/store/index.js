@@ -1,16 +1,16 @@
-import appConfigStoreModule from '@core/@app-config/appConfigStoreModule'
-import Vue from 'vue'
-import Vuex from 'vuex'
-import app from './app'
+import Vue from 'vue';
+import Vuex from 'vuex';
 
-Vue.use(Vuex)
+import layout from './layout';
+import auth from './auth';
+import page from './page';
+
+Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
-  mutations: {},
-  actions: {},
   modules: {
-    appConfig: appConfigStoreModule,
-    app,
+    layout,
+    auth,
+    page
   },
-})
+});
