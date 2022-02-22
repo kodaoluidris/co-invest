@@ -30,6 +30,10 @@ import ChartsPage from '@/pages/Charts/Charts';
 import IconsPage from '@/pages/Icons/Icons';
 import NotificationsPage from '@/pages/Notifications/Notifications';
 
+// Landing Page
+const LandingPage = () => import('@/pages/LandingPage/Index')
+const PropertyDetails = () => import('@/pages/LandingPage/PropertyDetails')
+
 
 Vue.use(Router);
 
@@ -39,7 +43,17 @@ export default new Router({
     {
       path: '/',
       name: 'Home',
-      redirect: '/app/dashboard',
+      redirect: '/home',
+    },
+    {
+      path: '/home',
+      name: 'Home',
+      component: LandingPage,
+    },
+    {
+      path: '/home/property/details/:propertyId',
+      name: 'PropertyDetails',
+      component: PropertyDetails,
     },
     {
       path: '/login',
