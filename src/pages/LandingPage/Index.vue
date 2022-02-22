@@ -78,7 +78,7 @@
                             </div>
                             <div class="pi-text">
                                 <div class="pt-price">$ 289.0<span>/month</span></div>
-                                <h5><a href="#">Home in Merrick Way</a></h5>
+                                <h5><b-link :to="{ name: 'PropertyDetails', params: { propertyId: 1}}">Home in Merrick Way</b-link></h5>
                                 <p><span class="mdi mdi-map-marker-outline"></span> 3 Middle Winchendon Rd, Rindge, NH 03461</p>
                                 <ul>
                                     <li><i class="fa fa-object-group"></i> 2,283</li>
@@ -96,7 +96,7 @@
                             </div>
                             <div class="pi-text">
                                 <div class="pt-price">$ 289.0</div>
-                                <h5><a href="#">Unimont Aurum</a></h5>
+                                <h5><b-link :to="{ name: 'PropertyDetails', params: { propertyId: 2}}">Unimont Aurum</b-link></h5>
                                 <p><span class="mdi mdi-map-marker-outline"></span> Gut No.102, Opp. HP Petrol Pump, Karjat</p>
                                 <ul>
                                     <li><i class="fa fa-object-group"></i> 2, 283</li>
@@ -114,7 +114,7 @@
                             </div>
                             <div class="pi-text">
                                 <div class="pt-price">$ 289.0</div>
-                                <h5><a href="#">Vrindavan Flora</a></h5>
+                                <h5><b-link :to="{ name: 'PropertyDetails', params: { propertyId: 3}}">Vrindavan Flora</b-link></h5>
                                 <p><span class="mdi mdi-map-marker-outline"></span> No. 15, 16, 17-1A And 17-2, Rasayani, Rasayani</p>
                                 <ul>
                                     <li><i class="fa fa-object-group"></i> 2, 283</li>
@@ -132,7 +132,7 @@
                             </div>
                             <div class="pi-text">
                                 <div class="pt-price">$ 289.0</div>
-                                <h5><a href="#">Shramik Vaibhav</a></h5>
+                                <h5><b-link :to="{ name: 'PropertyDetails', params: { propertyId: 4}}">Shramik Vaibhav</b-link></h5>
                                 <p><span class="mdi mdi-map-marker-outline"></span> 12 Pt at Shedung, Panvel, Raigarh, Navi Mumbai</p>
                                 <ul>
                                     <li><i class="fa fa-object-group"></i> 2, 283</li>
@@ -150,7 +150,7 @@
                             </div>
                             <div class="pi-text">
                                 <div class="pt-price">$ 289.0</div>
-                                <h5><a href="#">Poddar Wondercity</a></h5>
+                                <h5><b-link :to="{ name: 'PropertyDetails', params: { propertyId: 5}}">Poddar Wondercity</b-link></h5>
                                 <p><span class="mdi mdi-map-marker-outline"></span> Badlapur East, Beyond Thane</p>
                                 <ul>
                                     <li><i class="fa fa-object-group"></i> 2, 283</li>
@@ -168,7 +168,7 @@
                             </div>
                             <div class="pi-text">
                                 <div class="pt-price">$ 289.0<span>/month</span></div>
-                                <h5><a href="#">GoldCrest Residency</a></h5>
+                                <h5><b-link :to="{ name: 'PropertyDetails', params: { propertyId: 6}}">GoldCrest Residency</b-link></h5>
                                 <p><span class="mdi mdi-map-marker-outline"></span> No.7, Sector- 11, Ghansoli, Mumbai, Navi Mumbai</p>
                                 <ul>
                                     <li><i class="fa fa-object-group"></i> 2, 283</li>
