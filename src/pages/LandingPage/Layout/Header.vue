@@ -1,6 +1,6 @@
 <template>
     <div>
-        <nav class="navbar navbar-expand-md bg-white landing-nav navbar-light py-2">
+        <nav class="navbar navbar-expand-md bg-white landing-nav navbar-light py-2 fixed-top">
             <div class="container-fluid contain">
                 <!-- Brand -->
                 <a class="navbar-brand logo" href="#">
@@ -16,10 +16,13 @@
                 <div class="collapse navbar-collapse" id="collapsibleNavbar">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Login</a>
+                            <b-link :to="{name: 'Login'}" class="nav-link">Login</b-link>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Signup</a>
+                            <b-link :to="{name: 'Register'}" class="nav-link">Signup</b-link>
+                        </li>
+                        <li class="nav-item">
+                            <b-link class="nav-link" :to="{name: 'AnalyticsPage'}">Dashboard</b-link>
                         </li>
                     </ul>
                 </div>
