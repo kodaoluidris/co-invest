@@ -118,7 +118,7 @@
                             v-model="form.description"
                             ref="myQuillEditor"
                             :options="editorOption"
-                            style="height:400px"
+                            style="height:150px"
                             required
                                     
                             />
@@ -249,7 +249,7 @@ export default {
         save() {
             this.loading = true;
             const productImgArray = this.image_data.map(item => item.file)
-            const payload = new FormData()
+            const payload = new FormData();
             payload.append('name', this.form.name)
             payload.append('description', this.form.description)
             payload.append('price', this.form.price)
