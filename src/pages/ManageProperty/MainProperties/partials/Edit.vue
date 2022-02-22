@@ -38,6 +38,32 @@
                             :rules="statusRules"
                         ></v-select>
                     </v-col>
+                      <v-col
+                        cols="12"
+                        sm="6"
+                        md="6"
+                    >
+                        <v-text-field
+                            v-model="form.groups"
+                            type="number"
+                            label="No Groups *"
+                            :rules="groupRules"
+                            :disabled="form.group_allocated"
+                        ></v-text-field>
+                    </v-col>
+                    <v-col
+                        cols="12"
+                        sm="6"
+                        md="6"
+                    >
+                        <v-text-field
+                            v-model="form.price"
+                            type="number"
+                            label="Price *"
+                            :rules="priceRules"
+                            :disabled="form.group_allocated"
+                        ></v-text-field>
+                    </v-col>
                      <v-col
                         cols="12"
                         sm="12"
@@ -64,7 +90,7 @@
                             v-model="form.description"
                             ref="myQuillEditor"
                             :options="editorOption"
-                            style="height:400px"
+                            style="height:150px"
                             required
                                     
                             />
@@ -113,6 +139,12 @@ export default {
             ],
             propertyRules:[
                 v => !!v || 'Property is required',
+            ],
+            priceRules: [
+                v => !!v || 'Price is required',
+            ],
+            groupRules: [
+                v => !!v || 'Group is required',
             ],
             editorOption: {
                 debug: 'info',

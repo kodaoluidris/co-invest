@@ -11,12 +11,17 @@ export default {
         fetchData(state, authData) {
             state.authData = authData;
         },
+        fetchToken(state, data) {
+            state.authToken = data;
+        }
     },
     actions:{
         getAuthData({ commit }) {
             const text = localStorage.getItem("auth_user");
+            const token = localStorage.getItem("auth_token");
             const clientDetails = JSON.parse(text);
             commit("fetchData", clientDetails);
+            commit("fetchToken", token);
         },
     }
 }

@@ -4,20 +4,31 @@
     <v-app class="p-4">
         <h2 class="page-title">Profile Page</h2>
         <b-row>
-            <b-col>
+            <b-col
+                cols="4"
+                sm="12"
+                md="4"
+            >
+mm
+            </b-col>
+            <b-col
+                cols="8"
+                sm="12"
+                md="8"
+            >
                 <Widget
                 title=""
                 customHeader
                 >
-                <!-- <h5 class="d-inline-block">Manage  <span class='fw-semi-bold'>Your Profile</span></h5> -->
-                <VueElementLoading
-                    :active="loading"
-                    spinner="bar-fade-scale"
-                    color="var(--primary)"
-                    text="Loading.."
-                    duration="0.6"
-                />
-                    <h1 class="text-muted font-weight-light">Hi, {{form.fname}}</h1>
+                    <!-- <h5 class="d-inline-block">Manage  <span class='fw-semi-bold'>Your Profile</span></h5> -->
+                    <VueElementLoading
+                        :active="loading"
+                        spinner="bar-fade-scale"
+                        color="var(--primary)"
+                        text="Loading.."
+                        duration="0.6"
+                    />
+                    <p class="text-muted font-weight-light">Hi, {{form.fname}} <button class="float-right">mm</button></p>
                     <V-form class="mt-4" @submit.prevent="save">
                         <v-row>
                             <v-col

@@ -154,13 +154,13 @@
         </b-row>
 
         <!-- Modals -->
-        <b-modal size="" style="background:white" title="Create Property" id="create" hide-footer>
+        <b-modal size="lg" style="background:white" title="Create Property" id="create" hide-footer>
             <create :my_model="$bvModal" :auth_token="authToken" @submitted="fetchData()"  />
         </b-modal>
-        <b-modal size="" style="background:white" title="View Property" id="view" hide-footer>
+        <b-modal size="lg" style="background:white" title="View Property" id="view" hide-footer>
             <viewModal :my_model="$bvModal" :data="current" />
         </b-modal>
-        <b-modal size="" style="background:white" title="Edit Property" id="edit" hide-footer>
+        <b-modal size="lg" style="background:white" title="Edit Property" id="edit" hide-footer>
             <edit :my_model="$bvModal" :data="current" :auth_token="authToken" @updated="fetchData()"  />
         </b-modal>
         <!-- Modals end -->
@@ -247,7 +247,7 @@ import edit from "./partials/Edit.vue"
 import axios from 'axios'
 import VueElementLoading from 'vue-element-loading'
 import laravelVuePagination from 'laravel-vue-pagination'
-import { mapState } from 'vuex';
+import { mapState,mapActions } from 'vuex';
 
 export default {
     components:{Widget,create,edit,viewModal,VueElementLoading,laravelVuePagination},
@@ -273,140 +273,142 @@ export default {
     },
     mounted() {
         this.fetchData();
+        this.getAuthData();
     },
     methods: {
-    pass_current(data) {
-      this.current = data
-    },
-    fetchData(page=1) {
-      this.loading = true
-      axios
-        .post(this.dynamic_route('/properties/all?page'+page), {
-          filters: this.filters,
-        },{
-            headers:{
-                authorization: `Bearer ${this.authToken}`
-            }
-        })
-        .then(res => {
-          this.loading = false
-          this.properties = res.data.data
-          this.loading = false
-        })
-        .catch(err => {
+        ...mapActions('page', ['getAuthData']),
+        pass_current(data) {
+        this.current = data
+        },
+        fetchData(page=1) {
+        this.loading = true
+        axios
+            .post(this.dynamic_route('/properties/all?page'+page), {
+            filters: this.filters,
+            },{
+                headers:{
+                    authorization: `Bearer ${this.authToken}`
+                }
+            })
+            .then(res => {
+            this.loading = false
+            this.properties = res.data.data
+            this.loading = false
+            })
+            .catch(err => {
+                if(err.response.status == 401 && err.response.statusText == "Unauthorized") {
+                    return this.logoutUser();
+                }
+            // eslint-disable-next-line no-console
+            console.log(err)
+            })
+            .finally(() => {
+            this.loading = false
+            })
+        },
+        toggle_status(id, status) {
+        this.loading = true
+        axios
+            .put(this.dynamic_route(`/properties/toggle-status/${id}`), { id, status }, {
+                headers:{
+                    authorization: `Bearer ${this.authToken}`
+
+                }
+            })
+            .then(() => {
+            this.fetchData()
+            this.$toast.success('Status updated successfully!', {
+                position: 'top-center',
+                timeout: 5000,
+                closeOnClick: true,
+                pauseOnFocusLoss: true,
+                pauseOnHover: true,
+                draggable: true,
+                draggablePercent: 0.6,
+                showCloseButtonOnHover: false,
+                hideProgressBar: true,
+                closeButton: 'button',
+                icon: true,
+                rtl: false,
+            })
+            })
+            .catch((err) => {
+            this.loading = false;
+            if(err.response.status == 401 && err.response.statusText == "Unauthorized") {
+                    return this.logoutUser();
+                }
+            this.$toast.error('An error occurred please try again!', {
+                position: 'top-center',
+                timeout: 5000,
+                closeOnClick: true,
+                pauseOnFocusLoss: true,
+                pauseOnHover: true,
+                draggable: true,
+                draggablePercent: 0.6,
+                showCloseButtonOnHover: false,
+                hideProgressBar: true,
+                closeButton: 'button',
+                icon: true,
+                rtl: false,
+            })
+            })
+            .finally(() => {
+            this.loading = false
+            })
+        },
+        deleteProperty(id) {
+        this.loading = true
+        axios
+            .delete(this.dynamic_route(`/properties/${id}`), {
+                headers:{
+                    authorization: `Bearer ${this.authToken}`
+
+                }
+            })
+            .then(() => {
+            this.fetchData()
+            this.$toast.success('Deleted successfully!', {
+                position: 'top-center',
+                timeout: 5000,
+                closeOnClick: true,
+                pauseOnFocusLoss: true,
+                pauseOnHover: true,
+                draggable: true,
+                draggablePercent: 0.6,
+                showCloseButtonOnHover: false,
+                hideProgressBar: true,
+                closeButton: 'button',
+                icon: true,
+                rtl: false,
+            })
+            })
+            .catch(err => {
+            this.loading = false;
             if(err.response.status == 401 && err.response.statusText == "Unauthorized") {
                 return this.logoutUser();
             }
-          // eslint-disable-next-line no-console
-          console.log(err)
-        })
-        .finally(() => {
-          this.loading = false
-        })
-    },
-    toggle_status(id, status) {
-      this.loading = true
-      axios
-        .put(this.dynamic_route(`/properties/toggle-status/${id}`), { id, status }, {
-            headers:{
-                authorization: `Bearer ${this.authToken}`
-
+            if (err.response.status == 500) {
+                return this.$toast.error('Unable to delete property  it has been used in many places!', {
+                position: 'top-center',
+                timeout: 5000,
+                closeOnClick: true,
+                pauseOnFocusLoss: true,
+                pauseOnHover: true,
+                draggable: true,
+                draggablePercent: 0.6,
+                showCloseButtonOnHover: false,
+                hideProgressBar: true,
+                closeButton: 'button',
+                icon: true,
+                rtl: false,
+                })
             }
-        })
-        .then(() => {
-          this.fetchData()
-          this.$toast.success('Status updated successfully!', {
-            position: 'top-center',
-            timeout: 5000,
-            closeOnClick: true,
-            pauseOnFocusLoss: true,
-            pauseOnHover: true,
-            draggable: true,
-            draggablePercent: 0.6,
-            showCloseButtonOnHover: false,
-            hideProgressBar: true,
-            closeButton: 'button',
-            icon: true,
-            rtl: false,
-          })
-        })
-        .catch((err) => {
-          this.loading = false;
-          if(err.response.status == 401 && err.response.statusText == "Unauthorized") {
-                return this.logoutUser();
-            }
-          this.$toast.error('An error occurred please try again!', {
-            position: 'top-center',
-            timeout: 5000,
-            closeOnClick: true,
-            pauseOnFocusLoss: true,
-            pauseOnHover: true,
-            draggable: true,
-            draggablePercent: 0.6,
-            showCloseButtonOnHover: false,
-            hideProgressBar: true,
-            closeButton: 'button',
-            icon: true,
-            rtl: false,
-          })
-        })
-        .finally(() => {
-          this.loading = false
-        })
-    },
-    deleteProperty(id) {
-      this.loading = true
-      axios
-        .delete(this.dynamic_route(`/properties/${id}`), {
-            headers:{
-                authorization: `Bearer ${this.authToken}`
-
-            }
-        })
-        .then(() => {
-          this.fetchData()
-          this.$toast.success('Deleted successfully!', {
-            position: 'top-center',
-            timeout: 5000,
-            closeOnClick: true,
-            pauseOnFocusLoss: true,
-            pauseOnHover: true,
-            draggable: true,
-            draggablePercent: 0.6,
-            showCloseButtonOnHover: false,
-            hideProgressBar: true,
-            closeButton: 'button',
-            icon: true,
-            rtl: false,
-          })
-        })
-        .catch(err => {
-          this.loading = false;
-          if(err.response.status == 401 && err.response.statusText == "Unauthorized") {
-            return this.logoutUser();
-          }
-          if (err.response.status == 500) {
-            return this.$toast.error('Unable to delete property  it has been used in many places!', {
-              position: 'top-center',
-              timeout: 5000,
-              closeOnClick: true,
-              pauseOnFocusLoss: true,
-              pauseOnHover: true,
-              draggable: true,
-              draggablePercent: 0.6,
-              showCloseButtonOnHover: false,
-              hideProgressBar: true,
-              closeButton: 'button',
-              icon: true,
-              rtl: false,
             })
-          }
-        })
-        .finally(() => {
-          this.loading = false
-        })
+            .finally(() => {
+            this.loading = false
+            })
+        },
     },
-  },
 }
 </script>
 <style scoped>
