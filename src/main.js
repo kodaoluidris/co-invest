@@ -6,7 +6,6 @@ import BootstrapVue from 'bootstrap-vue';
 import * as VueGoogleMaps from 'vue2-google-maps';
 import VueTouch from 'vue-touch';
 import Trend from 'vuetrend';
-// import Toasted from 'vue-toasted';
 import VueApexCharts from 'vue-apexcharts';
 
 import store from './store';
