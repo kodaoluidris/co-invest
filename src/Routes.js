@@ -30,6 +30,9 @@ import ChartsPage from '@/pages/Charts/Charts';
 import IconsPage from '@/pages/Icons/Icons';
 import NotificationsPage from '@/pages/Notifications/Notifications';
 
+// Landing Page
+const LandingPage = () => import('@/pages/LandingPage/Index')
+
 
 Vue.use(Router);
 
@@ -40,6 +43,11 @@ export default new Router({
       path: '/',
       name: 'Home',
       redirect: '/app/dashboard',
+    },
+    {
+      path: '/home',
+      name: 'Home',
+      component: LandingPage,
     },
     {
       path: '/login',
