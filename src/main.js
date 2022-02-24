@@ -64,6 +64,14 @@ router.beforeEach((to, from, next) => {
 });
 Vue.mixin({
   methods: {
+    dynamic_route(endUrl) {
+      // return `https://api.diimtech.com/api/admin/${endUrl}`;
+      return `http://co_invest_backend.test/api${endUrl}`
+    },
+    dynamic_auth_route(endUrl) {
+      // return `https://api.diimtech.com/api/${endUrl}`;
+      return `http://co_invest_backend.test/api/auth${endUrl}`
+    },
 
    
 

@@ -31,7 +31,7 @@
                                     <div class="pi-pic">
                                         <!-- <img src="img/agents/profile-agent.jpg" alt=""> -->
                                         <div class="total-property">
-                                            159
+                                            {{total_property}}
                                         </div>
                                         <!-- <div class="rating-point">
                                             4.5
@@ -46,9 +46,13 @@
                             <div class="col-lg-4">
                                 <div class="profile-agent-widget">
                                     <ul>
-                                        <li>Land <span>21</span></li>
+                                        <li v-for="(a, index) in analytics" :key="index">
+                                            {{a.property_name}}
+                                            <span>{{a.property_count}}</span>
+                                        </li>
+                                        <!-- <li>Land <span>21</span></li>
                                         <li>House <span>35</span></li>
-                                        <li>Shop <span>40</span></li>
+                                        <li>Shop <span>40</span></li> -->
                                     </ul>
                                 </div>
                             </div>
@@ -197,10 +201,25 @@
 
 <script>
 import Content from '@/pages/LandingPage/Layout/Content'
-
+import { mapState, mapActions, mapGetters } from 'vuex';
 export default {
     components: {
         Content
+    }, 
+    data(){
+        return {
+            
+        }
+    },
+    methods :{
+        ...mapActions('analytics', ['getPropertiesAnalytics', 'getProperties']),
+    }, 
+    mounted (){
+        this.getPropertiesAnalytics(this.dynamic_route('/analytics/properties'));
+        this.getProperties(this.dynamic_route('/properties/all'));
+    },
+    computed : {
+        ...mapState('analytics', ['analytics', 'total_property', 'properties']),
     }
 }
 </script>
