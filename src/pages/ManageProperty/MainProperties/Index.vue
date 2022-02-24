@@ -196,7 +196,7 @@
         <b-modal size="lg" style="background:white" title="Main Property" id="create" hide-footer>
             <create :my_model="$bvModal" :auth_token="authToken" :property_types="property_types" @submitted="fetchData()"  />
         </b-modal>
-        <b-modal size="lg" style="background:white" :title="'Manage  groups ( total price ₦ ' + price + ')'" id="groups" hide-footer>
+        <b-modal size="lg" style="background:white" :title="'Manage  groups ( total price ₦ ' + c_price + ')'" id="groups" hide-footer>
             <manageGroup :my_model="$bvModal" :auth_token="authToken" :main_property="current" @submitted="fetchData()"  />
         </b-modal>
         <b-modal size="lg" style="background:white" :title="'Edit  groups allocation (total price ₦ ' + price + ')'" id="edit_groups" hide-footer>
@@ -322,11 +322,15 @@ export default {
             isDialogVisible: false,
             closeOnContentClick: true,
             property_types:[],
-            price:0,
+            c_price:'',
+
         }
     },
     computed:{
-        ...mapState('page',['authToken'])
+        ...mapState('page',['authToken']),
+        filter_price(val) {
+            return val.toLocaleString()
+        }
     },
     mounted() {
         this.fetchData();
@@ -336,7 +340,7 @@ export default {
     methods: {
         ...mapActions('page', ['getAuthData']),
         pass_current(data) {
-            this.price = data.price.toLocaleString()
+            this.c_price = data.price.toLocaleString()
             this.current = data
         },
         pass_current_img(data,name) {
