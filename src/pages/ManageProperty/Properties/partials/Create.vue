@@ -47,7 +47,7 @@
                             v-model="form.description"
                             ref="myQuillEditor"
                             :options="editorOption"
-                            style="height:400px"
+                            style="height:150px"
                             required
                                     
                             />

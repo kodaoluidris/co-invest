@@ -6,13 +6,13 @@ import BootstrapVue from 'bootstrap-vue';
 import * as VueGoogleMaps from 'vue2-google-maps';
 import VueTouch from 'vue-touch';
 import Trend from 'vuetrend';
-// import Toasted from 'vue-toasted';
 import VueApexCharts from 'vue-apexcharts';
 
 import store from './store';
 import router from './Routes';
 import App from './App';
 import layoutMixin from './mixins/layout';
+import authMixin from './mixins/auth';
 import Widget from './components/Widget/Widget';
 import vuetify from './plugins/vuetify'
 import 'vue-toastification/dist/index.css'
@@ -32,6 +32,7 @@ Vue.use(VueGoogleMaps, {
 });
 Vue.component('apexchart', VueApexCharts);
 Vue.mixin(layoutMixin);
+Vue.mixin(authMixin);
 // Vue.use(Toasted, {duration: 10000});
 
 Vue.config.productionTip = false;
@@ -72,25 +73,7 @@ Vue.mixin({
       return `http://co_invest_backend.test/api/auth${endUrl}`
     },
 
-    logoutUser() {
-      this.$toast.error('Login expired, please login again!', {
-        position: 'top-center',
-        timeout: 5000,
-        closeOnClick: true,
-        pauseOnFocusLoss: true,
-        pauseOnHover: true,
-        draggable: true,
-        draggablePercent: 0.6,
-        showCloseButtonOnHover: false,
-        hideProgressBar: true,
-        closeButton: 'button',
-        icon: true,
-        rtl: false,
-      })
-      localStorage.removeItem('auth_token');
-      localStorage.removeItem('auth_user');
-      return this.$router.push({name: 'Login'});
-    }
+   
 
   },
 })
