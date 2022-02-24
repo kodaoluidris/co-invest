@@ -5,14 +5,45 @@
         <h2 class="page-title">Profile Page</h2>
         <b-row>
             <b-col
-                cols="4"
+                cols="12"
                 sm="12"
                 md="4"
             >
-mm
+                <Widget
+                title=""
+                customHeader
+                class="text-center"
+                style="position:relative"
+                >
+                    <!-- <h5 class="d-inline-block">Manage  <span class='fw-semi-bold'>Your Profile</span></h5> -->
+                    <VueElementLoading
+                        :active="loading"
+                        spinner="bar-fade-scale"
+                        color="var(--primary)"
+                        text="Loading.."
+                        duration="0.6"
+                    />
+                    <div class="preview">
+
+                    </div>
+                    <div class="body pt-3 pb-3" >
+                        <div >
+                            <img class="avatar" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZmlsZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" style="width:100%" alt="">
+                        </div>
+                        <div class="profile_content">
+                            <h4 class="">Kodaolu Idris</h4>
+                            <span class="d-block my-2">User type</span>
+                            <small class="mb-3">admin@gmail.com</small>
+                            <button class="mt-5 p-2 btn btn-block btn-primary">
+                                Change Password
+                            </button>
+
+                        </div>
+                    </div>
+                </Widget>
             </b-col>
             <b-col
-                cols="8"
+                cols="12"
                 sm="12"
                 md="8"
             >
@@ -28,7 +59,10 @@ mm
                         text="Loading.."
                         duration="0.6"
                     />
-                    <p class="text-muted font-weight-light">Hi, {{form.fname}} <button class="float-right">mm</button></p>
+                    <p class="text-muted font-weight-light">Hi, {{form.fname}} 
+                        <button  class="float-right btn btn-primary" type="submit">Edit info</button>
+                        
+                        </p>
                     <V-form class="mt-4" @submit.prevent="save">
                         <v-row>
                             <v-col
@@ -278,5 +312,25 @@ export default {
 <style scoped>
    .modal-body {
        background: white !important;
+   }
+
+   .preview {
+       width:100% !important;
+       height: 100px !important;
+       background:var(--primary);
+       margin-bottom: 10px !important;
+   }
+   .avatar {
+        width: 115px  !important;
+        height: 115px  !important;
+        background: lightgray !important;
+        border-radius: 50% !important;
+        position: absolute;
+        top: 19%;
+        left: 34%;
+        border: 5px solid white;
+   }
+   .profile_content {
+       margin-top: 60px !important;
    }
 </style>

@@ -3,7 +3,7 @@
         <nav class="navbar navbar-expand-md bg-white landing-nav navbar-light py-2 fixed-top">
             <div class="container-fluid contain">
                 <!-- Brand -->
-                <a class="navbar-brand logo" href="#">
+                <a class="navbar-brand logo" href="/home">
                     <h5><span style="color: #1abc9c">Co</span><span>Invest</span></h5>
                 </a>
 

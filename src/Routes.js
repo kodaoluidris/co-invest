@@ -32,7 +32,8 @@ import NotificationsPage from '@/pages/Notifications/Notifications';
 
 // Landing Page
 const LandingPage = () => import('@/pages/LandingPage/Index')
-const PropertyDetails = () => import('@/pages/LandingPage/PropertyDetails')
+const MainPropertyDetails = () => import('@/pages/LandingPage/MainPropertyDetails')
+const MainPropertyGroupDetails = () => import('@/pages/LandingPage/MainPropertyGroupDetails')
 
 
 Vue.use(Router);
@@ -51,9 +52,14 @@ export default new Router({
       component: LandingPage,
     },
     {
-      path: '/home/property/details/:propertyId',
-      name: 'PropertyDetails',
-      component: PropertyDetails,
+      path: '/home/main-property/details/:mainPropertyId',
+      name: 'MainPropertyDetails',
+      component: MainPropertyDetails,
+    },
+    {
+      path: '/home/main-property/groups/details/:mainGroupPropertyId',
+      name: 'MainPropertyGroupDetails',
+      component: MainPropertyGroupDetails,
     },
     {
       path: '/login',

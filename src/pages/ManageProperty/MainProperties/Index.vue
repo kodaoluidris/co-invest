@@ -199,7 +199,7 @@
         <b-modal size="lg" style="background:white" :title="'Manage  groups ( total price ₦ ' + c_price + ')'" id="groups" hide-footer>
             <manageGroup :my_model="$bvModal" :auth_token="authToken" :main_property="current" @submitted="fetchData()"  />
         </b-modal>
-        <b-modal size="lg" style="background:white" :title="'Edit  groups allocation (total price ₦ ' + current.price + ')'" id="edit_groups" hide-footer>
+        <b-modal size="lg" style="background:white" :title="'Edit  groups allocation (total price ₦ ' + price + ')'" id="edit_groups" hide-footer>
             <editGroup :my_model="$bvModal" :auth_token="authToken" :main_property="current" @submitted="fetchData()"  />
         </b-modal>
         <b-modal size="lg" style="background:white" title="View Main Property" id="view" hide-footer>
