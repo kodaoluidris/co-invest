@@ -31,8 +31,8 @@
                                 <div class="pd-title">
                                     <!-- <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
                                     <div class="label">For rent</div> -->
-                                    <div class="pt-price">$ 289.0<span>/month</span></div>
-                                    <h3>Home in Merrick Way</h3>
+                                    <div v-if="data.name" class="pt-price">$ {{data.group_price.toLocaleString()}}</div>
+                                    <h3 v-if="data.name">{{data.name}}</h3>
                                     <p><span class=",mdi mdi-map-marker-outline"></span> 3 Middle Winchendon Rd, Rindge, NH 03463</p>
                                 </div>
                             </div>
@@ -51,9 +51,9 @@
                                     <li class="nav-item">
                                         <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Description</a>
                                     </li>
-                                    <li class="nav-item">
+                                    <!-- <li class="nav-item">
                                         <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Amenities</a>
-                                    </li>
+                                    </li> -->
                                 </ul><!-- Tab panes -->
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="tabs-1" role="tabpanel">
@@ -61,27 +61,23 @@
                                             <ul class="left-table">
                                                 <li>
                                                     <span class="type-name">Property Type</span>
-                                                    <span class="type-value">House</span>
+                                                    <span class="type-value">{{data.p_name}}</span>
                                                 </li>
                                                 <li>
                                                     <span class="type-name">Property ID</span>
                                                     <span class="type-value">#219</span>
                                                 </li>
                                                 <li>
-                                                    <span class="type-name">Price</span>
-                                                    <span class="type-value">$ 289.0/mounth</span>
+                                                    <span class="type-name">Main property Price </span>
+                                                    <span class="type-value">&nbsp; {{data.price}}</span>
+                                                </li>
+                                                 <li>
+                                                    <span class="type-name">No of groups </span>
+                                                    <span class="type-value">&nbsp;{{ data.groups}}</span>
                                                 </li>
                                                 <li>
-                                                    <span class="type-name">Year Built</span>
-                                                    <span class="type-value">2019</span>
-                                                </li>
-                                                <li>
-                                                    <span class="type-name">Contract type</span>
-                                                    <span class="type-value">Rent</span>
-                                                </li>
-                                                <li>
-                                                    <span class="type-name">Agent</span>
-                                                    <span class="type-value">Ashton Kutcher</span>
+                                                    <span class="type-name">Status</span>
+                                                    <span class="type-value">{{data.status}}</span>
                                                 </li>
                                             </ul>
                                             <ul class="right-table">
@@ -114,64 +110,9 @@
                                     </div>
                                     <div class="tab-pane" id="tabs-2" role="tabpanel">
                                         <div class="tab-desc">
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt dolor itaque facere consequatur, dignissimos minus adipisci ipsam repudiandae nisi illum provident, natus quidem vero? Quaerat ducimus sequi praesentium commodi, consectetur corporis eos sit perspiciatis, quae sed officia error, iure quasi.</p>
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt dolor itaque facere consequatur, dignissimos minus adipisci ipsam repudiandae nisi illum provident, natus quidem vero? Quaerat ducimus sequi praesentium commodi, consectetur corporis eos sit perspiciatis, quae sed officia error, iure quasi.</p>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane" id="tabs-3" role="tabpanel">
-                                        <div class="tab-details">
-                                            <ul class="left-table">
-                                                <li>
-                                                    <span class="type-name">Property Type</span>
-                                                    <span class="type-value">House</span>
-                                                </li>
-                                                <li>
-                                                    <span class="type-name">Property ID</span>
-                                                    <span class="type-value">#219</span>
-                                                </li>
-                                                <li>
-                                                    <span class="type-name">Price</span>
-                                                    <span class="type-value">$ 289.0/mounth</span>
-                                                </li>
-                                                <li>
-                                                    <span class="type-name">Year Built</span>
-                                                    <span class="type-value">2019</span>
-                                                </li>
-                                                <li>
-                                                    <span class="type-name">Contract type</span>
-                                                    <span class="type-value">Rent</span>
-                                                </li>
-                                                <li>
-                                                    <span class="type-name">Agent</span>
-                                                    <span class="type-value">Ashton Kutcher</span>
-                                                </li>
-                                            </ul>
-                                            <ul class="right-table">
-                                                <li>
-                                                    <span class="type-name">Home Area</span>
-                                                    <span class="type-value">1200 sqft</span>
-                                                </li>
-                                                <li>
-                                                    <span class="type-name">Rooms</span>
-                                                    <span class="type-value">9</span>
-                                                </li>
-                                                <li>
-                                                    <span class="type-name">Bedrooms</span>
-                                                    <span class="type-value">4</span>
-                                                </li>
-                                                <li>
-                                                    <span class="type-name">Bathrooms</span>
-                                                    <span class="type-value">3</span>
-                                                </li>
-                                                <li>
-                                                    <span class="type-name">Garages</span>
-                                                    <span class="type-value">2</span>
-                                                </li>
-                                                <li>
-                                                    <span class="type-name">Parking lots</span>
-                                                    <span class="type-value">2</span>
-                                                </li>
-                                            </ul>
+                                            <div v-html="data.description">
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -230,9 +171,63 @@
 
 <script>
 import Content from '@/pages/LandingPage/Layout/Content'
+import axios from "axios";
+
 export default {
     components: {
         Content
+    },
+    data() {
+        return {
+            data:{}
+        }
+    },
+     mounted(){
+        this.fetchData(parseInt(this.$route.params.mainGroupPropertyId));
+    },
+    methods: {
+        fetchData(id){
+            axios.get(this.dynamic_route(`/client/main-property-group/${id}`))
+            .then(res => {
+                if(res.status == 208) {
+                    this.$toast.error('There\'s no slot left in this Main property !', {
+                        position: 'top-center',
+                        timeout: 5000,
+                        closeOnClick: true,
+                        pauseOnFocusLoss: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        draggablePercent: 0.6,
+                        showCloseButtonOnHover: false,
+                        hideProgressBar: true,
+                        closeButton: 'button',
+                        icon: true,
+                        rtl: false,
+                    })
+
+                    return this.$router.push({name: 'MainPropertyDetails', params:{mainPropertyId: res.data.data.mp_id}})
+                }
+                this.data = res.data.data;
+            }).catch((err) => {
+                if(err.response.status == 404) {
+                    this.$toast.error('Main property group not found!', {
+                        position: 'top-center',
+                        timeout: 5000,
+                        closeOnClick: true,
+                        pauseOnFocusLoss: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        draggablePercent: 0.6,
+                        showCloseButtonOnHover: false,
+                        hideProgressBar: true,
+                        closeButton: 'button',
+                        icon: true,
+                        rtl: false,
+                    })
+                }
+              
+            })
+        }
     }
 }
 </script>

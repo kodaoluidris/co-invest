@@ -31,7 +31,7 @@
                                     <div class="pi-pic">
                                         <!-- <img src="img/agents/profile-agent.jpg" alt=""> -->
                                         <div class="total-property">
-                                            159
+                                            {{total_property}}
                                         </div>
                                         <!-- <div class="rating-point">
                                             4.5
@@ -46,9 +46,13 @@
                             <div class="col-lg-4">
                                 <div class="profile-agent-widget">
                                     <ul>
-                                        <li>Land <span>21</span></li>
+                                        <li v-for="(a, index) in analytics" :key="index">
+                                            {{a.property_name}}
+                                            <span>{{a.property_count}}</span>
+                                        </li>
+                                        <!-- <li>Land <span>21</span></li>
                                         <li>House <span>35</span></li>
-                                        <li>Shop <span>40</span></li>
+                                        <li>Shop <span>40</span></li> -->
                                     </ul>
                                 </div>
                             </div>
@@ -71,14 +75,14 @@
         <section class="property-section profile-page spad">
             <div class="container-fluid contain">
                 <div class="row">
-                    <div class="col-lg-4">
+                    <div class="col-lg-4" v-for="(p, i) in data.data" :key="i">
                         <div class="property-item">
-                            <div class="pi-pic set-bg" data-setbg="img/property/property-1.jpg" style="background-image: url(&quot;img/property/property-1.jpg&quot;);">
+                            <div class="pi-pic set-bg" :style="`background-image: url(&quot;${p.image[0].image}&quot;);`">
                             <!-- <div class="label">For rent</div> -->
                             </div>
                             <div class="pi-text">
-                                <div class="pt-price">$ 289.0<span>/month</span></div>
-                                <h5><b-link :to="{ name: 'PropertyDetails', params: { propertyId: 1}}">Home in Merrick Way</b-link></h5>
+                                <div class="pt-price">$ {{p.price.toLocaleString()}}</div>
+                                <h5><b-link :to="{ name: 'MainPropertyDetails', params: { mainPropertyId: p.id}}">{{p.name}}</b-link></h5>
                                 <p><span class="mdi mdi-map-marker-outline"></span> 3 Middle Winchendon Rd, Rindge, NH 03461</p>
                                 <ul>
                                     <li><i class="fa fa-object-group"></i> 2,283</li>
@@ -87,104 +91,6 @@
                                     <li><i class="fa fa-automobile"></i> 01</li>
                                 </ul>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="property-item">
-                            <div class="pi-pic set-bg" data-setbg="img/property/property-2.jpg" style="background-image: url(&quot;img/property/property-2.jpg&quot;);">
-                                <!-- <div class="label c-red">For sale</div> -->
-                            </div>
-                            <div class="pi-text">
-                                <div class="pt-price">$ 289.0</div>
-                                <h5><b-link :to="{ name: 'PropertyDetails', params: { propertyId: 2}}">Unimont Aurum</b-link></h5>
-                                <p><span class="mdi mdi-map-marker-outline"></span> Gut No.102, Opp. HP Petrol Pump, Karjat</p>
-                                <ul>
-                                    <li><i class="fa fa-object-group"></i> 2, 283</li>
-                                    <li><i class="fa fa-bathtub"></i> 03</li>
-                                    <li><i class="fa fa-bed"></i> 05</li>
-                                    <li><i class="fa fa-automobile"></i> 01</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="property-item">
-                            <div class="pi-pic set-bg" data-setbg="img/property/property-2.jpg" style="background-image: url(&quot;img/property/property-2.jpg&quot;);">
-                                <!-- <div class="label c-red">For sale</div> -->
-                            </div>
-                            <div class="pi-text">
-                                <div class="pt-price">$ 289.0</div>
-                                <h5><b-link :to="{ name: 'PropertyDetails', params: { propertyId: 3}}">Vrindavan Flora</b-link></h5>
-                                <p><span class="mdi mdi-map-marker-outline"></span> No. 15, 16, 17-1A And 17-2, Rasayani, Rasayani</p>
-                                <ul>
-                                    <li><i class="fa fa-object-group"></i> 2, 283</li>
-                                    <li><i class="fa fa-bathtub"></i> 03</li>
-                                    <li><i class="fa fa-bed"></i> 05</li>
-                                    <li><i class="fa fa-automobile"></i> 01</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="property-item">
-                            <div class="pi-pic set-bg" data-setbg="img/property/property-4.jpg" style="background-image: url(&quot;img/property/property-4.jpg&quot;);">
-                                <!-- <div class="label c-red">For sale</div> -->
-                            </div>
-                            <div class="pi-text">
-                                <div class="pt-price">$ 289.0</div>
-                                <h5><b-link :to="{ name: 'PropertyDetails', params: { propertyId: 4}}">Shramik Vaibhav</b-link></h5>
-                                <p><span class="mdi mdi-map-marker-outline"></span> 12 Pt at Shedung, Panvel, Raigarh, Navi Mumbai</p>
-                                <ul>
-                                    <li><i class="fa fa-object-group"></i> 2, 283</li>
-                                    <li><i class="fa fa-bathtub"></i> 03</li>
-                                    <li><i class="fa fa-bed"></i> 05</li>
-                                    <li><i class="fa fa-automobile"></i> 01</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="property-item">
-                            <div class="pi-pic set-bg" data-setbg="img/property/property-5.jpg" style="background-image: url(&quot;img/property/property-5.jpg&quot;);">
-                                <!-- <div class="label c-magenta">For sold</div> -->
-                            </div>
-                            <div class="pi-text">
-                                <div class="pt-price">$ 289.0</div>
-                                <h5><b-link :to="{ name: 'PropertyDetails', params: { propertyId: 5}}">Poddar Wondercity</b-link></h5>
-                                <p><span class="mdi mdi-map-marker-outline"></span> Badlapur East, Beyond Thane</p>
-                                <ul>
-                                    <li><i class="fa fa-object-group"></i> 2, 283</li>
-                                    <li><i class="fa fa-bathtub"></i> 03</li>
-                                    <li><i class="fa fa-bed"></i> 05</li>
-                                    <li><i class="fa fa-automobile"></i> 01</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="property-item">
-                            <div class="pi-pic set-bg" data-setbg="img/property/property-6.jpg" style="background-image: url(&quot;img/property/property-6.jpg&quot;);">
-                                <!-- <div class="label">For rent</div> -->
-                            </div>
-                            <div class="pi-text">
-                                <div class="pt-price">$ 289.0<span>/month</span></div>
-                                <h5><b-link :to="{ name: 'PropertyDetails', params: { propertyId: 6}}">GoldCrest Residency</b-link></h5>
-                                <p><span class="mdi mdi-map-marker-outline"></span> No.7, Sector- 11, Ghansoli, Mumbai, Navi Mumbai</p>
-                                <ul>
-                                    <li><i class="fa fa-object-group"></i> 2, 283</li>
-                                    <li><i class="fa fa-bathtub"></i> 03</li>
-                                    <li><i class="fa fa-bed"></i> 05</li>
-                                    <li><i class="fa fa-automobile"></i> 01</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <div class="property-pagination">
-                            <a href="#">1</a>
-                            <a href="#">2</a>
-                            <a href="#">3</a>
-                            <a href="#" class="icon"><span class="mdi mdi-arrow-right"></span></a>
                         </div>
                     </div>
                 </div>
@@ -197,10 +103,36 @@
 
 <script>
 import Content from '@/pages/LandingPage/Layout/Content'
-
+import { mapState, mapActions, mapGetters } from 'vuex';
+import axios from "axios"
 export default {
     components: {
         Content
+    }, 
+    data(){
+        return {
+            data:{}
+        }
+    },
+    methods :{
+        ...mapActions('analytics', ['getPropertiesAnalytics', 'getProperties']),
+        fetchData()
+        {
+            axios.post(this.dynamic_route('/client/all-main-properties', {
+                client_request:true
+            })).then(res => {
+                this.data = res.data.data.original.data;
+            }).catch(() => {
+            })
+        }
+    }, 
+    mounted (){
+        this.getPropertiesAnalytics(this.dynamic_route('/analytics/properties'));
+        this.getProperties(this.dynamic_route('/properties/all'));
+        this.fetchData();
+    },
+    computed : {
+        ...mapState('analytics', ['analytics', 'total_property', 'properties']),
     }
 }
 </script>
