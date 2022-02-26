@@ -24,7 +24,7 @@ Vue.use(BootstrapVue);
 Vue.use(Toast)
 Vue.use(VueSocialSharing);
 Vue.use(VueTouch);
-Vue.use(Trend);
+Vue.use(Trend); 
 Vue.component('Widget', Widget);
 Vue.use(VueGoogleMaps, {
   load: {
@@ -70,7 +70,6 @@ Vue.mixin({
 
   },
 })
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

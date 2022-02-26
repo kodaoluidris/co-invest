@@ -31,33 +31,14 @@
                                 <div class="pd-title">
                                     <!-- <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
                                     <div class="label">For rent</div> -->
-                                    <div v-if="data.name" class="pt-price">$ {{data.group_price.toLocaleString()}} / $ {{calculatePaymentPrice}}</div>
-                                    <h3 v-if="data.name">{{data.name}}</h3>
+                                    <div class="pt-price" v-if="data.name">₦ {{data.price.toLocaleString()}}</div>
+                                    <h3>{{data.name}}</h3>
                                     <p><span class=",mdi mdi-map-marker-outline"></span> 3 Middle Winchendon Rd, Rindge, NH 03463</p>
                                 </div>
                             </div>
                             <div class="col-lg-6">
-                                <div class="pd-social" >
-                                    
-                                    <button class="btn-special btn-lg">BUY NOW</button> 
-                                    <button class="btn-special btn-lg ml-3" @click="toggleShare" >
-                                        <span class="fa fa-share "></span>
-                                        SHARE</button>
-                                            <span v-if="shareStatus" class="d-block mt-3">
-                                                <ShareNetwork
-                                                    v-for="network in networks"
-                                                    :network="network.network"
-                                                    :key="network.network"
-                                                    :url="data.url"
-                                                    :quote="sharing.quote"
-                                                    :hashtags="sharing.hashtags"
-                                                    :twitterUser="sharing.twitterUser"
-                                                    :title="sharing.title"
-                                                    :class="'btn btn-outline-primary ml-2'"
-                                                >
-                                                <i :class="network.icon"></i>
-                                                </ShareNetwork>
-                                            </span>       
+                                <div class="pd-social">
+                                    <button class="d-none btn-special btn-lg">BUY NOW</button>
                                 </div>
                             </div>
                         </div>
@@ -77,23 +58,22 @@
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="tabs-1" role="tabpanel">
                                         <div class="tab-details">
-                                            <ul class="left-table"> 
-                                                <li>
-                                                    <span class="type-name">Paid Price</span>
-                                                    <span class="type-value">$ {{calculatePaymentPrice}}</span>
-                                                </li>
+                                            <ul class="left-table">
                                                 <li>
                                                     <span class="type-name">Property Type</span>
-                                                    <span class="type-value">{{data.p_name}}</span>
+                                                    <span class="type-value">{{data.pt_name}}</span>
                                                 </li>
-                                               
                                                 <li>
-                                                    <span class="type-name">Main property Price </span>
-                                                    <span class="type-value">&nbsp; {{data.price}}</span>
+                                                    <span class="type-name">Property ID</span>
+                                                    <span class="type-value">#219</span>
                                                 </li>
-                                                 <li>
-                                                    <span class="type-name">No of groups </span>
-                                                    <span class="type-value">&nbsp;{{ data.groups}}</span>
+                                                <li>
+                                                    <span class="type-name">Price</span>
+                                                    <span class="type-value" v-if="data.price">$ {{data.price.toLocaleString()}}</span>
+                                                </li>
+                                                <li>
+                                                    <span class="type-name">No of groups</span>
+                                                    <span class="type-value">{{data.groups}}</span>
                                                 </li>
                                                 <li>
                                                     <span class="type-name">Status</span>
@@ -135,6 +115,62 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="tab-pane" id="tabs-3" role="tabpanel">
+                                        <div class="tab-details">
+                                            <ul class="left-table">
+                                                <li>
+                                                    <span class="type-name">Property Type</span>
+                                                    <span class="type-value">House</span>
+                                                </li>
+                                                <li>
+                                                    <span class="type-name">Property ID</span>
+                                                    <span class="type-value">#219</span>
+                                                </li>
+                                                <li>
+                                                    <span class="type-name">Price</span>
+                                                    <span class="type-value">$ 289.0/mounth</span>
+                                                </li>
+                                                <li>
+                                                    <span class="type-name">Year Built</span>
+                                                    <span class="type-value">2019</span>
+                                                </li>
+                                                <li>
+                                                    <span class="type-name">Contract type</span>
+                                                    <span class="type-value">Rent</span>
+                                                </li>
+                                                <li>
+                                                    <span class="type-name">Agent</span>
+                                                    <span class="type-value">Ashton Kutcher</span>
+                                                </li>
+                                            </ul>
+                                            <ul class="right-table">
+                                                <li>
+                                                    <span class="type-name">Home Area</span>
+                                                    <span class="type-value">1200 sqft</span>
+                                                </li>
+                                                <li>
+                                                    <span class="type-name">Rooms</span>
+                                                    <span class="type-value">9</span>
+                                                </li>
+                                                <li>
+                                                    <span class="type-name">Bedrooms</span>
+                                                    <span class="type-value">4</span>
+                                                </li>
+                                                <li>
+                                                    <span class="type-name">Bathrooms</span>
+                                                    <span class="type-value">3</span>
+                                                </li>
+                                                <li>
+                                                    <span class="type-name">Garages</span>
+                                                    <span class="type-value">2</span>
+                                                </li>
+                                                <li>
+                                                    <span class="type-name">Parking lots</span>
+                                                    <span class="type-value">2</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -144,41 +180,27 @@
                     <div class="property-sidebar scroll-area-xl">
                         <div class="single-sidebar">
                             <div class="section-title sidebar-title">
-                                <h5>Group Members (10)</h5>
+                                <h5>No of Groups ({{data.all_groups.length}})</h5>
                             </div>
-                            <div class="top-agent">
-                                <div class="ta-item">
-                                    <div class="ta-pic set-bg" data-setbg="img/property/details/sidebar/ta-1.jpg" style="background-image: url(&quot;/img/property/details/sidebar/ta-1.jpg&quot;);"></div>
-                                    <div class="ta-text">
-                                        <h6><a href="#">Ashton Kutcher</a></h6>
-                                        <span>Member</span>
-                                        <div class="ta-num">09077266354</div>
-                                    </div>
+                            <div class="top-agent pr-1" v-if="data.all_groups.length">
+                                <div class="ta-item" v-for="(g,i) in data.all_groups" :key="i">
+                                    <b-link :to="{name:'MainPropertyGroupDetails', params:{mainGroupPropertyId: g.id}}" target="_blank">
+                                        <div class="ta-pic set-bg"  :style="`background-image: url(&quot;${data.image[0].image}&quot;);`"></div>
+                                        <div class="ta-text">
+                                            <h6><a href="#">Group {{ i + 1}}</a>  <span v-if="g.group_open" class="float-right badge d-inline text-white " style="background:#00C89E">Open</span>
+                                            <span v-else class="float-right badge d-inline text-white badge-primary">Closed</span></h6>
+                                            <span>Slot <b>{{g.no_of_people}}</b> &nbsp; &nbsp; Available <b>{{g.no_of_people - g.no_of_people_reg}}</b></span>
+                                            <div class="ta-num mb-2">
+                                                Price ₦{{g.group_price.toLocaleString()}}
+                                            </div>
+                                        
+                                        </div>
+
+                                    </b-link>
                                 </div>
-                                <div class="ta-item">
-                                    <div class="ta-pic set-bg" data-setbg="img/property/details/sidebar/ta-2.jpg" style="background-image: url(&quot;/img/property/details/sidebar/ta-2.jpg&quot;);"></div>
-                                    <div class="ta-text">
-                                        <h6><a href="#">Ashton Kutcher</a></h6>
-                                        <span>Member</span>
-                                        <div class="ta-num">08166277384</div>
-                                    </div>
-                                </div>
-                                <div class="ta-item">
-                                    <div class="ta-pic set-bg" data-setbg="img/property/details/sidebar/ta-3.jpg" style="background-image: url(&quot;/img/property/details/sidebar/ta-3.jpg&quot;);"></div>
-                                    <div class="ta-text">
-                                        <h6><a href="#">Ashton Kutcher</a></h6>
-                                        <span>Member</span>
-                                        <div class="ta-num">07033376295</div>
-                                    </div>
-                                </div>
-                                <div class="ta-item">
-                                    <div class="ta-pic set-bg" data-setbg="img/property/details/sidebar/ta-3.jpg" style="background-image: url(&quot;/img/property/details/sidebar/ta-3.jpg&quot;);"></div>
-                                    <div class="ta-text">
-                                        <h6><a href="#">Ashton Kutcher</a></h6>
-                                        <span>Member</span>
-                                        <div class="ta-num">07033376295</div>
-                                    </div>
-                                </div>
+                            </div>
+                            <div v-else class="alert alert-info shadow-sm">
+                                No group has been attached to this property
                             </div>
                         </div>
                     </div>
@@ -190,95 +212,37 @@
 </template>
 
 <script>
-import Content from '@/pages/LandingPage/Layout/Content'
+import Content from '@/pages/Client/Layout/Content'
 import axios from "axios";
-
 export default {
     components: {
         Content
     },
-    data() {
-        return {
-            data:{},
-            shareStatus: false,
-            link :'https://youtube.com',
-              sharing: {
-                url: 'https://youtube.com',
-                title: 'This is *LifeCard* Join Our Virtual Meetings through the link below ',
-                description: 'This is *LifeCard* your number one Real Estate Agency',
-                quote: 'The hot reload is so fast it\'s near instant. - Evan You',
-                hashtags: 'vuejs,vite,javascript',
-                twitterUser: 'youyuxi'
-            },
-            networks: [
-                { network: 'facebook', name: 'Facebook', icon: 'fab fah fa-lg fa-facebook-f' },
-                { network: 'linkedin', name: 'LinkedIn', icon: 'fab fah fa-lg fa-linkedin' },
-                { network: 'messenger', name: 'Messenger', icon: 'fab fah fa-lg fa-facebook-messenger' },
-                { network: 'skype', name: 'Skype', icon: 'fab fah fa-lg fa-skype' },
-                { network: 'telegram', name: 'Telegram', icon: 'fab fah fa-lg fa-telegram-plane' },
-                { network: 'twitter', name: 'Twitter', icon: 'fab fah fa-lg fa-twitter' },
-                { network: 'whatsapp', name: 'Whatsapp', icon: 'fab fah fa-lg fa-whatsapp' },
-            ],
-        }
-    },
-    computed : {
-        calculatePaymentPrice(){
-            return Math.floor(parseInt(this.data.group_price/this.data.no_of_people)).toLocaleString();
-        }
-    },
-     mounted(){
-        this.fetchData(parseInt(this.$route.params.mainGroupPropertyId));
+    data(){return {
+        data:{},
+    }},
+    mounted(){
+        this.fetchData(parseInt(this.$route.params.mainPropertyId));
     },
     methods: {
         fetchData(id){
-            axios.get(this.dynamic_route(`/client/main-property-group/${id}`))
+            axios.get(this.dynamic_route(`/client/single-main-property/${id}`))
             .then(res => {
-                if(res.status == 208) {
-                    this.$toast.error('There\'s no slot left in this Main property !', {
-                        position: 'top-center',
-                        timeout: 5000,
-                        closeOnClick: true,
-                        pauseOnFocusLoss: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        draggablePercent: 0.6,
-                        showCloseButtonOnHover: false,
-                        hideProgressBar: true,
-                        closeButton: 'button',
-                        icon: true,
-                        rtl: false,
-                    })
+                if(res.status) {
+                    this.data = res.data.data
 
-                    return this.$router.push({name: 'MainPropertyDetails', params:{mainPropertyId: res.data.data.mp_id}})
                 }
-                this.data = res.data.data;
-            }).catch((err) => {
-                if(err.response.status == 404) {
-                    this.$toast.error('Main property group not found!', {
-                        position: 'top-center',
-                        timeout: 5000,
-                        closeOnClick: true,
-                        pauseOnFocusLoss: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        draggablePercent: 0.6,
-                        showCloseButtonOnHover: false,
-                        hideProgressBar: true,
-                        closeButton: 'button',
-                        icon: true,
-                        rtl: false,
-                    })
-                }
-              
+            }).catch(() => {
+
             })
-        },
-        toggleShare(){
-            this.shareStatus = !this.shareStatus
-        },
+        }
     }
 }
 </script>
 <style scoped>
+a:hover {
+    text-decoration: none !important;
+}
 .wrapper {
     padding: 5.9rem 0;
 }

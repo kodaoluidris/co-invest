@@ -102,7 +102,7 @@
 </template>
 
 <script>
-import Content from '@/pages/LandingPage/Layout/Content'
+import Content from '@/pages/Client/Layout/Content'
 import { mapState, mapActions, mapGetters } from 'vuex';
 import axios from "axios"
 export default {
