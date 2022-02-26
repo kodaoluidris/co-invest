@@ -31,14 +31,33 @@
                                 <div class="pd-title">
                                     <!-- <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
                                     <div class="label">For rent</div> -->
-                                    <div v-if="data.name" class="pt-price">$ {{data.group_price.toLocaleString()}}</div>
+                                    <div v-if="data.name" class="pt-price">$ {{data.group_price.toLocaleString()}} / $ {{calculatePaymentPrice}}</div>
                                     <h3 v-if="data.name">{{data.name}}</h3>
                                     <p><span class=",mdi mdi-map-marker-outline"></span> 3 Middle Winchendon Rd, Rindge, NH 03463</p>
                                 </div>
                             </div>
                             <div class="col-lg-6">
-                                <div class="pd-social">
-                                    <button class="btn-special btn-lg">BUY NOW</button>
+                                <div class="pd-social" >
+                                    
+                                    <button class="btn-special btn-lg">BUY NOW</button> 
+                                    <button class="btn-special btn-lg ml-3" @click="toggleShare" >
+                                        <span class="fa fa-share "></span>
+                                        SHARE</button>
+                                            <span v-if="shareStatus" class="d-block mt-3">
+                                                <ShareNetwork
+                                                    v-for="network in networks"
+                                                    :network="network.network"
+                                                    :key="network.network"
+                                                    :url="data.url"
+                                                    :quote="sharing.quote"
+                                                    :hashtags="sharing.hashtags"
+                                                    :twitterUser="sharing.twitterUser"
+                                                    :title="sharing.title"
+                                                    :class="'btn btn-outline-primary ml-2'"
+                                                >
+                                                <i :class="network.icon"></i>
+                                                </ShareNetwork>
+                                            </span>       
                                 </div>
                             </div>
                         </div>
@@ -58,15 +77,16 @@
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="tabs-1" role="tabpanel">
                                         <div class="tab-details">
-                                            <ul class="left-table">
+                                            <ul class="left-table"> 
+                                                <li>
+                                                    <span class="type-name">Paid Price</span>
+                                                    <span class="type-value">$ {{calculatePaymentPrice}}</span>
+                                                </li>
                                                 <li>
                                                     <span class="type-name">Property Type</span>
                                                     <span class="type-value">{{data.p_name}}</span>
                                                 </li>
-                                                <li>
-                                                    <span class="type-name">Property ID</span>
-                                                    <span class="type-value">#219</span>
-                                                </li>
+                                               
                                                 <li>
                                                     <span class="type-name">Main property Price </span>
                                                     <span class="type-value">&nbsp; {{data.price}}</span>
@@ -179,7 +199,31 @@ export default {
     },
     data() {
         return {
-            data:{}
+            data:{},
+            shareStatus: false,
+            link :'https://youtube.com',
+              sharing: {
+                url: 'https://youtube.com',
+                title: 'This is *LifeCard* Join Our Virtual Meetings through the link below ',
+                description: 'This is *LifeCard* your number one Real Estate Agency',
+                quote: 'The hot reload is so fast it\'s near instant. - Evan You',
+                hashtags: 'vuejs,vite,javascript',
+                twitterUser: 'youyuxi'
+            },
+            networks: [
+                { network: 'facebook', name: 'Facebook', icon: 'fab fah fa-lg fa-facebook-f' },
+                { network: 'linkedin', name: 'LinkedIn', icon: 'fab fah fa-lg fa-linkedin' },
+                { network: 'messenger', name: 'Messenger', icon: 'fab fah fa-lg fa-facebook-messenger' },
+                { network: 'skype', name: 'Skype', icon: 'fab fah fa-lg fa-skype' },
+                { network: 'telegram', name: 'Telegram', icon: 'fab fah fa-lg fa-telegram-plane' },
+                { network: 'twitter', name: 'Twitter', icon: 'fab fah fa-lg fa-twitter' },
+                { network: 'whatsapp', name: 'Whatsapp', icon: 'fab fah fa-lg fa-whatsapp' },
+            ],
+        }
+    },
+    computed : {
+        calculatePaymentPrice(){
+            return Math.floor(parseInt(this.data.group_price/this.data.no_of_people)).toLocaleString();
         }
     },
      mounted(){
@@ -227,7 +271,10 @@ export default {
                 }
               
             })
-        }
+        },
+        toggleShare(){
+            this.shareStatus = !this.shareStatus
+        },
     }
 }
 </script>
