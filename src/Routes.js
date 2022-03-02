@@ -30,10 +30,11 @@ import ChartsPage from '@/pages/Charts/Charts';
 import IconsPage from '@/pages/Icons/Icons';
 import NotificationsPage from '@/pages/Notifications/Notifications';
 
-// Landing Page
-const LandingPage = () => import('@/pages/LandingPage/Index')
-const MainPropertyDetails = () => import('@/pages/LandingPage/MainPropertyDetails')
-const MainPropertyGroupDetails = () => import('@/pages/LandingPage/MainPropertyGroupDetails')
+// Client Page
+const LandingPage = () => import('@/pages/Client/Index')
+const MainPropertyDetails = () => import('@/pages/Client/MainPropertyDetails')
+const MainPropertyGroupDetails = () => import('@/pages/Client/MainPropertyGroupDetails')
+const BuyNow = () => import('@/pages/Client/BuyNow')
 
 
 Vue.use(Router);
@@ -60,6 +61,11 @@ export default new Router({
       path: '/home/main-property/groups/details/:mainGroupPropertyId',
       name: 'MainPropertyGroupDetails',
       component: MainPropertyGroupDetails,
+    },
+    {
+      path: '/home/checkout-main-property/:mainGroupPropertyId',
+      name: 'BuyNow',
+      component: BuyNow,
     },
     {
       path: '/login',
