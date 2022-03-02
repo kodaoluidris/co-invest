@@ -323,6 +323,7 @@ export default {
             closeOnContentClick: true,
             property_types:[],
             c_price:'',
+            price:'',
 
         }
     },
