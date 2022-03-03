@@ -24,7 +24,6 @@ export default {
     }},
     created (){
         this.data = JSON.parse(localStorage.getItem('checkout_data'))
-        console.log(this.data);
     }
 }
 </script>
