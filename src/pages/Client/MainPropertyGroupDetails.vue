@@ -31,7 +31,7 @@
                                 <div class="pd-title">
                                     <!-- <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
                                     <div class="label">For rent</div> -->
-                                    <div v-if="data.name" class="pt-price">$ {{data.group_price.toLocaleString()}} / $ {{calculatePaymentPrice}}</div>
+                                    <div v-if="data.name" class="pt-price">₦ {{data.group_price.toLocaleString()}} / ₦ {{calculatePaymentPrice}}</div>
                                     <h3 v-if="data.name">{{data.name}}</h3>
                                     <p><span class=",mdi mdi-map-marker-outline"></span> 3 Middle Winchendon Rd, Rindge, NH 03463</p>
                                 </div>
@@ -80,7 +80,7 @@
                                             <ul class="left-table"> 
                                                 <li>
                                                     <span class="type-name">Paid Price</span>
-                                                    <span class="type-value">$ {{calculatePaymentPrice}}</span>
+                                                    <span class="type-value">₦ {{calculatePaymentPrice}}</span>
                                                 </li>
                                                 <li>
                                                     <span class="type-name">Property Type</span>
@@ -144,41 +144,22 @@
                     <div class="property-sidebar scroll-area-xl">
                         <div class="single-sidebar">
                             <div class="section-title sidebar-title">
-                                <h5>Group Members (10)</h5>
+                                <h5>Group Members ({{data.members.length}})</h5>
                             </div>
-                            <div class="top-agent">
-                                <div class="ta-item">
-                                    <div class="ta-pic set-bg" data-setbg="img/property/details/sidebar/ta-1.jpg" style="background-image: url(&quot;/img/property/details/sidebar/ta-1.jpg&quot;);"></div>
-                                    <div class="ta-text">
-                                        <h6><a href="#">Ashton Kutcher</a></h6>
+                            <div class="top-agent" v-if="data.members.length">
+                                <div class="ta-item" v-for="(member,i) in data.members" :key="i">
+                                    <div class="ta-pic set-bg"   style="background-image: url(&quot;https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiYhGP5eN3CABVLqXCjVZT_CfIC_wzNK_f4M9Bc4Yd4E6NchqqZfWegamZO77KedEldT0&usqp=CAU&quot;);"></div>
+                                    <div class="ta-text" >
+                                        <h6><a href="#">{{member.fname + ' ' + member.lname}}</a></h6>
                                         <span>Member</span>
-                                        <div class="ta-num">09077266354</div>
+                                        <div class="ta-num">{{member.phone}}</div>
+                                        <div class="ta-num mt-1">Total Slot: {{member.total_slot}}</div>
                                     </div>
                                 </div>
-                                <div class="ta-item">
-                                    <div class="ta-pic set-bg" data-setbg="img/property/details/sidebar/ta-2.jpg" style="background-image: url(&quot;/img/property/details/sidebar/ta-2.jpg&quot;);"></div>
-                                    <div class="ta-text">
-                                        <h6><a href="#">Ashton Kutcher</a></h6>
-                                        <span>Member</span>
-                                        <div class="ta-num">08166277384</div>
-                                    </div>
-                                </div>
-                                <div class="ta-item">
-                                    <div class="ta-pic set-bg" data-setbg="img/property/details/sidebar/ta-3.jpg" style="background-image: url(&quot;/img/property/details/sidebar/ta-3.jpg&quot;);"></div>
-                                    <div class="ta-text">
-                                        <h6><a href="#">Ashton Kutcher</a></h6>
-                                        <span>Member</span>
-                                        <div class="ta-num">07033376295</div>
-                                    </div>
-                                </div>
-                                <div class="ta-item">
-                                    <div class="ta-pic set-bg" data-setbg="img/property/details/sidebar/ta-3.jpg" style="background-image: url(&quot;/img/property/details/sidebar/ta-3.jpg&quot;);"></div>
-                                    <div class="ta-text">
-                                        <h6><a href="#">Ashton Kutcher</a></h6>
-                                        <span>Member</span>
-                                        <div class="ta-num">07033376295</div>
-                                    </div>
-                                </div>
+                            </div>
+                            <div v-else class="alert alert-secondary shadow-sm">
+                                Currently, this group doesn't have any member.
+                                <p class="mt-3">BE THE FIRST MEMBER</p>
                             </div>
                         </div>
                     </div>
@@ -302,7 +283,8 @@ export default {
         contiueProcess() {
             this.closeMe();
             this.$router.push({name: 'BuyNow', params:{id:this.data.id}});
-            bus.$emit('buy_now_data', this.data)
+            localStorage.setItem('checkout_data', JSON.stringify(this.data))
+
         }
     }
 }
@@ -422,6 +404,7 @@ ul, ol {
 .pd-text .pd-board .tab-board .tab-content .tab-details ul.right-table li:nth-child(odd) {
     background: #f7f7f7;
 }
+
 .property-sidebar .single-sidebar {
     margin-bottom: 68px;
 }
@@ -452,6 +435,7 @@ ul, ol {
     background: #00C89E;
     content: "";
 }
+
 .property-sidebar .single-sidebar .top-agent .ta-item {
     overflow: hidden;
     margin-bottom: 30px;

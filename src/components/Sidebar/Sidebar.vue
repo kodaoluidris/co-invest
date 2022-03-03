@@ -35,6 +35,16 @@
             { header: 'Main properties', link: '/app/manage-properties/main-properties' },
           ]"
         />
+        <NavLink
+          :activeItem="activeItem"
+          header="My Investment"
+          link="/app/my-investments"
+          iconName="flaticon-network"
+          index="my"
+          :childrenLinks="[
+            { header: 'Investment', link: '/app/my-investments/index' },
+          ]"
+        />
       </ul>
       <!-- <h5 class="navTitle">
         LABELS

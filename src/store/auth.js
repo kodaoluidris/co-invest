@@ -14,7 +14,7 @@ export default {
     actions:{
         getAuthData({commit}) {
             const token  = localStorage.getItem('auth_token') || null;
-            const data  = localStorage.getItem('auth_user') || null;
+            const data  = JSON.parse(localStorage.getItem('auth_user') || null);
 
             commit('setAuthData', {token,data})
         }
