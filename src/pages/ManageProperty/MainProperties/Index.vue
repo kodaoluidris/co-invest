@@ -194,13 +194,13 @@
 
         <!-- Modals -->
         <b-modal size="lg" style="background:white" title="Main Property" id="create" hide-footer>
-            <create :my_model="$bvModal" :auth_token="authToken" :property_types="property_types" @submitted="fetchData()"  />
+            <create :my_model="$bvModal" :authToken="auth_token" :property_types="property_types" @submitted="fetchData()"  />
         </b-modal>
         <b-modal size="lg" style="background:white" :title="'Manage  groups ( total price ₦ ' + c_price + ')'" id="groups" hide-footer>
-            <manageGroup :my_model="$bvModal" :auth_token="authToken" :main_property="current" @submitted="fetchData()"  />
+            <manageGroup :my_model="$bvModal" :authToken="auth_token" :main_property="current" @submitted="fetchData()"  />
         </b-modal>
         <b-modal size="lg" style="background:white" :title="'Edit  groups allocation (total price ₦ ' + price + ')'" id="edit_groups" hide-footer>
-            <editGroup :my_model="$bvModal" :auth_token="authToken" :main_property="current" @submitted="fetchData()"  />
+            <editGroup :my_model="$bvModal" :authToken="auth_token" :main_property="current" @submitted="fetchData()"  />
         </b-modal>
         <b-modal size="lg" style="background:white" title="View Main Property" id="view" hide-footer>
             <viewModal :my_model="$bvModal" :data="current" :property_types="property_types"  />
@@ -209,7 +209,7 @@
             <viewImageModal :my_model="$bvModal" :data="current_img" :main_name="main_name" />
         </b-modal>
         <b-modal size="lg" style="background:white" title="Edit Main Property" id="edit" hide-footer>
-            <edit :my_model="$bvModal" :auth_token="authToken" :data="current" :property_types="property_types" @updated="fetchData()"  />
+            <edit :my_model="$bvModal" :authToken="auth_token" :data="current" :property_types="property_types" @updated="fetchData()"  />
         </b-modal>
         <!-- Modals end -->
         <!-- V Dialog -->
@@ -328,7 +328,7 @@ export default {
         }
     },
     computed:{
-        ...mapState('page',['authToken']),
+        ...mapState('page',['auth_token']),
         filter_price(val) {
             return val.toLocaleString()
         }
@@ -355,7 +355,7 @@ export default {
             filters: this.filters,
             }, {
                 headers:{
-                    authorization: `Bearer ${this.authToken}`
+                    authorization: `Bearer ${this.auth_token}`
 
                 }
             })
@@ -379,7 +379,7 @@ export default {
             active_only: true,
             }, {
                 headers:{
-                    authorization: `Bearer ${this.authToken}`
+                    authorization: `Bearer ${this.auth_token}`
 
                 }
             })
@@ -400,7 +400,7 @@ export default {
         axios
             .put(this.dynamic_route(`/main_properties/toggle-status/${id}`), { id, status }, {
                 headers:{
-                    authorization: `Bearer ${this.authToken}`
+                    authorization: `Bearer ${this.auth_token}`
 
                 }
             })
@@ -450,7 +450,7 @@ export default {
         axios
             .delete(this.dynamic_route(`/main_properties/${id}`), {
                 headers:{
-                    authorization: `Bearer ${this.authToken}`
+                    authorization: `Bearer ${this.auth_token}`
 
                 }
             })

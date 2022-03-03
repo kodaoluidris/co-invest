@@ -6,11 +6,11 @@ export default {
   methods: {
     dynamic_route(endUrl) {
         // return `https://api.diimtech.com/api/admin/${endUrl}`;
-        return `http://co_invest_backend.test/api${endUrl}`
+        return `http://localhost:1000/api${endUrl}`
       },
       dynamic_auth_route(endUrl) {
         // return `https://api.diimtech.com/api/${endUrl}`;
-        return `http://co_invest_backend.test/api/auth${endUrl}`
+        return `http://localhost:1000/api/auth${endUrl}`
       },
       logoutUser() {
         this.$toast.error('Login expired, please login again!', {
