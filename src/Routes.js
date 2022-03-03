@@ -22,6 +22,8 @@ import Testing from '@/pages/Dashboard/Gaw';
 import Properties from '@/pages/ManageProperty/Properties/Index';
 import PropertyTypes from '@/pages/ManageProperty/PropertyTypes/Index';
 import MainProperty from '@/pages/ManageProperty/MainProperties/Index';
+import MyInvestment from '@/pages/MyAssets/Assets/Index';
+import ViewInvestment from '@/pages/MyAssets/Assets/partials/View';
 
 // Charts
 import ChartsPage from '@/pages/Charts/Charts';
@@ -123,6 +125,16 @@ export default new Router({
           component: MainProperty,
         },
         {
+          path: 'my-investments/index',
+          name: 'Investment',
+          component: MyInvestment,
+        },
+        {
+          path: 'my-investments/:id/view',
+          name: 'ViewInvestment',
+          component: ViewInvestment,
+        },
+        {
           path: 'test',
           name: 'test',
           component: Testing,
@@ -157,6 +169,7 @@ export default new Router({
           name: 'GoogleMapPage',
           component: GoogleMapPage,
         },
+        { path: "/:pathMatch(.*)*", component: AnalyticsPage }
       ],
     },
   ],
