@@ -17,13 +17,14 @@ import Widget from './components/Widget/Widget';
 import vuetify from './plugins/vuetify'
 import 'vue-toastification/dist/index.css'
 import Toast from 'vue-toastification';
+import VueSocialSharing from 'vue-social-sharing'
 
 
 Vue.use(BootstrapVue);
 Vue.use(Toast)
-
+Vue.use(VueSocialSharing);
 Vue.use(VueTouch);
-Vue.use(Trend);
+Vue.use(Trend); 
 Vue.component('Widget', Widget);
 Vue.use(VueGoogleMaps, {
   load: {
@@ -69,7 +70,6 @@ Vue.mixin({
 
   },
 })
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

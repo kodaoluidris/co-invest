@@ -87,7 +87,8 @@ export default {
     mounted() {
         // eslint-disable-next-line no-console
         for(let i =0; i < this.main_property.groups;i++) {
-            this.data.push({np:'', price:''})
+            let ii=i +1;
+            this.data.push({gn:'Group ' + ii,np:'', price:''})
         }
     },
     methods:{

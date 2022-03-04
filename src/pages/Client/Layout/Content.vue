@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import Header from '@/pages/LandingPage/Layout/Header'
-import Footer from '@/pages/LandingPage/Layout/Footer'
+import Header from '@/pages/Client/Layout/Header'
+import Footer from '@/pages/Client/Layout/Footer'
 
 export default {
     components: {
