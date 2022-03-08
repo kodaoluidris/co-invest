@@ -168,7 +168,7 @@
         </div>
         <!--  End of details-->
         <!-- Modal -->
-        <b-modal id="autenticateUser" size="md" hide-footer title="Authentication">
+        <b-modal id="authenticateUser" size="md" hide-footer title="Authentication">
             <authenticateUser :my_moal="$bvModal" @authenticated="contiueProcess" />
         </b-modal>
     </Content>
@@ -271,13 +271,13 @@ export default {
             localStorage.setItem('checkout_data', JSON.stringify(this.data))
         },
         authenticateUser() {
-            this.$bvModal.show('autenticateUser');
+            this.$bvModal.show('authenticateUser');
         },
         toggleShare(){
             this.shareStatus = !this.shareStatus
         },
         closeMe(){
-            this.$bvModal.hide('autenticateUser')
+            this.$bvModal.hide('authenticateUser')
 
         },
         contiueProcess() {

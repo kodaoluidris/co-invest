@@ -153,8 +153,6 @@ export default {
     },
     mounted(){
         this.getAuthData()
-        console.log(this.auth_data);
-        console.log(this.data);
     },
     
 }
