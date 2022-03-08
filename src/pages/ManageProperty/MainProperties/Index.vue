@@ -351,7 +351,7 @@ export default {
         this.getAuthData();
     },
     methods: {
-        ...mapActions('page', ['getAuthData']),
+        ...mapActions('auth', ['getAuthData']),
         pass_current(data) {
             this.c_price = data.price.toLocaleString()
             this.current = data

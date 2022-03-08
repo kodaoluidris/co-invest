@@ -4,113 +4,187 @@
     <h1 class="page-title">Dashboard</h1>
     <b-row>
       <b-col md="6" xl="3" sm="6" xs="12">
-        <div class="pb-xlg h-100">
-          <Widget class="h-100 mb-0" title="Visits Today" close>
-            <div class="d-flex justify-content-between align-items-center mb-lg">
-              <h2>4,332</h2>
-              <i class="la la-arrow-right text-primary la-lg rotate-315" />
+        <div class="h-100">
+          <div class="card">
+            <div class="card-body p-0">
+              <div class="small-box">
+                <div class="d-flex inner">
+                  <div>
+                    <h3>150</h3>
+                    <p>Properties</p>
+                  </div>
+                  <span class="b-avatar badge-light-primary rounded-circle ml-auto" style="width: 58px; height: 58px;">
+                    <span class="b-avatar-custom"><svg xmlns="http://www.w3.org/2000/svg" width="34px" height="34px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></span><!---->
+                  </span>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
             </div>
-            <div class="d-flex flex-wrap justify-content-between">
-              <div class="mt">
-                <h6>+830</h6><p class="text-muted mb-0 mr"><small>Logins</small></p>
-              </div>
-              <div class="mt">
-                <h6>0.5%</h6><p class="text-muted mb-0"><small>Sign Out</small></p>
-              </div>
-              <div class="mt">
-                <h6>4.5%</h6><p class="text-muted mb-0 mr"><small>Rate</small></p>
-              </div>
-            </div>
-          </Widget>
+          </div>
         </div>
       </b-col>
+
       <b-col md="6" xl="3" sm="6" xs="12">
-        <div class="pb-xlg h-100">
-          <Widget class="h-100 mb-0" title="Revenue Breakdown" close>
-            <highcharts :options="donut"></highcharts>
-          </Widget>
+        <div class="h-100">
+          <div class="card">
+            <div class="card-body p-0">
+              <div class="small-box">
+                <div class="d-flex inner">
+                  <div>
+                    <h3>1354</h3>
+                    <p>Users</p>
+                  </div>
+                  <span class="b-avatar badge-light-info rounded-circle ml-auto" style="width: 58px; height: 58px;">
+                    <span class="b-avatar-custom">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    </span><!---->
+                  </span>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+          </div>
         </div>
       </b-col>
+
       <b-col md="6" xl="3" sm="6" xs="12">
-        <div class="pb-xlg h-100">
-          <Widget class="h-100 mb-0" title="App Perfomance" close>
-            <p class="text-muted d-flex flex-wrap">
-              <small class="mr-lg d-flex align-items-center">
-                <span class="circle bg-danger text-danger mr-xs" style="font-size: 4px;">
-                  .
-                </span>
-                  This Period
-              </small>
-              <small class="mr-lg d-flex align-items-center">
-                <span class="circle bg-primary text-primary mr-xs" style="font-size: 4px;">
-                  .
-                </span>
-                Last Period
-              </small>
-            </p>
-            <h6>SDK</h6>
-            <b-progress class="mb-xs" style="height: 5px"
-              variant="danger" :value="60" :max="100" />
-            <b-progress class="mb" style="height: 5px"
-              variant="primary" :value="35" :max="100" />
-            <h6>Integration</h6>
-            <b-progress class="mb-xs" style="height: 5px"
-              variant="danger" :value="40" :max="100" />
-            <b-progress style="height: 5px"
-              variant="primary" :value="55" :max="100" />
-          </Widget>
+        <div class="h-100">
+          <div class="card">
+            <div class="card-body p-0">
+              <div class="small-box">
+                <div class="d-flex inner">
+                  <div>
+                    <h3>10</h3>
+                    <p>Groups</p>
+                  </div>
+                  <span class="b-avatar badge-light-danger rounded-circle ml-auto" style="width: 58px; height: 58px;">
+                    <span class="b-avatar-custom">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-box"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                    </span><!---->
+                  </span>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+          </div>
         </div>
       </b-col>
+
       <b-col md="6" xl="3" sm="6" xs="12">
-        <div class="pb-xlg h-100">
-          <Widget class="h-100 mb-0" title="Server Overview" close>
-            <div class="d-flex align-items-center mb-sm">
-              <p class="width-150"><small>60% / 37°С / 3.3 Ghz</small></p>
-              <div style="width: calc(100% - 150px)">
-                <trend
-                  :data="getRandomData()"
-                  :gradient="[appConfig.colors.danger]"
-                  :height="40"
-                  stroke-width="4"
-                  smooth />
+        <div class="h-100">
+          <div class="card">
+            <div class="card-body p-0">
+              <div class="small-box">
+                <div class="d-flex inner">
+                  <div>
+                    <h3>143</h3>
+                    <p>Active Properties</p>
+                  </div>
+                  <span class="b-avatar badge-light-success rounded-circle ml-auto" style="width: 58px; height: 58px;">
+                    <span class="b-avatar-custom">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </span><!---->
+                  </span>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
-            <div class="d-flex align-items-center mb-sm">
-              <p class="width-150"><small>54% / 31°С / 3.3 Ghz</small></p>
-              <div style="width: calc(100% - 150px)">
-                <trend
-                  :data="getRandomData()"
-                  :gradient="[appConfig.colors.info]"
-                  :height="40"
-                  stroke-width="4"
-                  smooth />
-              </div>
-            </div>
-            <div class="d-flex align-items-center">
-              <p class="width-150"><small>57% / 21°С / 3.3 Ghz</small></p>
-              <div style="width: calc(100% - 150px)">
-                <trend
-                  :data="getRandomData()"
-                  :gradient="[appConfig.colors.primary]"
-                  :height="40"
-                  stroke-width="4"
-                  smooth />
-              </div>
-            </div>
-          </Widget>
+          </div>
         </div>
       </b-col>
-    </b-row>
-    <b-row>
-      <b-col xs="12" lg="6" xl="4" v-for="stat in mock.bigStat" :key="stat.id">
-        <BigStat
-          :product="stat.product"
-          :color="stat.color"
-          :total="stat.total"
-          :registrations="stat.registrations"
-          :bounce="stat.bounce"
-        />
+
+      <b-col md="6" xl="3" sm="6" xs="12">
+        <div class="h-100">
+          <div class="card">
+            <div class="card-body p-0">
+              <div class="small-box">
+                <div class="d-flex inner">
+                  <div>
+                    <h3>7</h3>
+                    <p>Open Groups</p>
+                  </div>
+                  <span class="b-avatar badge-light-warning rounded-circle ml-auto" style="width: 58px; height: 58px;">
+                    <span class="b-avatar-custom">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </span><!---->
+                  </span>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
       </b-col>
+
+      <b-col md="6" xl="3" sm="6" xs="12">
+        <div class="h-100">
+          <div class="card">
+            <div class="card-body p-0">
+              <div class="small-box">
+                <div class="d-flex inner">
+                  <div>
+                    <h3>3</h3>
+                    <p>Closed Groups</p>
+                  </div>
+                  <span class="b-avatar badge-light-secondary rounded-circle ml-auto" style="width: 58px; height: 58px;">
+                    <span class="b-avatar-custom">
+                      <svg data-v-9a6e255c="" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-info"><circle data-v-9a6e255c="" cx="12" cy="12" r="10"></circle><line data-v-9a6e255c="" x1="12" y1="16" x2="12" y2="12"></line><line data-v-9a6e255c="" x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                    </span><!---->
+                  </span>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </b-col>
+
+      <b-col md="6" xl="3" sm="6" xs="12">
+        <div class="h-100">
+          <div class="card">
+            <div class="card-body p-0">
+              <div class="small-box">
+                <div class="d-flex inner">
+                  <div>
+                    <h3>6</h3>
+                    <p>Property Types</p>
+                  </div>
+                  <span class="b-avatar badge-light-primary rounded-circle ml-auto" style="width: 58px; height: 58px;">
+                    <span class="b-avatar-custom">
+                      <svg data-v-9a6e255c="" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-pie-chart"><path data-v-9a6e255c="" d="M21.21 15.89A10 10 0 1 1 8 2.83"></path><path data-v-9a6e255c="" d="M22 12A10 10 0 0 0 12 2v10z"></path></svg>  
+                    </span><!---->
+                  </span>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </b-col>
+
+      <b-col md="6" xl="3" sm="6" xs="12">
+        <div class="h-100">
+          <div class="card">
+            <div class="card-body p-0">
+              <div class="small-box">
+                <div class="d-flex inner">
+                  <div>
+                    <h3>120</h3>
+                    <p>Logged in users</p>
+                  </div>
+                  <span class="b-avatar badge-light-warning rounded-circle ml-auto" style="width: 58px; height: 58px;">
+                    <span class="b-avatar-custom">
+                      <svg data-v-254b7dbb="" xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-watch"><circle data-v-254b7dbb="" cx="12" cy="12" r="7"></circle><polyline data-v-254b7dbb="" points="12 9 12 12 13.5 13.5"></polyline><path data-v-254b7dbb="" d="M16.51 17.35l-.35 3.83a2 2 0 0 1-2 1.82H9.83a2 2 0 0 1-2-1.82l-.35-3.83m.01-10.7l.35-3.83A2 2 0 0 1 9.83 1h4.35a2 2 0 0 1 2 1.82l.35 3.83"></path></svg>
+                    </span><!---->
+                  </span>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </b-col>
+
     </b-row>
     <b-row>
         <b-col xs="12">
@@ -272,3 +346,102 @@ export default {
 </script>
 
 <style src="./Dashboard.scss" lang="scss" />
+<style scoped>
+  .card {
+      border: none;
+      margin-bottom: 1.5rem;
+      padding: 0  !important;
+      box-shadow: 0 4px 24px 0 rgb(34 41 47 / 10%);
+  }
+  .small-box {
+    display: block;
+    position: relative;
+  }
+  .small-box:hover {
+    text-decoration: none;
+  }
+  .small-box>.inner {
+    padding: 20px;
+  }
+  .small-box h3, .small-box p {
+    z-index: 5;
+  }
+  .small-box h3 {
+      font-weight: 600;
+      padding: 0;
+      white-space: nowrap;
+      color: #5e5873;
+      font-size: 25px;
+      margin-bottom: 5px !important;
+  }
+  .small-box p {
+    font-size: 0.93rem;
+    font-weight: 500;
+    color: #999999;
+  }
+  .small-box .icon {
+    color: rgba(0,0,0,.15);
+    z-index: 0;
+  }
+  .small-box .icon>i.fa, 
+  .small-box .icon>i.fab, 
+  .small-box .icon>i.fad, 
+  .small-box .icon>i.fal, 
+  .small-box .icon>i.far, 
+  .small-box .icon>i.fas, 
+  .small-box .icon>i.ion {
+    font-size: 70px;
+    top: 20px;
+  }
+  .small-box .icon>i {
+    position: absolute;
+    right: 15px;
+    top: 15px;  
+    transition: transform .3s linear,-webkit-transform .3s linear;
+  }
+  .small-box>.small-box-footer {
+    border-top: 1px solid #f7f7f7;
+    display: block;
+    padding: 3px 0;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    z-index: 10;
+  }
+  .b-avatar.badge-light-primary {
+    background-color: rgba(115,103,240,.12);
+  }
+  .b-avatar.badge-light-primary {
+    color: #7367f0;
+  }
+  .b-avatar.badge-light-info {
+    background-color: rgba(0,207,232,.12);
+  }
+  .b-avatar.badge-light-info {
+    color: #00cfe8;
+  }
+  .b-avatar.badge-light-danger {
+    background-color: rgba(234,84,85,.12);
+  }
+  .b-avatar.badge-light-danger {
+    color: #ea5455;
+  }
+  .b-avatar.badge-light-success {
+    background-color: rgba(40,199,111,.12);
+  }
+  .b-avatar.badge-light-success {
+    color: #28c76f;
+  }
+  .b-avatar.badge-light-warning {
+    background-color: rgba(255,159,67,.12);
+  }
+  .b-avatar.badge-light-warning {
+      color: #ff9f43;
+  }
+  .b-avatar.badge-light-secondary {
+    background-color: rgba(130,134,139,.12);
+  }
+  .b-avatar.badge-light-secondary {
+      color: #82868b;
+  }
+</style>
