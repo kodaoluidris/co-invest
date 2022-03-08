@@ -187,41 +187,52 @@
 
     </b-row>
     <b-row>
-        <b-col xs="12">
+        <b-col md="6">
           <Widget
-            title="<h5>Support <span class='fw-semi-bold'>Requests</span></h5>"
+            title="<h5>Properties against Investors</h5>"
             bodyClass="widget-table-overflow"
             customHeader
           >
-            <div class="table-responsive">
+            <div class="px-3">
+              <bar height="395" style="height: 395px;"></bar>
+            </div>
+          </Widget>
+        </b-col>
+        <b-col md="6">
+          <Widget
+            title="<h5>Main Property <span class='fw-semi-bold'>Overview</span></h5>"
+            bodyClass="widget-table-overflow"
+            customHeader
+          >
+            <div class="table-responsive mt-3">
               <table class="table table-striped table-lg mb-0 requests-table">
                 <thead>
                   <tr class="text-muted">
-                    <th>NAME</th>
-                    <th>EMAIL</th>
-                    <th>PRODUCT</th>
+                    <th>MAIN PROPERTY</th>
+                    <th>GROUPS</th>
+                    <th>INVESTORS</th>
                     <th>PRICE</th>
-                    <th>DATE</th>
-                    <th>CITY</th>
+                    <!-- <th>DATE</th>
+                    <th>CITY</th> -->
                     <th>STATUS</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr
-                    v-for="row in mock.table"
+                    v-for="(row, ind) in mock.table"
                     :key="row.id"
                   >
                     <td>{{row.name}}</td>
-                    <td>{{row.email}}</td>
-                    <td>{{row.product}}</td>
+                    <td>{{row.groups}}</td>
+                    <td>{{ind+25}}</td>
                     <td>{{row.price}}</td>
-                    <td>{{row.date}}</td>
-                    <td>{{row.city}}</td>
+                    <!-- <td>{{row.date}}</td>
+                    <td>{{row.city}}</td> -->
                     <td>
                       <b-badge
-                        :variant="row.status === 'Pending'
+                        :variant="row.status === 'Active'
                           ? 'success'
-                          : row.status === 'Declined' ? 'danger' : 'info'"
+                          : row.status === 'Inactive' ? 'danger' : 'info'"
                         pill
                       >
                         {{row.status}}
@@ -233,7 +244,7 @@
             </div>
           </Widget>
         </b-col>
-      </b-row>
+    </b-row>
   </div>
 </template>
 
@@ -241,13 +252,14 @@
 import Widget from '@/components/Widget/Widget';
 import BigStat from './components/BigStat/BigStat';
 import mock from './mock';
+import Bar from './Bar'
 
 import { Chart } from 'highcharts-vue';
 
 export default {
   name: 'Dashboard',
   components: {
-    Widget, BigStat, highcharts: Chart
+    Bar, Widget, BigStat, highcharts: Chart
   },
   data() {
     return {
@@ -443,5 +455,12 @@ export default {
   }
   .b-avatar.badge-light-secondary {
       color: #82868b;
+  }
+  th, tr {
+      white-space: nowrap;
+  }
+  .requests-table td {
+    font-weight: 100 !important;
+    font-size: 13px;
   }
 </style>
