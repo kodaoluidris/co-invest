@@ -78,23 +78,24 @@
                             required
                         ></v-text-field>
                     </v-col>
-                    <v-col
+                     <v-col
                         cols="12"
                         sm="6"
                         md="6"
                     >
-                        <v-select
-                            v-model="form.status"
-                            :items="['active', 'inactive']"
-                            label="Status*"
-                            :rules="statusRules"
+                        <v-text-field
+                            v-model="form.appreciate"
+                            type="number"
+                            label="Main Property Appreciation year *"
+                            :rules="appreciate"
                             required
-                        ></v-select>
+                        ></v-text-field>
                     </v-col>
+                    
                     <v-col
                         cols="12"
-                        sm="12"
-                        md="12"
+                        sm="6"
+                        md="6"
                     >
                         <v-select
                             v-model="form.property_type_id"
@@ -106,6 +107,19 @@
                             :rules="propertyTypeRules"
                             persistent-hint
                             dense
+                            required
+                        ></v-select>
+                    </v-col>
+                    <v-col
+                        cols="12"
+                        sm="6"
+                        md="6"
+                    >
+                        <v-select
+                            v-model="form.status"
+                            :items="['active', 'inactive']"
+                            label="Status*"
+                            :rules="statusRules"
                             required
                         ></v-select>
                     </v-col>
@@ -153,7 +167,7 @@ import VueElementLoading from 'vue-element-loading'
 import axios from 'axios'
 
 export default {
-    props:['my_model', 'property_types', 'auth_token'],
+    props:['my_model', 'property_types', 'authToken'],
     components:{ quillEditor,VueElementLoading },
     data() {
         return {
@@ -168,6 +182,9 @@ export default {
             ],
             groupRules: [
                 v => !!v || 'Group is required',
+            ],
+            appreciate: [
+                v => !!v || 'This field is required',
             ],
             statusRules:[
                 v => !!v || 'Status is required',
@@ -254,6 +271,7 @@ export default {
             payload.append('description', this.form.description)
             payload.append('price', this.form.price)
             payload.append('groups', this.form.group)
+            payload.append('appreciate', this.form.appreciate)
             payload.append('property_type_id', this.form.property_type_id)
             for (let i = 0; i < productImgArray.length; i++) {
                 payload.append('image[]', productImgArray[i])
@@ -262,7 +280,7 @@ export default {
             axios
             .post(this.dynamic_route('/main_properties/'), payload, {
                 headers:{
-                  authorization: `Bearer ${this.auth_token}`
+                  authorization: `Bearer ${this.authToken}`
 
                 }
             })
