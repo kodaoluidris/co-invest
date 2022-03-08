@@ -328,7 +328,7 @@ export default {
         }
     },
     computed:{
-        ...mapState('page',['auth_token']),
+        ...mapState('auth',['auth_token']),
         filter_price(val) {
             return val.toLocaleString()
         }
@@ -339,7 +339,7 @@ export default {
         this.getAuthData();
     },
     methods: {
-        ...mapActions('page', ['getAuthData']),
+        ...mapActions('auth', ['getAuthData']),
         pass_current(data) {
             this.c_price = data.price.toLocaleString()
             this.current = data

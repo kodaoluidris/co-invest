@@ -18,6 +18,16 @@ import vuetify from './plugins/vuetify'
 import 'vue-toastification/dist/index.css'
 import Toast from 'vue-toastification';
 import VueSocialSharing from 'vue-social-sharing'
+import Echo from 'laravel-echo';
+
+window.Pusher = require('pusher-js');
+
+// window.Echo = new Echo({
+//     broadcaster: 'pusher',
+//     key: '4c2e73e2ff55dfbf20af',
+//     cluster: 'us2',
+//     forceTLS: true
+// });
 
 
 Vue.use(BootstrapVue);

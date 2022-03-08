@@ -47,17 +47,25 @@
                </div>
            </div>
        </div>
+       <div class="row px-2" style="margin-top:20px">
+           <div class="col-12">
+            <Chat @messagesent="fetchMessages"  :user="auth_data" :token="auth_token" :mainPropertyId="data.mpg_id"/>
+
+            </div>
+       </div>
    </v-app>
 </template>
 <script>
 import Widget from '@/components/Widget/Widget';
 import VueElementLoading from 'vue-element-loading'
+import Chat from './Chat.vue'
 import { mapState, mapActions } from 'vuex';
 import axios from "axios"
 export default {
     components:{
         Widget,
-        VueElementLoading
+        VueElementLoading, 
+        Chat
     },
     data() {
         return {
@@ -142,6 +150,9 @@ export default {
                 this.loading = false
             })
         },
+        fetchMessages(){
+
+        }
     }
 }
 </script>
