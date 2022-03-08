@@ -149,7 +149,7 @@ export default {
         },
     },
     created (){
-        this.data = JSON.parse(localStorage.getItem('checkout_data'));
+        this.data = JSON.parse(localStorage.getItem('checkout_data'))
     },
     mounted(){
         this.getAuthData()
