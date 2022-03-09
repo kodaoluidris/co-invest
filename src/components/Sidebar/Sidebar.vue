@@ -49,7 +49,6 @@
         />
       </ul>
       <!-- <h5 class="navTitle">
-        LABELS
       </h5>
       <ul class="sidebarLabels">
         <li>
