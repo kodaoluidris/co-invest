@@ -82,6 +82,7 @@ export default {
             let payload ={
                 user_id: this.auth_data.id,
                 main_property_group_id:this.data.id,
+                amount: Math.floor(parseInt(this.data.group_price/this.data.no_of_people))
             }
 
             axios.post(this.dynamic_route('/client/checkout'),payload,{
