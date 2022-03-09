@@ -9,11 +9,11 @@
         <router-link to="/app/dashboard"><span class="primary-word">CO</span> <span class="secondary-word"> Invest</span></router-link>
       </header>
 
-      <a class="generator-link navTitle" target="_blank" href="https://flatlogic.com/generator">Main modules</a>
+      <!-- <a class="generator-link navTitle" target="_blank" href="https://flatlogic.com/generator">Main modules</a> -->
 
-      <h5 class="navTitle first">
+      <!-- <h5 class="navTitle first">
         APP
-      </h5>
+      </h5> -->
       <ul class="nav">
         <NavLink
             :activeItem="activeItem"
@@ -24,6 +24,7 @@
             isHeader
         />
         <NavLink
+          v-if="authType.name == 'superadmin'"
           :activeItem="activeItem"
           header="Manage Property"
           link="/app/manage-properties"
@@ -36,6 +37,7 @@
           ]"
         />
         <NavLink
+          v-if="authType.name == 'user'"
           :activeItem="activeItem"
           header="My Investment"
           link="/app/my-investments"
@@ -93,12 +95,13 @@
 import { mapState, mapActions } from 'vuex';
 import isScreen from '@/core/screenHelper';
 import NavLink from './NavLink/NavLink';
-
+import axios from "axios";
 export default {
   name: 'Sidebar',
   components: { NavLink },
   data() {
     return {
+      authType:'',
       alerts: [
         {
           id: 0,
@@ -118,6 +121,7 @@ export default {
     };
   },
   methods: {
+    ...mapActions('page', ['getAuthData']),
     ...mapActions('layout', ['changeSidebarActive', 'switchSidebar']),
     setActiveByRoute() {
       const paths = this.$route.fullPath.split('/');
@@ -136,11 +140,39 @@ export default {
         this.changeSidebarActive(null);
       }
     },
+     getUserType(){
+        const auth_user = JSON.parse(localStorage.getItem('auth_user')) || null;
+        if(auth_user) {
+          axios
+            .post(this.dynamic_auth_route('/user_type'), 
+            {id:auth_user.id },
+            {
+              headers:{
+                authorization: `Bearer ${this.authToken}`
+              }
+            })
+            .then(res => {
+              this.authType = res.data;
+            })
+            .catch(err => {
+             
+            })
+            .finally(() => {
+              this.loading = false
+            });
+          
+        }
+    },
   },
   created() {
     this.setActiveByRoute();
   },
+  mounted() {
+    this.getAuthData();
+    this.getUserType({url:this.dynamic_auth_route('/user_type'), token:this.authToken});
+  },
   computed: {
+    ...mapState('page', ['authToken']),
     ...mapState('layout', {
       sidebarStatic: state => state.sidebarStatic,
       sidebarOpened: state => !state.sidebarClose,

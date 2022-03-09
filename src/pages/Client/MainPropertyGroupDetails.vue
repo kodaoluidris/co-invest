@@ -100,30 +100,10 @@
                                                     <span class="type-value">{{data.status}}</span>
                                                 </li>
                                             </ul>
-                                            <ul class="right-table">
-                                                <li>
-                                                    <span class="type-name">Home Area</span>
-                                                    <span class="type-value">1200 sqft</span>
-                                                </li>
-                                                <li>
-                                                    <span class="type-name">Rooms</span>
-                                                    <span class="type-value">9</span>
-                                                </li>
-                                                <li>
-                                                    <span class="type-name">Bedrooms</span>
-                                                    <span class="type-value">4</span>
-                                                </li>
-                                                <li>
-                                                    <span class="type-name">Bathrooms</span>
-                                                    <span class="type-value">3</span>
-                                                </li>
-                                                <li>
-                                                    <span class="type-name">Garages</span>
-                                                    <span class="type-value">2</span>
-                                                </li>
-                                                <li>
-                                                    <span class="type-name">Parking lots</span>
-                                                    <span class="type-value">2</span>
+                                            <ul class="right-table" v-if="data.more_infos != null">
+                                                <li v-for="(m, i) in data.more_infos" :key="i">
+                                                    <span class="type-name">{{m.name}}</span>
+                                                    <span class="type-value">{{m.value}}</span>
                                                 </li>
                                             </ul>
                                         </div>
@@ -150,7 +130,15 @@
                                 <div class="ta-item" v-for="(member,i) in data.members" :key="i">
                                     <div class="ta-pic set-bg"   style="background-image: url(&quot;https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiYhGP5eN3CABVLqXCjVZT_CfIC_wzNK_f4M9Bc4Yd4E6NchqqZfWegamZO77KedEldT0&usqp=CAU&quot;);"></div>
                                     <div class="ta-text" >
-                                        <h6><a href="#">{{member.fname + ' ' + member.lname}}</a></h6>
+                                        <h6 class="pr-1">
+                                            <a href="#">{{member.fname + ' ' + member.lname}}</a> 
+                                            <span 
+                                                v-if="member.user_id == auth_data.id"
+                                                class="badge float-right text-white badge-sm badge-secondary"
+                                            >
+                                                You
+                                            </span> 
+                                        </h6>
                                         <span>Member</span>
                                         <div class="ta-num">{{member.phone}}</div>
                                         <div class="ta-num mt-1">Total Slot: {{member.total_slot}}</div>
