@@ -82,7 +82,7 @@ import VueElementLoading from 'vue-element-loading'
 import axios from 'axios'
 
 export default {
-    props:['my_model', 'authToken'],
+    props:['my_model', 'auth_token'],
     components:{ quillEditor,VueElementLoading },
     data() {
         return {
@@ -118,7 +118,7 @@ export default {
             axios
             .post(this.dynamic_route('/properties/create'), this.form, {
                 headers:{
-                    authorization: `Bearer ${this.authToken}`
+                    authorization: `Bearer ${this.auth_token}`
 
                 }
             })
