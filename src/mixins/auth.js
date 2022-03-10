@@ -8,7 +8,7 @@ export default {
         // return `https://api.diimtech.com/api/admin/${endUrl}`;
         return `https://co-invest-backend.herokuapp.com/api${endUrl}`
       },
-      dynamic_auth_route(endUrl) {
+      dynamicauth_route(endUrl) {
         // return `https://api.diimtech.com/api/${endUrl}`;
         return `https://co-invest-backend.herokuapp.com/api/auth${endUrl}`
       },
