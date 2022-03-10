@@ -28,10 +28,10 @@ export default {
             labels: ['Land', 'Mall', 'Yatch', 'Office space'],
             datasets: [{
                     label: 'Investors',
-                    backgroundColor: 'rgba(115, 103, 240, 1)',
-                    borderColor: 'rgba(115, 103, 240, 1)',
+                    backgroundColor: 'rgba(115, 103, 240, 0.5)',
+                    borderColor: 'rgba(115, 103, 240, 0.5)',
                     borderWidth: 1,
-                    hoverBackgroundColor: 'rgba(115, 103, 240, 0.2)',
+                    hoverBackgroundColor: 'rgba(115, 103, 240, 1)',
                     hoverBorderColor: 'rgba(115, 103, 240)',
                     borderCapStyle: 'round',
                     // barPercentage: 0.5,
