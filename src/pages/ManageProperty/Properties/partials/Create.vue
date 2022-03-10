@@ -116,7 +116,7 @@ export default {
         save() {
             this.loading = true
             axios
-            .post(this.dynamic_route('/properties/'), this.form, {
+            .post(this.dynamic_route('/properties/create'), this.form, {
                 headers:{
                     authorization: `Bearer ${this.authToken}`
 
