@@ -17,6 +17,7 @@ export default {
             const data  = JSON.parse(localStorage.getItem('auth_user') || null);
 
             commit('setAuthData', {token,data})
-        }
+        },
+       
     }
 }

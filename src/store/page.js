@@ -1,3 +1,4 @@
+
 export default {
     namespaced: true,
     state:{
@@ -5,7 +6,8 @@ export default {
         authToken: localStorage.getItem("auth_token"),
     },
     getters:{
-        auth_user: (state) => state.authData
+        auth_user: (state) => state.authData,
+        auth_token: (state) => state.authToken,
     },
     mutations:{
         fetchData(state, authData) {
@@ -23,5 +25,6 @@ export default {
             commit("fetchData", clientDetails);
             commit("fetchToken", token);
         },
+        
     }
 }

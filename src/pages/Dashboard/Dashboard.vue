@@ -2,297 +2,36 @@
   <div class="dashboard-page">
  
     <h1 class="page-title">Dashboard</h1>
-    <b-row>
-      <b-col md="6" xl="3" sm="6" xs="12">
-        <div class="h-100">
-          <div class="card">
-            <div class="card-body p-0">
-              <div class="small-box">
-                <div class="d-flex inner">
-                  <div>
-                    <h3>150</h3>
-                    <p>Properties</p>
-                  </div>
-                  <span class="b-avatar badge-light-primary rounded-circle ml-auto" style="width: 58px; height: 58px;">
-                    <span class="b-avatar-custom"><svg xmlns="http://www.w3.org/2000/svg" width="34px" height="34px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></span><!---->
-                  </span>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </b-col>
+    <div v-if="authType.name">
+      <AdminDashboard v-if="authType.name== 'superadmin'" />
+      <ClientDashboard :analytics="analytics" v-else-if="authType.name== 'user'" />
 
-      <b-col md="6" xl="3" sm="6" xs="12">
-        <div class="h-100">
-          <div class="card">
-            <div class="card-body p-0">
-              <div class="small-box">
-                <div class="d-flex inner">
-                  <div>
-                    <h3>1354</h3>
-                    <p>Users</p>
-                  </div>
-                  <span class="b-avatar badge-light-info rounded-circle ml-auto" style="width: 58px; height: 58px;">
-                    <span class="b-avatar-custom">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                    </span><!---->
-                  </span>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </b-col>
-
-      <b-col md="6" xl="3" sm="6" xs="12">
-        <div class="h-100">
-          <div class="card">
-            <div class="card-body p-0">
-              <div class="small-box">
-                <div class="d-flex inner">
-                  <div>
-                    <h3>10</h3>
-                    <p>Groups</p>
-                  </div>
-                  <span class="b-avatar badge-light-danger rounded-circle ml-auto" style="width: 58px; height: 58px;">
-                    <span class="b-avatar-custom">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-box"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
-                    </span><!---->
-                  </span>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </b-col>
-
-      <b-col md="6" xl="3" sm="6" xs="12">
-        <div class="h-100">
-          <div class="card">
-            <div class="card-body p-0">
-              <div class="small-box">
-                <div class="d-flex inner">
-                  <div>
-                    <h3>143</h3>
-                    <p>Active Properties</p>
-                  </div>
-                  <span class="b-avatar badge-light-success rounded-circle ml-auto" style="width: 58px; height: 58px;">
-                    <span class="b-avatar-custom">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    </span><!---->
-                  </span>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </b-col>
-
-      <b-col md="6" xl="3" sm="6" xs="12">
-        <div class="h-100">
-          <div class="card">
-            <div class="card-body p-0">
-              <div class="small-box">
-                <div class="d-flex inner">
-                  <div>
-                    <h3>7</h3>
-                    <p>Open Groups</p>
-                  </div>
-                  <span class="b-avatar badge-light-warning rounded-circle ml-auto" style="width: 58px; height: 58px;">
-                    <span class="b-avatar-custom">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    </span><!---->
-                  </span>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </b-col>
-
-      <b-col md="6" xl="3" sm="6" xs="12">
-        <div class="h-100">
-          <div class="card">
-            <div class="card-body p-0">
-              <div class="small-box">
-                <div class="d-flex inner">
-                  <div>
-                    <h3>3</h3>
-                    <p>Closed Groups</p>
-                  </div>
-                  <span class="b-avatar badge-light-secondary rounded-circle ml-auto" style="width: 58px; height: 58px;">
-                    <span class="b-avatar-custom">
-                      <svg data-v-9a6e255c="" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-info"><circle data-v-9a6e255c="" cx="12" cy="12" r="10"></circle><line data-v-9a6e255c="" x1="12" y1="16" x2="12" y2="12"></line><line data-v-9a6e255c="" x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-                    </span><!---->
-                  </span>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </b-col>
-
-      <b-col md="6" xl="3" sm="6" xs="12">
-        <div class="h-100">
-          <div class="card">
-            <div class="card-body p-0">
-              <div class="small-box">
-                <div class="d-flex inner">
-                  <div>
-                    <h3>6</h3>
-                    <p>Property Types</p>
-                  </div>
-                  <span class="b-avatar badge-light-primary rounded-circle ml-auto" style="width: 58px; height: 58px;">
-                    <span class="b-avatar-custom">
-                      <svg data-v-9a6e255c="" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-pie-chart"><path data-v-9a6e255c="" d="M21.21 15.89A10 10 0 1 1 8 2.83"></path><path data-v-9a6e255c="" d="M22 12A10 10 0 0 0 12 2v10z"></path></svg>  
-                    </span><!---->
-                  </span>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </b-col>
-
-      <b-col md="6" xl="3" sm="6" xs="12">
-        <div class="h-100">
-          <div class="card">
-            <div class="card-body p-0">
-              <div class="small-box">
-                <div class="d-flex inner">
-                  <div>
-                    <h3>120</h3>
-                    <p>Logged in users</p>
-                  </div>
-                  <span class="b-avatar badge-light-warning rounded-circle ml-auto" style="width: 58px; height: 58px;">
-                    <span class="b-avatar-custom">
-                      <svg data-v-254b7dbb="" xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-watch"><circle data-v-254b7dbb="" cx="12" cy="12" r="7"></circle><polyline data-v-254b7dbb="" points="12 9 12 12 13.5 13.5"></polyline><path data-v-254b7dbb="" d="M16.51 17.35l-.35 3.83a2 2 0 0 1-2 1.82H9.83a2 2 0 0 1-2-1.82l-.35-3.83m.01-10.7l.35-3.83A2 2 0 0 1 9.83 1h4.35a2 2 0 0 1 2 1.82l.35 3.83"></path></svg>
-                    </span><!---->
-                  </span>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </b-col>
-
-    </b-row>
-    <b-row>
-        <b-col md="6">
-          <Widget
-            title="<h5>Properties against Investors</h5>"
-            bodyClass="widget-table-overflow"
-            customHeader
-          >
-            <div class="px-3">
-              <bar height="395" style="height: 395px;"></bar>
-            </div>
-          </Widget>
-        </b-col>
-        <b-col md="6">
-          <Widget
-            title="<h5>Main Property <span class='fw-semi-bold'>Overview</span></h5>"
-            bodyClass="widget-table-overflow"
-            customHeader
-          >
-            <div class="table-responsive mt-3">
-              <table class="table table-striped table-lg mb-0 requests-table">
-                <thead>
-                  <tr class="text-muted">
-                    <th>MAIN PROPERTY</th>
-                    <th>GROUPS</th>
-                    <th>INVESTORS</th>
-                    <th>PRICE</th>
-                    <!-- <th>DATE</th>
-                    <th>CITY</th> -->
-                    <th>STATUS</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr
-                    v-for="(row, ind) in mock.table"
-                    :key="row.id"
-                  >
-                    <td>{{row.name}}</td>
-                    <td>{{row.groups}}</td>
-                    <td>{{ind+25}}</td>
-                    <td>{{row.price}}</td>
-                    <!-- <td>{{row.date}}</td>
-                    <td>{{row.city}}</td> -->
-                    <td>
-                      <b-badge
-                        :variant="row.status === 'Active'
-                          ? 'success'
-                          : row.status === 'Inactive' ? 'danger' : 'info'"
-                        pill
-                      >
-                        {{row.status}}
-                      </b-badge>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </Widget>
-        </b-col>
-    </b-row>
+    </div>
+    <div v-else>
+    </div>
   </div>
 </template>
 
 <script>
 import Widget from '@/components/Widget/Widget';
 import BigStat from './components/BigStat/BigStat';
+import AdminDashboard from './components/AdminDashboard';
+import ClientDashboard from './components/ClientDashboard';
 import mock from './mock';
 import Bar from './Bar'
 
 import { Chart } from 'highcharts-vue';
+import axios from "axios";
+import {mapActions,mapState } from "vuex";
 
 export default {
   name: 'Dashboard',
   components: {
-    Bar, Widget, BigStat, highcharts: Chart
+    Bar, Widget, BigStat, highcharts: Chart,AdminDashboard,ClientDashboard
   },
-  data() {
-    return {
-      mock,
-      dialog:false,
-    };
-  },
-  methods: {
-    getRandomData() {
-      const arr = [];
-
-      for (let i = 0; i < 25; i += 1) {
-        arr.push(Math.random().toFixed(1) * 10);
-      }
-
-      return arr;
-    },
-    getRevenueData() {
-      const data = [];
-      const seriesCount = 3;
-      const accessories = ['SMX', 'Direct', 'Networks'];
-
-      for (let i = 0; i < seriesCount; i += 1) {
-        data.push({
-          label: accessories[i],
-          data: Math.floor(Math.random() * 100) + 1,
-        });
-      }
-
-      return data;
-    }
-  },
+  
   computed: {
+    ...mapState('page', ['authToken']),
     donut() {
       let revenueData = this.getRevenueData();
       let {danger, info, primary} = this.appConfig.colors;
@@ -353,7 +92,91 @@ export default {
         series
       };
     }
-  }
+  },
+  mounted() {
+    this.getAuthData();
+    this.getUserType();
+    this.getAnalytics();
+  },
+  data() {
+    return {
+      mock,
+      dialog:false,
+      authType:'',
+      analytics:{},
+    };
+  },
+  methods: {
+    ...mapActions('page', ['getAuthData']),
+    getRandomData() {
+      const arr = [];
+
+      for (let i = 0; i < 25; i += 1) {
+        arr.push(Math.random().toFixed(1) * 10);
+      }
+
+      return arr;
+    },
+    getRevenueData() {
+      const data = [];
+      const seriesCount = 3;
+      const accessories = ['SMX', 'Direct', 'Networks'];
+
+      for (let i = 0; i < seriesCount; i += 1) {
+        data.push({
+          label: accessories[i],
+          data: Math.floor(Math.random() * 100) + 1,
+        });
+      }
+
+      return data;
+    },
+    getUserType(){
+        const auth_user = JSON.parse(localStorage.getItem('auth_user')) || null;
+        if(auth_user) {
+          axios
+            .post(this.dynamic_auth_route('/user_type'), 
+            {id:auth_user.id },
+            {
+              headers:{
+                authorization: `Bearer ${this.authToken}`
+              }
+            })
+            .then(res => {
+              this.authType = res.data;
+            })
+            .catch(err => {
+             
+            })
+            .finally(() => {
+              this.loading = false
+            });
+          
+        }
+    },
+    getAnalytics(){
+        const auth_user = JSON.parse(localStorage.getItem('auth_user')) || null;
+        if(auth_user) {
+          axios
+            .get(this.dynamic_route(`/analytics/${auth_user.id}`), 
+            {
+              headers:{
+                authorization: `Bearer ${this.authToken}`
+              }
+            })
+            .then(res => {
+              this.analytics = res.data;
+            })
+            .catch(err => {
+             
+            })
+            .finally(() => {
+              this.loading = false
+            });
+          
+        }
+    }
+  },
 };
 </script>
 
