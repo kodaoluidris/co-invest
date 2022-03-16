@@ -6,11 +6,11 @@ export default {
   methods: {
     dynamic_route(endUrl) {
         // return `https://api.diimtech.com/api/admin/${endUrl}`;
-        return `http://co-invest-backend.herokuapp.com/api${endUrl}`
+        return `http://127.0.0.1:1000/api${endUrl}`
       },
-      dynamicauth_route(endUrl) {
+      dynamic_auth_route(endUrl) {
         // return `https://api.diimtech.com/api/${endUrl}`;
-        return `http://co-invest-backend.herokuapp.com/api/auth${endUrl}`
+        return `http://127.0.0.1:1000/api/auth${endUrl}`
       },
       logoutUser() {
         this.$toast.error('Login expired, please login again!', {

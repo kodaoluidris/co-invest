@@ -2,6 +2,13 @@
   <div class="dashboard-page">
  
     <h1 class="page-title">Dashboard</h1>
+     <VueElementLoading
+        :active="loading"
+        spinner="bar-fade-scale"
+        color="var(--primary)"
+        text="Loading.."
+        duration="0.6"
+    />
     <div v-if="authType.name">
       <AdminDashboard v-if="authType.name== 'superadmin'" />
       <ClientDashboard :analytics="analytics" v-else-if="authType.name== 'user'" />
@@ -19,6 +26,7 @@ import AdminDashboard from './components/AdminDashboard';
 import ClientDashboard from './components/ClientDashboard';
 import mock from './mock';
 import Bar from './Bar'
+import VueElementLoading from 'vue-element-loading'
 
 import { Chart } from 'highcharts-vue';
 import axios from "axios";
@@ -27,7 +35,8 @@ import {mapActions,mapState } from "vuex";
 export default {
   name: 'Dashboard',
   components: {
-    Bar, Widget, BigStat, highcharts: Chart,AdminDashboard,ClientDashboard
+    Bar, Widget, BigStat, highcharts: Chart,AdminDashboard,ClientDashboard,
+    VueElementLoading
   },
   
   computed: {
@@ -104,6 +113,7 @@ export default {
       dialog:false,
       authType:'',
       analytics:{},
+      loading:true,
     };
   },
   methods: {
@@ -143,10 +153,14 @@ export default {
               }
             })
             .then(res => {
+              this.loading=false;
               this.authType = res.data;
             })
             .catch(err => {
-             
+              if(err.response.status == 401 && err.response.statusText == "Unauthorized") {
+                return this.logoutUser();
+              }
+              this.loading=false;
             })
             .finally(() => {
               this.loading = false
@@ -165,12 +179,14 @@ export default {
               }
             })
             .then(res => {
+              this.loading=false;
               this.analytics = res.data;
             })
             .catch(err => {
-             
+              this.loading=false;
             })
             .finally(() => {
+              this.loading=false;
               this.loading = false
             });
           
