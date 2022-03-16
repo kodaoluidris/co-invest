@@ -193,7 +193,7 @@
             bodyClass="widget-table-overflow"
             customHeader
           >
-            <div class="px-3">
+            <div class="px-3 mt-3">
               <bar height="395" style="height: 395px;"></bar>
             </div>
           </Widget>
@@ -459,8 +459,11 @@ export default {
   th, tr {
       white-space: nowrap;
   }
+  .requests-table th {
+    font-weight: 600 !important;
+  }
   .requests-table td {
-    font-weight: 100 !important;
+    font-weight: 400 !important;
     font-size: 13px;
   }
 </style>
