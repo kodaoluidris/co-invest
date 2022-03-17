@@ -6,7 +6,7 @@
       </div>
       <b-button-group id="notification-b-buttons">
         <b-button variant="default" @click="changeNotificationsTab(1)"
-          >Notifications</b-button
+          >Quick Sales</b-button
         >
         <b-button variant="default" @click="changeNotificationsTab(2)"
           >Messages</b-button
@@ -16,8 +16,8 @@
         >
       </b-button-group>
     </header>
-    <NewNotifictionsList v-if="newNotifications" />
-    <NotifictionsList v-else-if="notificationsTabSelected === 1" />
+    <NewNotifictionsList v-if="newNotifications || notificationsTabSelected === 1" />
+    <!-- <NotifictionsList v-else-if="notificationsTabSelected === 1" /> -->
     <Messages v-else-if="notificationsTabSelected === 2" />
     <Progress v-else-if="notificationsTabSelected === 3" />
     <NotifictionsList v-else />
@@ -59,7 +59,7 @@ export default {
   data() {
     return {
       notificationsTabSelected: 1,
-      newNotifications: null,
+      newNotifications: true,
       isLoad: false,
     };
   },
