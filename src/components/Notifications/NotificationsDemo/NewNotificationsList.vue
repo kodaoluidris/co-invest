@@ -57,15 +57,22 @@
         </time>
       </p>
     </b-list-group-item> -->
-    <b-list-group-item class="listGroupItem" v-for="(n,i) in notificationsData" :key="i">
+    <b-list-group-item class="listGroupItem shadow-sm mb-2" v-for="(n,i) in notificationsData" :key="i">
       <span class="notificationIcon thumb-sm">
         <img class="rounded-circle" src="../../../assets/people/a5.jpg" alt="..." />
       </span>
-      <p class="m-0 overflow-hidden">
-        User <a href="#">{{n.fname}}</a> Is selling <span>{{n.gender == 'male' ? 'his' : 'her'}}</span> portion
-        &nbsp;&nbsp;
-        <b-button size="xs" variant="success" @click="reply_to_notification('interested',n.id)" class="mr-1">Interested</b-button>
-        <b-button size="xs" variant="danger" @click="reply_to_notification('notInterested',n.id)">Not Interested</b-button>
+      <p class="mb-2 overflow-hidden">
+        User <span class="text-primary" style="cursor:pointer" @click="$router.push({name:'MarketPlace'})">{{n.fname}}</span> Is selling <span>{{n.gender == 'male' ? 'his' : 'her'}}</span> portion
+        <!-- &nbsp;&nbsp; -->
+        <div class="pt-1 d-flex justify-content-between">
+          <b-button size="xs" variant="success" @click="reply_to_notification('interested',n.id)" class="">Interested</b-button>
+          <b-button size="xs" variant="danger" @click="reply_to_notification('notInterested',n.id)">Not Interested</b-button>
+
+        </div>
+        <!-- <div class="text-center">
+          <a href.prevent="/app/market-place/index"> click to view more</a>
+          
+        </div> -->
         <!-- <time class="help-block m-0">
           12:18 AM
         </time> -->
