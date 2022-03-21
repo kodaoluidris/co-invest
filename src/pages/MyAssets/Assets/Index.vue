@@ -14,7 +14,7 @@
                     text="Loading.."
                     duration="0.6"
                 />
-                <div>
+                <div class="py-2">
                     <h5>Total Investment {{data.length}}</h5>
                     <div class="row">
                         <div 
