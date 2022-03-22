@@ -133,7 +133,7 @@
                                         <h6 class="pr-1">
                                             <a href="#">{{member.fname + ' ' + member.lname}}</a> 
                                             <span 
-                                                v-if="member.user_id == auth_data.id"
+                                                v-if="auth_data && member.user_id == auth_data.id"
                                                 class="badge float-right text-white badge-sm badge-secondary"
                                             >
                                                 You

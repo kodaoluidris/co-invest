@@ -181,7 +181,23 @@ export default {
             icon: true,
             rtl: false,
           })
-        }
+        } 
+        else if(err.response.status == 405)  {
+            return this.$toast.error(err.response.data.email[0], {
+              position: 'top-center',
+              timeout: 5000,
+              closeOnClick: true,
+              pauseOnFocusLoss: true,
+              pauseOnHover: true,
+              draggable: true,
+              draggablePercent: 0.6,
+              showCloseButtonOnHover: false,
+              hideProgressBar: true,
+              closeButton: 'button',
+              icon: true,
+              rtl: false,
+            })
+          }
         this.$toast.error('An error occurred, please try again!', {
             position: 'top-center',
             timeout: 5000,

@@ -16,7 +16,7 @@
                 />
                 <div class="py-2">
                     <h5>Total Investment {{data.length}}</h5>
-                    <div class="row">
+                    <div class="row" v-if="data.length">
                         <div 
                             class="col-md-3 mb-3"
                             v-for="(asset, i) in data"
@@ -33,6 +33,9 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div v-else class="alert alert-secondary shadow-sm">
+                        You have no investment
                     </div>
                 </div>
                 </Widget>
