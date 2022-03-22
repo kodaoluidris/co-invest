@@ -45,6 +45,7 @@
           index="my"
           :childrenLinks="[
             { header: 'Investment', link: '/app/my-investments/index' },
+            { header: 'Market Place', link: '/app/market-place/index' },
           ]"
         />
       </ul>

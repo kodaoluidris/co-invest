@@ -28,7 +28,7 @@
                             transition="fade-transition"
                             ></v-carousel-item>
                         </v-carousel>
-                        <h2 class="my-3">{{data.name}}</h2>
+                        <h2 class="my-3">{{data.name}} <span class="badge badge-info">{{data.group_name}}</span></h2>
                         <p class="text-muted" v-html="data.description">
                         </p>
                    </div>
@@ -227,24 +227,8 @@ export default {
                 })
             })
             .catch(err => {
-                 if(err.response.status == 401 && err.response.statusText == "Unauthorized") {
-                    this.$toast.error('Login expired, please login again!', {
-                    position: 'top-center',
-                    timeout: 5000,
-                    closeOnClick: true,
-                    pauseOnFocusLoss: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    draggablePercent: 0.6,
-                    showCloseButtonOnHover: false,
-                    hideProgressBar: true,
-                    closeButton: 'button',
-                    icon: true,
-                    rtl: false,
-                    })
-                    localStorage.removeItem('auth_token');
-                    localStorage.removeItem('auth_user');
-                    return this.$router.push({name: 'Home'});
+                if(err.response.status == 401 && err.response.statusText == "Unauthorized") {
+                    return this.logoutUser();
                 }
                 if(err.status == 404) {
                     this.$toast.error('Cannot find an investment with the given Id!', {
