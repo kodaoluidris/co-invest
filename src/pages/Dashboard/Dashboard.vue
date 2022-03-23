@@ -12,7 +12,6 @@
     <div v-if="authType.name">
       <AdminDashboard v-if="authType.name== 'superadmin'" />
       <ClientDashboard :analytics="analytics" v-else-if="authType.name== 'user'" />
-
     </div>
     <div v-else>
     </div>
@@ -298,8 +297,11 @@ export default {
   th, tr {
       white-space: nowrap;
   }
+  .requests-table th {
+    font-weight: 600 !important;
+  }
   .requests-table td {
-    font-weight: 100 !important;
+    font-weight: 400 !important;
     font-size: 13px;
   }
 </style>
