@@ -1,6 +1,6 @@
 <template>
     <div>
-        <form action="" @submit.prevent="update">
+        <form action="" @submit.prevent="updateUserDetails">
             <VueElementLoading
             :active="loading"
             spinner="bar-fade-scale"
@@ -81,7 +81,7 @@
                                 :rules="genderRules"
                             ></v-select>
                         </v-col>
-                        <v-col
+                        <!-- <v-col
                             cols="12"
                         >
                             <v-select
@@ -90,7 +90,7 @@
                                 label="Status*"
                                 :rules="statusRules"
                             ></v-select>
-                        </v-col>
+                        </v-col> -->
                         <!-- <v-col
                             cols="12"
                             sm="12"
@@ -133,11 +133,10 @@
 
 <script>
 import VueElementLoading from 'vue-element-loading'
-import { mapState, mapActions } from 'vuex';
 import axios from "axios"
 
 export default {
-    props: ['user'],
+    props: ['user', 'authToken'],
     components: {
         VueElementLoading
     },
@@ -148,6 +147,51 @@ export default {
         }
     },
     methods: {
+        updateUserDetails(){
+            this.loading = true
+            axios.post(this.dynamic_route('/users/edit'), this.form, {
+                    headers:{
+                        authorization: `Bearer ${this.authToken}`
+                    }
+                }).then(()=> {
+                    this.$emit('updated')
+                    this.$toast.success('User details updated successfully!', {
+                        position: 'top-center',
+                        timeout: 5000,
+                        closeOnClick: true,
+                        pauseOnFocusLoss: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        draggablePercent: 0.6,
+                        showCloseButtonOnHover: false,
+                        hideProgressBar: true,
+                        closeButton: 'button',
+                        icon: true,
+                        rtl: false,
+                    })
+                    this.closeMe()
+                })
+                .catch((err) => {
+                    if(err.response.status == 401 && err.response.statusText == "Unauthorized") {
+                        return this.logoutUser();
+                    }
+                    this.$toast.error('An error occurred. Please try again!', {
+                        position: 'top-center',
+                        timeout: 5000,
+                        closeOnClick: true,
+                        pauseOnFocusLoss: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        draggablePercent: 0.6,
+                        showCloseButtonOnHover: false,
+                        hideProgressBar: true,
+                        closeButton: 'button',
+                        icon: true,
+                        rtl: false,
+                    })
+                })
+                .finally(() => this.loading = false)
+        },
         closeMe() {
             this.$bvModal.hide('edit')
         }
