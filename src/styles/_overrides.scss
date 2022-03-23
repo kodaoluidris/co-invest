@@ -2,6 +2,73 @@
   padding-left: 30px;
   padding-right: 30px;
 }
+.content {
+  background-color: #f8f8f8 !important;
+}
+.b-avatar.badge-light-primary {
+  background-color: rgba(115,103,240,.12);
+}
+.b-avatar.badge-light-primary {
+  color: #7367f0;
+}
+.b-avatar.badge-light-info {
+  background-color: rgba(0,207,232,.12);
+}
+.b-avatar.badge-light-info {
+  color: #00cfe8;
+}
+.b-avatar.badge-light-danger {
+  background-color: rgba(234,84,85,.12);
+}
+.b-avatar.badge-light-danger {
+  color: #ea5455;
+}
+.b-avatar.badge-light-success {
+  background-color: rgba(40,199,111,.12);
+}
+.b-avatar.badge-light-success {
+  color: #28c76f;
+}
+.b-avatar.badge-light-warning {
+  background-color: rgba(255,159,67,.12);
+}
+.b-avatar.badge-light-warning {
+    color: #ff9f43;
+}
+.b-avatar.badge-light-secondary {
+  background-color: rgba(130,134,139,.12);
+}
+.b-avatar.badge-light-secondary {
+    color: #82868b;
+}
+.badge.badge-light-success {
+  background-color: rgba(40,199,111,.12);
+  color: #28c76f!important;
+}
+.badge.badge-light-warning {
+  background-color: rgba(255,159,67,.12);
+  color: #ff9f43!important;
+}
+.badge.badge-light-primary {
+  background-color: rgba(115,103,240,.12);
+  color: #7367f0!important;
+}
+.badge.badge-light-secondary {
+  background-color: rgba(130,134,139,.12);
+  color: #82868b!important;
+}
+.badge.badge-light-danger {
+  background-color: rgba(234,84,85,.12);
+  color: #ea5455!important;
+}
+.badge.badge-light-info {
+  background-color: rgba(0,207,232,.12);
+  color: #00cfe8!important;
+}
+[dir] .badge.badge-light-dark {
+  background-color: rgba(75,75,75,.12);
+  color: #4b4b4b!important;
+}
 
 .progress-bar {
   @include box-shadow(none);

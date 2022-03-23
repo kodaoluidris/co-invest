@@ -38,6 +38,7 @@ const LandingPage = () => import('@/pages/Client/Index')
 const MainPropertyDetails = () => import('@/pages/Client/MainPropertyDetails')
 const MainPropertyGroupDetails = () => import('@/pages/Client/MainPropertyGroupDetails')
 const BuyNow = () => import('@/pages/Client/BuyNow')
+const Users = () => import('@/pages/ManageUsers/Index')
 
 
 Vue.use(Router);
@@ -124,6 +125,11 @@ export default new Router({
           path: 'manage-properties/main-properties',
           name: 'MainProperty',
           component: MainProperty,
+        },
+        {
+          path: 'users',
+          name: 'ManageUsers',
+          component: Users,
         },
         {
           path: 'my-investments/index',
