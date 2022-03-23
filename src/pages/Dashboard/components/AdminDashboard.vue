@@ -203,44 +203,44 @@
                 customHeader
             >
                 <div class="table-responsive mt-3">
-                <table class="table table-striped table-lg mb-0 requests-table">
-                    <thead>
-                    <tr class="text-muted">
-                        <th>MAIN PROPERTY</th>
-                        <th>GROUPS</th>
-                        <th>INVESTORS</th>
-                        <th>PRICE</th>
-                        <!-- <th>DATE</th>
-                        <th>CITY</th> -->
-                        <th>STATUS</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr
-                        v-for="(property, ind) in tableData"
-                        :key="property.id"
-                    >
-                        <td>
-                          {{property.name}}
-                        </td>
-                        <td>{{property.groups}}</td>
-                        <td>{{property.investor_count > 0 ? property.investor_count : '-'}}</td>
-                        <td>₦ {{Number(property.price).toLocaleString()}}</td>
-                        <!-- <td>{{row.date}}</td>
-                        <td>{{row.city}}</td> -->
-                        <td>
-                        <b-badge
-                            :variant="property.status === 'Active'
-                            ? 'success'
-                            : property.status === 'Inactive' ? 'danger' : 'info'"
-                            pill
-                        >
-                            {{property.status}}
-                        </b-badge>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                  <table class="table table-striped table-lg mb-0 requests-table">
+                      <thead>
+                      <tr class="text-muted">
+                          <th>MAIN PROPERTY</th>
+                          <th>GROUPS</th>
+                          <th>INVESTORS</th>
+                          <th>PRICE</th>
+                          <!-- <th>DATE</th>
+                          <th>CITY</th> -->
+                          <th>STATUS</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr
+                          v-for="(property, ind) in tableData"
+                          :key="property.id"
+                      >
+                          <td>
+                            {{property.name}}
+                          </td>
+                          <td>{{property.groups}}</td>
+                          <td>{{property.investor_count > 0 ? property.investor_count : '-'}}</td>
+                          <td>₦ {{Number(property.price).toLocaleString()}}</td>
+                          <!-- <td>{{row.date}}</td>
+                          <td>{{row.city}}</td> -->
+                          <td>
+                          <b-badge
+                              :variant="property.status === 'Active'
+                              ? 'success'
+                              : property.status === 'Inactive' ? 'danger' : 'info'"
+                              pill
+                          >
+                              {{property.status}}
+                          </b-badge>
+                          </td>
+                      </tr>
+                      </tbody>
+                  </table>
                 </div>
             </Widget>
             </b-col>
@@ -374,42 +374,6 @@ export default {
     text-align: center;
     text-decoration: none;
     z-index: 10;
-  }
-  .b-avatar.badge-light-primary {
-    background-color: rgba(115,103,240,.12);
-  }
-  .b-avatar.badge-light-primary {
-    color: #7367f0;
-  }
-  .b-avatar.badge-light-info {
-    background-color: rgba(0,207,232,.12);
-  }
-  .b-avatar.badge-light-info {
-    color: #00cfe8;
-  }
-  .b-avatar.badge-light-danger {
-    background-color: rgba(234,84,85,.12);
-  }
-  .b-avatar.badge-light-danger {
-    color: #ea5455;
-  }
-  .b-avatar.badge-light-success {
-    background-color: rgba(40,199,111,.12);
-  }
-  .b-avatar.badge-light-success {
-    color: #28c76f;
-  }
-  .b-avatar.badge-light-warning {
-    background-color: rgba(255,159,67,.12);
-  }
-  .b-avatar.badge-light-warning {
-      color: #ff9f43;
-  }
-  .b-avatar.badge-light-secondary {
-    background-color: rgba(130,134,139,.12);
-  }
-  .b-avatar.badge-light-secondary {
-      color: #82868b;
   }
   th, tr {
       white-space: nowrap;
