@@ -203,7 +203,7 @@ export default {
                 //     }
                 // ],
                 onComplete: function(response){
-                    console.log(response);
+                    
                     $this.callback(response.paymentReference)
                     //Implement what happens when transaction is completed.
                     return true; 

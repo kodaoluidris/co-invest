@@ -80,30 +80,10 @@
                                                     <span class="type-value">{{data.status}}</span>
                                                 </li>
                                             </ul>
-                                            <ul class="right-table">
-                                                <li>
-                                                    <span class="type-name">Home Area</span>
-                                                    <span class="type-value">1200 sqft</span>
-                                                </li>
-                                                <li>
-                                                    <span class="type-name">Rooms</span>
-                                                    <span class="type-value">9</span>
-                                                </li>
-                                                <li>
-                                                    <span class="type-name">Bedrooms</span>
-                                                    <span class="type-value">4</span>
-                                                </li>
-                                                <li>
-                                                    <span class="type-name">Bathrooms</span>
-                                                    <span class="type-value">3</span>
-                                                </li>
-                                                <li>
-                                                    <span class="type-name">Garages</span>
-                                                    <span class="type-value">2</span>
-                                                </li>
-                                                <li>
-                                                    <span class="type-name">Parking lots</span>
-                                                    <span class="type-value">2</span>
+                                             <ul class="right-table" v-if="data.more_infos != null">
+                                                <li v-for="(m, i) in data.more_infos" :key="i">
+                                                    <span class="type-name">{{m.name}}</span>
+                                                    <span class="type-value">{{m.value}}</span>
                                                 </li>
                                             </ul>
                                         </div>

@@ -24,6 +24,7 @@ import PropertyTypes from '@/pages/ManageProperty/PropertyTypes/Index';
 import MainProperty from '@/pages/ManageProperty/MainProperties/Index';
 import MyInvestment from '@/pages/MyAssets/Assets/Index';
 import ViewInvestment from '@/pages/MyAssets/Assets/partials/View';
+import MarketPlace from '@/pages/MyAssets/MarketPlace/Index';
 
 // Charts
 import ChartsPage from '@/pages/Charts/Charts';
@@ -129,10 +130,16 @@ export default new Router({
           name: 'Investment',
           component: MyInvestment,
         },
+      
         {
           path: 'my-investments/:id/view',
           name: 'ViewInvestment',
           component: ViewInvestment,
+        },
+        {
+          path: 'market-place/index',
+          name: 'MarketPlace',
+          component: MarketPlace,
         },
         {
           path: 'test',
