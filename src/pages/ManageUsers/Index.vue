@@ -13,6 +13,10 @@
                     spinner="bar-fade-scale"
                     color="var(--primary)"
                 />
+                <div class="p-3 col-md-5 float-md-right mb-3">
+                    <input type="text" v-model="filter.search" @keyup="searchData"
+                        class="form-control form-control-lg" placeholder="Search users by email, name, username or phone">
+                </div>
                 <div class="table-responsive mt-4">
                     <table class="table table-hover table-sm mb-0 requests-table">
                         <thead>
@@ -302,7 +306,10 @@ export default {
         dialog:false,
         isDialogVisible: false,
         closeOnContentClick: true,
-        currentUser: {}
+        currentUser: {},
+        filter: {
+            search: ''
+        }
     };
   },
   computed:{
@@ -322,7 +329,7 @@ export default {
     },
     getUsers(){
         this.loading = true
-        axios.get(this.dynamic_route('/users/fetch'), {
+        axios.post(this.dynamic_route('/users/fetch'), {filter: this.filter}, {
                 headers:{
                     authorization: `Bearer ${this.auth_token}`
                 }
@@ -337,6 +344,9 @@ export default {
                 });
             })
             .finally(() => this.loading = false)
+    },
+    searchData() {
+        this.getUsers()
     },
     parseDate(date) {
       const dateSet = date.toDateString().split(' ');
