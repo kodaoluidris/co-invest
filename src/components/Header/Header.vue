@@ -128,7 +128,7 @@ export default {
     logout() {
       window.localStorage.removeItem('auth_token');
       window.localStorage.removeItem('auth_user');
-      this.$router.push('/login');
+      this.$router.push('/home');
     },
     navigate() {
       this.$router.push({name: 'ProfilePage'});

@@ -51,6 +51,15 @@
             isHeader
         />
         <NavLink
+          v-if="authType.name == 'superadmin'"
+          :activeItem="activeItem"
+          header="Manage Users"
+          link="/app/users"
+          iconName="flaticon-user"
+          index="manage"
+          isHeader
+        />
+        <NavLink
           v-if="authType.name == 'user'"
           :activeItem="activeItem"
           header="My Investment"

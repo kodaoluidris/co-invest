@@ -555,4 +555,4 @@ export default {
 };
 </script>
 
-<style src="./Basic.scss" lang="scss" scoped />
+

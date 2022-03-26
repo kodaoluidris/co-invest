@@ -8,7 +8,7 @@
                     <div class="small-box">
                         <div class="d-flex inner">
                         <div>
-                            <h3>150</h3>
+                            <h3>{{stats ? stats.total_properties : 0}}</h3>
                             <p>Properties</p>
                         </div>
                         <span class="b-avatar badge-light-primary rounded-circle ml-auto" style="width: 58px; height: 58px;">
@@ -29,7 +29,7 @@
                     <div class="small-box">
                         <div class="d-flex inner">
                         <div>
-                            <h3>1354</h3>
+                            <h3>{{stats ? stats.total_users : 0}}</h3>
                             <p>Users</p>
                         </div>
                         <span class="b-avatar badge-light-info rounded-circle ml-auto" style="width: 58px; height: 58px;">
@@ -52,7 +52,7 @@
                     <div class="small-box">
                         <div class="d-flex inner">
                         <div>
-                            <h3>10</h3>
+                            <h3>{{stats ? stats.total_groups : 0}}</h3>
                             <p>Groups</p>
                         </div>
                         <span class="b-avatar badge-light-danger rounded-circle ml-auto" style="width: 58px; height: 58px;">
@@ -75,7 +75,7 @@
                     <div class="small-box">
                         <div class="d-flex inner">
                         <div>
-                            <h3>143</h3>
+                            <h3>{{stats ? stats.active_properties : 0}}</h3>
                             <p>Active Properties</p>
                         </div>
                         <span class="b-avatar badge-light-success rounded-circle ml-auto" style="width: 58px; height: 58px;">
@@ -98,7 +98,7 @@
                     <div class="small-box">
                         <div class="d-flex inner">
                         <div>
-                            <h3>7</h3>
+                            <h3>{{stats ? stats.open_groups : 0}}</h3>
                             <p>Open Groups</p>
                         </div>
                         <span class="b-avatar badge-light-warning rounded-circle ml-auto" style="width: 58px; height: 58px;">
@@ -121,7 +121,7 @@
                     <div class="small-box">
                         <div class="d-flex inner">
                         <div>
-                            <h3>3</h3>
+                            <h3>{{stats ? stats.closed_groups : 0}}</h3>
                             <p>Closed Groups</p>
                         </div>
                         <span class="b-avatar badge-light-secondary rounded-circle ml-auto" style="width: 58px; height: 58px;">
@@ -144,7 +144,7 @@
                     <div class="small-box">
                         <div class="d-flex inner">
                         <div>
-                            <h3>6</h3>
+                            <h3>{{stats ? stats.property_types : 0}}</h3>
                             <p>Property Types</p>
                         </div>
                         <span class="b-avatar badge-light-primary rounded-circle ml-auto" style="width: 58px; height: 58px;">
@@ -192,7 +192,7 @@
                 customHeader
             >
                 <div class="px-3">
-                <bar height="395" style="height: 395px;"></bar>
+                <bar :chartData="chartData" height="395" style="height: 395px;"></bar>
                 </div>
             </Widget>
             </b-col>
@@ -203,42 +203,44 @@
                 customHeader
             >
                 <div class="table-responsive mt-3">
-                <table class="table table-striped table-lg mb-0 requests-table">
-                    <thead>
-                    <tr class="text-muted">
-                        <th>MAIN PROPERTY</th>
-                        <th>GROUPS</th>
-                        <th>INVESTORS</th>
-                        <th>PRICE</th>
-                        <!-- <th>DATE</th>
-                        <th>CITY</th> -->
-                        <th>STATUS</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr
-                        v-for="(row, ind) in mock.table"
-                        :key="row.id"
-                    >
-                        <td>{{row.name}}</td>
-                        <td>{{row.groups}}</td>
-                        <td>{{ind+25}}</td>
-                        <td>{{row.price}}</td>
-                        <!-- <td>{{row.date}}</td>
-                        <td>{{row.city}}</td> -->
-                        <td>
-                        <b-badge
-                            :variant="row.status === 'Active'
-                            ? 'success'
-                            : row.status === 'Inactive' ? 'danger' : 'info'"
-                            pill
-                        >
-                            {{row.status}}
-                        </b-badge>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                  <table class="table table-striped table-lg mb-0 requests-table">
+                      <thead>
+                      <tr class="text-muted">
+                          <th>MAIN PROPERTY</th>
+                          <th>GROUPS</th>
+                          <th>INVESTORS</th>
+                          <th>PRICE</th>
+                          <!-- <th>DATE</th>
+                          <th>CITY</th> -->
+                          <th>STATUS</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr
+                          v-for="(property, ind) in tableData"
+                          :key="property.id"
+                      >
+                          <td>
+                            {{property.name}}
+                          </td>
+                          <td>{{property.groups}}</td>
+                          <td>{{property.investor_count > 0 ? property.investor_count : '-'}}</td>
+                          <td>₦ {{Number(property.price).toLocaleString()}}</td>
+                          <!-- <td>{{row.date}}</td>
+                          <td>{{row.city}}</td> -->
+                          <td>
+                          <b-badge
+                              :variant="property.status === 'Active'
+                              ? 'success'
+                              : property.status === 'Inactive' ? 'danger' : 'info'"
+                              pill
+                          >
+                              {{property.status}}
+                          </b-badge>
+                          </td>
+                      </tr>
+                      </tbody>
+                  </table>
                 </div>
             </Widget>
             </b-col>
@@ -251,105 +253,59 @@ import BigStat from './BigStat/BigStat';
 import mock from '../mock';
 import Bar from '../Bar'
 import { Chart } from 'highcharts-vue';
+import { mapState, mapActions } from 'vuex';
+import axios from "axios"
 export default {
   name: 'Dashboard',
   components: {
     Bar, Widget, BigStat, highcharts: Chart,
   },
-  
-  computed: {
-    donut() {
-      let revenueData = this.getRevenueData();
-      let {danger, info, primary} = this.appConfig.colors;
-      let series = [
-        {
-          name: 'Revenue',
-          data: revenueData.map(s => {
-            return {
-              name: s.label,
-              y: s.data
-            }
-          })
-        }
-      ];
-      return {
-        chart: {
-          type: 'pie',
-          height: 120
-        },
-        credits: {
-          enabled: false
-        },
-        title: false,
-        plotOptions: {
-          pie: {
-            dataLabels: {
-              enabled: false
-            },
-            borderColor: null,
-            showInLegend: true,
-            innerSize: 60,
-            size: 100,
-            states: {
-              hover: {
-                halo: {
-                  size: 1
-                }
-              }
-            }
-          }
-        },
-        colors: [danger, info, primary],
-        legend: {
-          align: 'right',
-          verticalAlign: 'middle',
-          layout: 'vertical',
-          itemStyle: {
-            color: '#495057',
-            fontWeight: 100,
-            fontFamily: 'Montserrat'
-          },
-          itemMarginBottom: 5,
-          symbolRadius: 0
-        },
-        exporting: {
-          enabled: false
-        },
-        series
-      };
-    }
-  },
   data() {
     return {
       mock,
       dialog:false,
+      chartData: {},
+      tableData: {},
+      stats: {}
     };
   },
   mounted(){
+      this.getAuthData()
+      this.getDashboardStats()
+      this.getDashboardChartData()
+      this.getDashboardTableData()
+  },
+  computed:{
+    ...mapState('auth', ['auth_data','auth_token']),
   },
   methods: {
-    getRandomData() {
-      const arr = [];
-
-      for (let i = 0; i < 25; i += 1) {
-        arr.push(Math.random().toFixed(1) * 10);
-      }
-
-      return arr;
+    ...mapActions('auth', ['getAuthData']),
+    getDashboardStats(){
+      axios.get(this.dynamic_route('/dashboard/stats'), {
+            headers:{
+                authorization: `Bearer ${this.auth_token}`
+            }
+        }).then((res)=> {
+          this.stats = res.data
+        })
     },
-    getRevenueData() {
-      const data = [];
-      const seriesCount = 3;
-      const accessories = ['SMX', 'Direct', 'Networks'];
-
-      for (let i = 0; i < seriesCount; i += 1) {
-        data.push({
-          label: accessories[i],
-          data: Math.floor(Math.random() * 100) + 1,
-        });
-      }
-
-      return data;
+    getDashboardChartData(){
+      axios.get(this.dynamic_route('/dashboard/chart_data'), {
+            headers:{
+                authorization: `Bearer ${this.auth_token}`
+            }
+        }).then((res)=> {
+          this.chartData = res.data
+        })
+    },
+    getDashboardTableData(){
+      axios.get(this.dynamic_route('/dashboard/table_data'), {
+            headers:{
+                authorization: `Bearer ${this.auth_token}`
+            }
+        }).then((res)=> {
+          this.tableData = res.data
+        })
     },
     
   },
@@ -419,47 +375,14 @@ export default {
     text-decoration: none;
     z-index: 10;
   }
-  .b-avatar.badge-light-primary {
-    background-color: rgba(115,103,240,.12);
-  }
-  .b-avatar.badge-light-primary {
-    color: #7367f0;
-  }
-  .b-avatar.badge-light-info {
-    background-color: rgba(0,207,232,.12);
-  }
-  .b-avatar.badge-light-info {
-    color: #00cfe8;
-  }
-  .b-avatar.badge-light-danger {
-    background-color: rgba(234,84,85,.12);
-  }
-  .b-avatar.badge-light-danger {
-    color: #ea5455;
-  }
-  .b-avatar.badge-light-success {
-    background-color: rgba(40,199,111,.12);
-  }
-  .b-avatar.badge-light-success {
-    color: #28c76f;
-  }
-  .b-avatar.badge-light-warning {
-    background-color: rgba(255,159,67,.12);
-  }
-  .b-avatar.badge-light-warning {
-      color: #ff9f43;
-  }
-  .b-avatar.badge-light-secondary {
-    background-color: rgba(130,134,139,.12);
-  }
-  .b-avatar.badge-light-secondary {
-      color: #82868b;
-  }
   th, tr {
       white-space: nowrap;
   }
+  .requests-table th {
+    font-weight: 550 !important;
+  }
   .requests-table td {
-    font-weight: 100 !important;
+    font-weight: 400 !important;
     font-size: 13px;
   }
 </style>

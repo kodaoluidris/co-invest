@@ -45,6 +45,7 @@
                                     >
                                         Proceed <b-spinner v-if="isLoading"/>
                                     </button>
+                                    <!-- <button @click="payWithMonnify()">Pay with Monnify</button> -->
                                 </div>
                             </div>
                            </div>
@@ -80,9 +81,9 @@ export default {
         checkout() {
             this.isLoading=true;
             let payload ={
-                user_id: this.auth_data.id,
-                main_property_group_id:this.data.id,
-                amount: Math.floor(parseInt(this.data.group_price/this.data.no_of_people))
+                user_id : this.auth_data.id,
+                main_property_group_id : this.data.id,
+                amount : Math.floor(parseInt(this.data.group_price/this.data.no_of_people))
             }
 
             axios.post(this.dynamic_route('/client/checkout'),payload,{
@@ -91,21 +92,8 @@ export default {
                 }
             }).then(res => {
                 if(res.status ==200) {
-                    this.$toast.success('Main property bought successful', {
-                    position: 'top-center',
-                    timeout: 5000,
-                    closeOnClick: true,
-                    pauseOnFocusLoss: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    draggablePercent: 0.6,
-                    showCloseButtonOnHover: false,
-                    hideProgressBar: true,
-                    closeButton: 'button',
-                    icon: true,
-                    rtl: false,
-                    })
-                    this.$router.push({name:'Investment'})
+                    this.payWithMonnify(res.data.data, this)
+                    // this.$router.push({name:'Investment'})
                     return this.isLoading=false;
                 }
                 this.isLoading=false;
@@ -148,6 +136,87 @@ export default {
 
 
         },
+        callback(transaction_id){
+            axios.get(this.dynamic_route('/client/callback/'+transaction_id), {
+                        headers : {
+                            authorization : `Bearer ${this.auth_token}`
+                        }
+                    })
+                    .then(res=>{
+                        this.$toast.success('Main property bought successful', {
+                        position: 'top-center',
+                        timeout: 5000,
+                        closeOnClick: true,
+                        pauseOnFocusLoss: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        draggablePercent: 0.6,
+                        showCloseButtonOnHover: false,
+                        hideProgressBar: true,
+                        closeButton: 'button',
+                        icon: true,
+                        rtl: false,
+                        });
+                        this.$router.push({name:'Investment'})
+                    }).catch(err=>{
+                         this.$toast.error('Transaction Error', {
+                            position: 'top-center',
+                            timeout: 5000,
+                            closeOnClick: true,
+                            pauseOnFocusLoss: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            draggablePercent: 0.6,
+                            showCloseButtonOnHover: false,
+                            hideProgressBar: true,
+                            closeButton: 'button',
+                            icon: true,
+                            rtl: false,
+                            });
+                    })
+        },
+        payWithMonnify(data, $this) {
+            MonnifySDK.initialize({
+                amount: data.data.amount,
+                currency: "NGN",
+                reference: data.data.transaction_id,
+                customerFullName: data.user_data.lname + ' ' + data.user_data.fname+' '+data.user_data.mname,
+                customerEmail: data.user_data.email,
+                customerMobileNumber: "08121281921",
+                apiKey: "MK_TEST_7YKQWLNT6M",
+                contractCode: "3121387439",
+                paymentDescription: "Test Pay",
+                isTestMode: true,
+                paymentMethods: ["CARD", "ACCOUNT_TRANSFER"],
+                // incomeSplitConfig:  [
+                //     {
+                //         "subAccountCode": "MFY_SUB_342113621921",
+                //         "feePercentage": 50,
+                //         "splitAmount": 1900,
+                //         "feeBearer": true
+                //     },
+                //     {
+                //         "subAccountCode": "MFY_SUB_342113621922",
+                //         "feePercentage": 50,
+                //         "splitAmount": 2100,
+                //         "feeBearer": true
+                //     }
+                // ],
+                onComplete: function(response){
+                    
+                    $this.callback(response.paymentReference)
+                    //Implement what happens when transaction is completed.
+                    return true; 
+                },
+                onClose: function(data){
+                    //Implement what should happen when the modal is closed here
+                    console.log(data);
+                }
+            });
+                function testFunc(){
+                    
+                }
+            }
     },
     created (){
         this.data = JSON.parse(localStorage.getItem('checkout_data'))
