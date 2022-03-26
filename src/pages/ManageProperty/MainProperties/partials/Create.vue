@@ -278,7 +278,7 @@ export default {
             }
             
             axios
-            .post(this.dynamic_route('/main_properties/'), payload, {
+            .post(this.dynamic_route('/main_properties/create'), payload, {
                 headers:{
                   authorization: `Bearer ${this.authToken}`
 

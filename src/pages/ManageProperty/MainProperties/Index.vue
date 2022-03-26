@@ -81,7 +81,6 @@
                                     </span>
                                 </td>
                                 <td class="text-right">
-                                    
                                     <v-menu
                                         bottom
                                         origin="center center"

@@ -6,8 +6,8 @@
                     <div class="row">
                         <div class="col-lg-7">
                             <h1 class="h1" style="font-family: 'Manrope', sans-serif; font-weight: 700;">
-                                <strong>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                                    Consectetur, ipsum adipisci
+                                <strong>
+                                    Become A Co-Investor with Pride Today
                                 </strong>
                             </h1>
                             <h6 class="h6">We believe influencers, when worked with authentically, they produce the best brand stories. ViralGet handles all aspects of influencer programs from start to finish, and our suite of services can help you host a successful influencer
@@ -127,8 +127,8 @@ export default {
         }
     }, 
     mounted (){
-        this.getPropertiesAnalytics(this.dynamic_route('/analytics/properties'));
-        this.getProperties(this.dynamic_route('/properties/all'));
+        this.getPropertiesAnalytics(this.dynamic_route('/analytic/properties'));
+        // this.getProperties(this.dynamic_route('/properties/all'));
         this.fetchData();
     },
     computed : {
