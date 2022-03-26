@@ -13,6 +13,10 @@
                     spinner="bar-fade-scale"
                     color="var(--primary)"
                 />
+                <div class="p-3 col-md-5 float-md-right mb-3">
+                    <input type="text" v-model="filter.search" @keyup="searchData"
+                        class="form-control form-control-lg" placeholder="Search users by email, name, username or phone">
+                </div>
                 <div class="table-responsive mt-4">
                     <table class="table table-hover table-sm mb-0 requests-table">
                         <thead>
@@ -81,6 +85,7 @@
                                         origin="center center"
                                         transition="scale-transition"
                                         :close-on-content-click="closeOnContentClick"
+                                        left
                                     >
                                         <template #activator="{ on, attrs }">
                                             <v-btn
@@ -97,14 +102,6 @@
                                             <v-list-item>
                                                 <v-list-item-title
                                                 style="cursor:pointer"
-                                                @click="pass_current(user);$bvModal.show('view');"
-                                                >
-                                                <i class="mdi mdi-eye-outline mr-1"></i> View more info
-                                                </v-list-item-title>
-                                            </v-list-item>
-                                            <v-list-item>
-                                                <v-list-item-title
-                                                style="cursor:pointer"
                                                 @click="setCurrent(user); $bvModal.show('edit')"
                                                 >
                                                 <i class="mdi mdi-square-edit-outline mr-1"></i> Edit Details
@@ -114,12 +111,12 @@
                                                 <v-list-item-title
 
                                                 style="cursor:pointer"
-                                                @click="openConfirm=true;dynamic_status='inactive';status_id=user.id"
+                                                @click="setCurrent(user);openConfirm=true;dynamic_status='inactive';status_id=user.id"
                                                 >
                                                     <button
                                                         class="text-left p-0 btn"
                                                     >
-                                                        <i class=" mdi mdi-toggle-switch-outline"></i> <span style="font-size:13px !important"> Deactivate</span>
+                                                        <i class=" mdi mdi-toggle-switch-outline"></i> <span style="font-size:13px !important"> Deactivate Account</span>
                                                     </button>
                                                 <!-- <i class="mdi mdi-toggle-switch-outline mr-1"></i> Deactivate -->
                                                 </v-list-item-title>
@@ -127,12 +124,12 @@
                                             <v-list-item v-else>
                                                 <v-list-item-title
                                                     style="cursor:pointer"
-                                                    @click="openConfirm=true;dynamic_status='active';status_id=user.id"
+                                                    @click="setCurrent(user);openConfirm=true;dynamic_status='active';status_id=user.id"
                                                 >
                                                     <button
                                                         class="text-left p-0 btn"
                                                     >
-                                                        <i class=" mdi mdi-toggle-switch-outline"></i> <span style="font-size:13px !important"> Activate</span>
+                                                        <i class=" mdi mdi-toggle-switch-outline"></i> <span style="font-size:13px !important"> Activate Account</span>
                                                     </button>
                                                 <!-- <i class="mdi mdi-toggle-switch-outline mr-1"></i> Activate -->
                                                 </v-list-item-title>
@@ -142,7 +139,15 @@
                                                 style="cursor:pointer"
                                                 @click="openConfirm2=true;del_id=user.id"
                                                 >
-                                                <i class="mdi mdi-delete-forever-outline mr-1"></i> Delete
+                                                <i class="mdi mdi-delete-forever-outline mr-1"></i> Delete Account
+                                                </v-list-item-title>
+                                            </v-list-item>
+                                            <v-list-item>
+                                                <v-list-item-title
+                                                style="cursor:pointer"
+                                                @click="setCurrent(user);openConfirm3=true;reset_id=user.id"
+                                                >
+                                                <i class="mdi mdi-account-outline mr-1"></i> Reset Password
                                                 </v-list-item-title>
                                             </v-list-item>
                                         </v-list>
@@ -156,9 +161,124 @@
       </b-col>
     </b-row>
 
+    <!--  Edit user modal -->
     <b-modal size="md" style="background:white" title="Edit user details" id="edit" hide-footer>
         <edit :authToken="auth_token" :user="currentUser" @updated="getUsers" />
     </b-modal>
+
+    <!-- toggle status dialog -->
+    <v-dialog
+        v-model="openConfirm"
+        max-width="550"
+    >
+        <v-card>
+            <v-card-title class="text-h5">
+            {{dynamic_status == 'inactive' ? 'Deactivate' : 'Activate'}} &nbsp; <b>{{currentUser.fullname}}</b>'s account
+            </v-card-title>
+
+            <v-card-text>
+            Are you sure you want to perform this operation ?
+            </v-card-text>
+
+            <v-card-actions>
+            <v-spacer></v-spacer>
+
+            <v-btn
+                color=" darken-1"
+                text
+                @click="openConfirm = false"
+            >
+                No, exit
+            </v-btn>
+
+            <v-btn
+                color="primary darken-1"
+                text
+                @click="toggle_status(status_id, dynamic_status);openConfirm=false"
+
+            >
+                Yes, continue
+            </v-btn>
+            </v-card-actions>
+        </v-card>
+    </v-dialog>
+
+    <!-- delete user dialog -->
+    <v-dialog
+        v-model="openConfirm2"
+        max-width="485"
+    >
+        <v-card>
+            <v-card-title class="text-h5">
+                <p>Delete User account. </p>
+                <p><small><b>Note: </b> This action is irreversible and will delete all records associated with this user including transactions,
+                groups, profile etc.</small></p>
+            </v-card-title>
+
+            <v-card-text>
+            Are you sure you want to perform this operation ?
+            </v-card-text>
+
+            <v-card-actions>
+            <v-spacer></v-spacer>
+
+            <v-btn
+                color=" darken-1"
+                text
+                @click="openConfirm2 = false"
+            >
+                No, exit
+            </v-btn>
+
+            <v-btn
+                color="primary darken-1"
+                text
+                @click="deleteUser(del_id);openConfirm2=false"
+
+
+            >
+                Yes, continue
+            </v-btn>
+            </v-card-actions>
+        </v-card>
+    </v-dialog>
+
+    <!-- Password Reset dialog -->
+    <v-dialog
+        v-model="openConfirm3"
+        max-width="450"
+    >
+        <v-card>
+            <v-card-title class="text-h5">
+                <p>Reset <b>{{currentUser.fullname}}</b>'s password </p>
+                <p><small><b>Note: </b> This will change user password to <b>12345678</b></small></p>
+            </v-card-title>
+
+            <v-card-text>
+                Are you sure you want to perform this operation ?
+            </v-card-text>
+
+            <v-card-actions>
+            <v-spacer></v-spacer>
+
+            <v-btn
+                color=" darken-1"
+                text
+                @click="openConfirm3 = false"
+            >
+                No, exit
+            </v-btn>
+
+            <v-btn
+                color="primary darken-1"
+                text
+                @click="resetPassword(reset_id);openConfirm3=false"
+            >
+                Yes, continue
+            </v-btn>
+            </v-card-actions>
+        </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -170,7 +290,7 @@ import axios from "axios"
 import edit from '@/pages/ManageUsers/Partials/EditUser'
 
 export default {
-  name: 'Tables',
+  name: 'ManageUsers',
   components: { Widget, VueElementLoading, edit },
   data() {
     return {
@@ -178,13 +298,18 @@ export default {
         users: {},
         status_id:0,
         del_id:0,
+        reset_id: 0,
         dynamic_status:'',
         openConfirm:false,
         openConfirm2:false,
+        openConfirm3:false,
         dialog:false,
         isDialogVisible: false,
         closeOnContentClick: true,
-        currentUser: {}
+        currentUser: {},
+        filter: {
+            search: ''
+        }
     };
   },
   computed:{
@@ -204,7 +329,7 @@ export default {
     },
     getUsers(){
         this.loading = true
-        axios.get(this.dynamic_route('/users/fetch'), {
+        axios.post(this.dynamic_route('/users/fetch'), {filter: this.filter}, {
                 headers:{
                     authorization: `Bearer ${this.auth_token}`
                 }
@@ -220,6 +345,9 @@ export default {
             })
             .finally(() => this.loading = false)
     },
+    searchData() {
+        this.getUsers()
+    },
     parseDate(date) {
       const dateSet = date.toDateString().split(' ');
       return `${date.toLocaleString('en-us', { month: 'long' })} ${dateSet[2]}, ${dateSet[3]}`;
@@ -232,7 +360,156 @@ export default {
       const colors = ['badge-light-info', 'badge-light-primary', 'badge-light-danger', 
                     'badge-light-success', 'badge-light-warning', 'badge-light-secondary'];
       return colors[Math.floor(Math.random() * colors.length)]
-    }
+    },
+    toggle_status(id, status) {
+        this.loading = true
+        axios
+            .put(this.dynamic_route(`/users/toggle-status/${id}`), { status }, {
+                headers:{
+                    authorization: `Bearer ${this.auth_token}`
+
+                }
+            })
+            .then(() => {
+                
+                this.$toast.success('Status updated successfully!', {
+                    position: 'top-center',
+                    timeout: 3000,
+                    closeOnClick: true,
+                    pauseOnFocusLoss: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    draggablePercent: 0.6,
+                    showCloseButtonOnHover: false,
+                    hideProgressBar: true,
+                    closeButton: 'button',
+                    icon: true,
+                    rtl: false,
+                })
+                this.getUsers()
+            })
+            .catch((err) => {
+                this.loading = false;
+                if(err.response.status == 401 && err.response.statusText == "Unauthorized") {
+                    return this.logoutUser();
+                }
+                this.$toast.error('An error occurred please try again!', {
+                    position: 'top-center',
+                    timeout: 3000,
+                    closeOnClick: true,
+                    pauseOnFocusLoss: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    draggablePercent: 0.6,
+                    showCloseButtonOnHover: false,
+                    hideProgressBar: true,
+                    closeButton: 'button',
+                    icon: true,
+                    rtl: false,
+                })
+            })
+            .finally(() => {
+                this.loading = false
+            })
+    },
+    deleteUser(id) {
+        this.loading = true
+        axios
+            .delete(this.dynamic_route(`/users/delete/${id}`), {
+                headers:{
+                    authorization: `Bearer ${this.auth_token}`
+                }
+            })
+            .then(() => {
+                this.$toast.success('Deleted successfully!', {
+                    position: 'top-center',
+                    timeout: 3000,
+                    closeOnClick: true,
+                    pauseOnFocusLoss: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    draggablePercent: 0.6,
+                    showCloseButtonOnHover: false,
+                    hideProgressBar: true,
+                    closeButton: 'button',
+                    icon: true,
+                    rtl: false,
+                })
+                this.getUsers()
+            })
+            .catch(err => {
+                this.loading = false;
+                if(err.response.status == 401 && err.response.statusText == "Unauthorized") {
+                    return this.logoutUser();
+                }
+                this.$toast.error('An error occurred please try again!', {
+                    position: 'top-center',
+                    timeout: 3000,
+                    closeOnClick: true,
+                    pauseOnFocusLoss: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    draggablePercent: 0.6,
+                    showCloseButtonOnHover: false,
+                    hideProgressBar: true,
+                    closeButton: 'button',
+                    icon: true,
+                    rtl: false,
+                })
+            })
+            .finally(() => {
+                this.loading = false
+            })
+    },
+    resetPassword(id) {
+        this.loading = true
+        axios
+            .get(this.dynamic_route(`/users/reset-password/${id}`), {
+                headers:{
+                    authorization: `Bearer ${this.auth_token}`
+                }
+            })
+            .then(() => {
+                this.$toast.success('Password Reset successfully!', {
+                    position: 'top-center',
+                    timeout: 3000,
+                    closeOnClick: true,
+                    pauseOnFocusLoss: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    draggablePercent: 0.6,
+                    showCloseButtonOnHover: false,
+                    hideProgressBar: true,
+                    closeButton: 'button',
+                    icon: true,
+                    rtl: false,
+                })
+                this.getUsers()
+            })
+            .catch(err => {
+                this.loading = false;
+                if(err.response.status == 401 && err.response.statusText == "Unauthorized") {
+                    return this.logoutUser();
+                }
+                this.$toast.error('An error occurred please try again!', {
+                    position: 'top-center',
+                    timeout: 3000,
+                    closeOnClick: true,
+                    pauseOnFocusLoss: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    draggablePercent: 0.6,
+                    showCloseButtonOnHover: false,
+                    hideProgressBar: true,
+                    closeButton: 'button',
+                    icon: true,
+                    rtl: false,
+                })
+            })
+            .finally(() => {
+                this.loading = false
+            })
+    },
   },
   mounted() {
     this.getAuthData()

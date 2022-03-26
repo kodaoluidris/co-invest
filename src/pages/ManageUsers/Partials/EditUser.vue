@@ -157,7 +157,7 @@ export default {
                     this.$emit('updated')
                     this.$toast.success('User details updated successfully!', {
                         position: 'top-center',
-                        timeout: 5000,
+                        timeout: 3000,
                         closeOnClick: true,
                         pauseOnFocusLoss: true,
                         pauseOnHover: true,
@@ -177,7 +177,7 @@ export default {
                     }
                     this.$toast.error('An error occurred. Please try again!', {
                         position: 'top-center',
-                        timeout: 5000,
+                        timeout: 3000,
                         closeOnClick: true,
                         pauseOnFocusLoss: true,
                         pauseOnHover: true,

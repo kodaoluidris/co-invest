@@ -4,9 +4,7 @@ export default {
         }
     },
   methods: {
-    dynamic_route(endUrl) {
-      console.log(process.env.VUE_APP_BASE_URL+endUrl);
-
+    dynamic_route(endUrl) { 
         // return `https://api.diimtech.com/api/admin/${endUrl}`;
         return process.env.VUE_APP_BASE_URL+endUrl
       },
