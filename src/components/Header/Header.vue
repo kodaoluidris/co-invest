@@ -35,6 +35,8 @@
         menu-class="notificationsWrapper py-0 animate__animated animate__animated-fast animate__fadeIn"
         right>
         <template slot="button-content">
+            <span class="notify" v-if="notificationsData.length"></span>
+
           <span class="avatar rounded-circle thumb-sm float-left mr-2">
             <img class="rounded-circle" src="../../assets/people/a7.png" alt="..." />
           </span>
@@ -42,7 +44,7 @@
           <!-- <span class="ml-1 mr-2 circle text-white fw-bold avatar-badge">9</span> -->
           <i class='fi flaticon-arrow-down px-2' />
         </template>
-        <Notifications />
+        <Notifications @replied="fetchNotification" :notificationsData="notificationsData" />
       </b-nav-item-dropdown>
       <b-nav-item-dropdown id="v-step-2" class="settingsDropdown d-sm-down-none" no-caret right>
         <template slot="button-content">
@@ -66,20 +68,41 @@
 <script>
 import { mapState, mapActions } from 'vuex';
 import Notifications from '@/components/Notifications/Notifications';
+import axios from "axios"
 
 export default {
   name: 'Header',
   components: { Notifications },
   computed: {
     ...mapState('layout', ['sidebarClose', 'sidebarStatic']),
-    ...mapState('page', ['authData'])
+    ...mapState('page', ['authData', 'authToken'])
+    
+  },
+  data(){
+    return {
+       notificationsData:[]
+    }
   },
   mounted() {
     this.getAuthData()
+     this.fetchNotification();
   },
   methods: {
     ...mapActions('layout', ['toggleSidebar', 'switchSidebar', 'changeSidebarActive']),
     ...mapActions('page', ['getAuthData']),
+     fetchNotification(){
+      axios.post(this.dynamic_route('/client/my-investments/quick-sale-notification'), {id: this.authData.id},{
+        headers:{
+          authorization: `Bearer ${this.authToken}`
+        }
+      }).then(res => {
+        this.notificationsData = res.data;
+      }).catch(err => {
+        if(err.response.status == 401 && err.response.statusText == "Unauthorized") {
+          return this.logoutUser();
+        }
+      })
+    },
     switchSidebarMethod() {
       if (!this.sidebarClose) {
         this.switchSidebar(true);
@@ -115,3 +138,15 @@ export default {
 </script>
 
 <style src="./Header.scss" lang="scss"></style>
+<style scoped>
+  .notify {
+    background: orange;
+    width: 13px;
+    height: 13px;
+    position: absolute;
+    z-index: 20;
+    top: 15%;
+    left: 22%;
+    border-radius: 50%;
+  }
+</style>

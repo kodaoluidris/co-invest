@@ -55,7 +55,7 @@
                                             </span> 
                                         </h6>
                                         <span>Member</span>
-                                        <div class="ta-num">{{member.phone}}</div>
+                                        <div class="ta-num">{{member.email}}</div>
                                         <div class="ta-num mt-1">Total Slot: {{member.total_slot}}</div>
                                     </div>
                                 </div>

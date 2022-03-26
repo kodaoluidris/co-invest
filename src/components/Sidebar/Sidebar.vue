@@ -24,17 +24,31 @@
             isHeader
         />
         <NavLink
-          v-if="authType.name == 'superadmin'"
-          :activeItem="activeItem"
-          header="Manage Property"
-          link="/app/manage-properties"
-          iconName="flaticon-network"
-          index="manage"
-          :childrenLinks="[
-            { header: 'Properties', link: '/app/manage-properties/properties' },
-            { header: 'Property Types', link: '/app/manage-properties/property-types' },
-            { header: 'Main properties', link: '/app/manage-properties/main-properties' },
-          ]"
+            :activeItem="activeItem"
+            v-if="authType.name == 'superadmin'"
+            header="Properties"
+            link="/app/manage-properties/properties"
+            iconName="flaticon-home"
+            index="properties"
+            isHeader
+        />
+         <NavLink
+            :activeItem="activeItem"
+            v-if="authType.name == 'superadmin'"
+            header="Property Types"
+            link="/app/manage-properties/property-types"
+            iconName="flaticon-home"
+            index="property-types"
+            isHeader
+        />
+         <NavLink
+            :activeItem="activeItem"
+            v-if="authType.name == 'superadmin'"
+            header="Main Properties"
+            link="/app/manage-properties/main-properties"
+            iconName="flaticon-home"
+            index="main-properties"
+            isHeader
         />
         <NavLink
           v-if="authType.name == 'user'"

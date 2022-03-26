@@ -203,6 +203,12 @@ export default {
     }},
     mounted(){
         this.fetchData(parseInt(this.$route.params.mainPropertyId));
+        document.addEventListener('visibilitychange', () => {
+            if(!document.hidden) {
+                this.fetchData(parseInt(this.$route.params.mainPropertyId));
+
+            }
+        })
     },
     methods: {
         fetchData(id){

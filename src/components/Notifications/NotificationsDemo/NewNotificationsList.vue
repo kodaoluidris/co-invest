@@ -128,31 +128,16 @@ export default {
    computed: {
     ...mapState('page', ['authData', 'authToken'])
   },
+  props:['notificationsData'],
   data(){
     return {
-      notificationsData:[]
     }
   },
   mounted(){
     this.getAuthData()
-    this.fetchNotification();
   },
   methods:{
     ...mapActions('page', ['getAuthData']),
-
-    fetchNotification(){
-      axios.post(this.dynamic_route('/client/my-investments/quick-sale-notification'), {id: this.authData.id},{
-        headers:{
-          authorization: `Bearer ${this.authToken}`
-        }
-      }).then(res => {
-        this.notificationsData = res.data;
-      }).catch(err => {
-        if(err.response.status == 401 && err.response.statusText == "Unauthorized") {
-          return this.logoutUser();
-        }
-      })
-    },
     reply_to_notification(msg,id){
       let payload = {
         msg,
@@ -166,7 +151,7 @@ export default {
         }
       })
       .then(res => {
-        this.fetchNotification();
+        this.$emit('replied');
       }).catch(err => {
         if(err.response.status == 401 && err.response.statusText == "Unauthorized") {
           return this.logoutUser();
