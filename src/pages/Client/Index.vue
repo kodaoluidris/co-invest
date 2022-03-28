@@ -43,7 +43,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-4 scroll-area-xs">
                                 <div class="profile-agent-widget">
                                     <ul>
                                         <li v-for="(a, index) in analytics" :key="index">
@@ -146,7 +146,7 @@ export default {
 }
 .bg {
     /* background-color: #282A35; */
-    background-color: #549e8f;
+    background-color: #017db3;
     opacity: 0.96;
     margin: auto;
     padding: 7rem 0;
@@ -190,7 +190,7 @@ export default {
 .property-item .pi-text .pt-price {
     font-size: 19px;
     font-weight: 700;
-    color: #00C89E;
+    color: #017db3;
     margin-bottom: 10px;
 }
 .property-item .pi-text .pt-price span {
@@ -211,7 +211,7 @@ export default {
     font-weight: 500;
 }
 .property-item .pi-text p span {
-    color: #00C89E;
+    color: #017db3;
 }
 .property-item .pi-text ul {
     padding-bottom: 20px;
@@ -295,7 +295,7 @@ a {
     font-weight: 600;
     padding: 40px 0;
     color: #ffffff;
-    background: #00C89E;
+    background-image: linear-gradient(243deg, #343a40, #01a1e3);
     border-radius: 50%;
     line-height: 40px;
     text-align: center;
@@ -399,7 +399,7 @@ a {
 .profile-agent-content .profile-agent-newslatter form button {
     height: 50px;
     width: 50px;
-    background: #00C89E;
+    background-image: linear-gradient(243deg, #343a40, #01a1e3);
     color: #ffffff;
     font-size: 18px;
     border: none;

@@ -12,7 +12,7 @@
 
 <style scoped>
 .footer-section {
-    background: #103230;
+    background: #00032b;
 }
 .copyright-text {
     font-size: 14px;
