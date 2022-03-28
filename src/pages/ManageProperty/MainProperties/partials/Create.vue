@@ -78,20 +78,6 @@
                             required
                         ></v-text-field>
                     </v-col>
-                     <v-col
-                        cols="12"
-                        sm="6"
-                        md="6"
-                    >
-                        <v-text-field
-                            v-model="form.appreciate"
-                            type="number"
-                            label="Main Property Appreciation year *"
-                            :rules="appreciate"
-                            required
-                        ></v-text-field>
-                    </v-col>
-                    
                     <v-col
                         cols="12"
                         sm="6"
@@ -112,8 +98,8 @@
                     </v-col>
                     <v-col
                         cols="12"
-                        sm="6"
-                        md="6"
+                        sm="12"
+                        md="12"
                     >
                         <v-select
                             v-model="form.status"
@@ -123,6 +109,50 @@
                             required
                         ></v-select>
                     </v-col>
+                     <v-col
+                        cols="12"
+                        sm="6"
+                        md="6"
+                    >
+                        <v-text-field
+                            v-model="form.appreciate"
+                            type="date"
+                            label="Main Property Appreciation year *"
+                            :rules="appreciate"
+                            required
+                        ></v-text-field>
+                    </v-col>
+                     <v-col
+                        cols="12"
+                        sm="6"
+                        md="6"
+                    >
+                        <v-text-field
+                            v-model="form.appreciate_percent"
+                            type="number"
+                            label="Percent of appreciation (%)"
+                            :rules="appreciate_percent"
+                            required
+                        ></v-text-field>
+                    </v-col>
+                     <v-col
+                        cols="12"
+                        sm="12"
+                        md="12"
+                    >
+                        <v-textarea
+                            
+                            v-model="form.location"
+                            rows="3"
+                            row-height="30"
+                            label="Property Location    "
+                            auto-grow
+                            :rules="location"
+                            required
+                            name="input-7-4"
+                        ></v-textarea>
+                    </v-col>
+                    
                     <v-col
                         cols="12"
                         sm="12"
@@ -188,6 +218,15 @@ export default {
             ],
             statusRules:[
                 v => !!v || 'Status is required',
+            ],
+            appreciate:[
+                v => !!v || 'Apprciation field is required',
+            ],
+            appreciate_percent:[
+                v => !!v || 'Percent field is required',
+            ],
+            location:[
+                v => !!v || 'Location is required',
             ],
             propertyTypeRules:[
                 v => !!v || 'Property type is required',

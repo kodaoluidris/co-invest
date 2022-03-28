@@ -99,6 +99,10 @@
                                                     <span class="type-name">Status</span>
                                                     <span class="type-value">{{data.status}}</span>
                                                 </li>
+                                                 <li>
+                                                    <span class="type-name">Appreciated Amount (%)</span>
+                                                    <span class="type-value">{{getAppPercentAmount().toLocaleString()}}</span>
+                                                </li>
                                             </ul>
                                             <ul class="right-table" v-if="data.more_infos != null">
                                                 <li v-for="(m, i) in data.more_infos" :key="i">
@@ -273,7 +277,16 @@ export default {
             this.$router.push({name: 'BuyNow', params:{id:this.data.id}});
             localStorage.setItem('checkout_data', JSON.stringify(this.data))
 
-        }
+        },
+         getAppPercentAmount(){
+             var group_price =parseInt(this.data.group_price/this.data.no_of_people);
+             var appreciate = this.data.more_infos.find(ele=>{
+                return ele.name.toLowerCase() == 'percent' 
+            });
+
+            return (Number(group_price)/100) * Number(appreciate.value)+group_price
+            
+        },
     }
 }
 </script>

@@ -76,7 +76,7 @@ import VueElementLoading from 'vue-element-loading'
 import axios from 'axios'
 
 export default {
-    props:['my_model', 'main_property', 'auth_token'],
+    props:['my_model', 'main_property', 'authToken'],
     components:{ quillEditor,VueElementLoading },
     data() {
         return {
@@ -120,7 +120,7 @@ export default {
                 axios
                 .post(this.dynamic_route('/main_properties/add-more'), payload, {
                     headers:{
-                      authorization: `Bearer ${this.auth_token}`
+                      authorization: `Bearer ${this.authToken}`
     
                     }
                 })
