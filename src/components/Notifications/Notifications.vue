@@ -16,7 +16,7 @@
         >
       </b-button-group>
     </header>
-    <NewNotifictionsList v-if="newNotifications || notificationsTabSelected === 1" />
+    <NewNotifictionsList :notificationsData="notificationsData" @replied="$emit('replied')" v-if="newNotifications || notificationsTabSelected === 1" />
     <!-- <NotifictionsList v-else-if="notificationsTabSelected === 1" /> -->
     <Messages v-else-if="notificationsTabSelected === 2" />
     <Progress v-else-if="notificationsTabSelected === 3" />
@@ -50,6 +50,7 @@ import Progress from "./NotificationsDemo/Progress";
 
 export default {
   name: "Notification",
+  props:['notificationsData'],
   components: {
     NotifictionsList,
     NewNotifictionsList,

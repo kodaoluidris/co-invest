@@ -114,6 +114,7 @@ export default {
             this.$bvModal.hide("create");
         },
         save() {
+            console.log(this.auth_token);
             this.loading = true
             axios
             .post(this.dynamic_route('/properties/create'), this.form, {

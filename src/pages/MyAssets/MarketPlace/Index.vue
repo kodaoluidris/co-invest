@@ -31,65 +31,138 @@
                       <v-tabs-items v-model="tabs">
                         <v-tab-item>
                             <v-card flat class="py-3">
-                                <div 
-                                    v-for="(m, i) in data" 
-                                    :key="i"
-                                    class=" px-md-3 py-md-3 border-bottom"
-                                >
-                                    <div class="head">
-                                        <span class="b-avatar badge-secondary rounded-circle" style="width: 1.2rem; height: 1.2rem;"><svg viewBox="0 0 16 16" width="1em" height="1em" focusable="false" role="img" aria-label="person fill" aria-hidden="true" alt="avatar" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi-person-fill b-icon bi"><g><path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path></g></svg>
-                                        </span>
-                                        <span class="ml-2"><b>{{m.fname + ' ' + m.lname}}</b></span>
+                                <div v-if="allMarketPlace.length">
+                                    <div 
+                                        v-for="(m, i) in allMarketPlace" 
+                                        :key="i"
+                                        class=" px-md-3 py-md-3 border-bottom"
+                                    >
+                                        <div class="head">
+                                            <span class="b-avatar badge-secondary rounded-circle" style="width: 1.2rem; height: 1.2rem;"><svg viewBox="0 0 16 16" width="1em" height="1em" focusable="false" role="img" aria-label="person fill" aria-hidden="true" alt="avatar" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi-person-fill b-icon bi"><g><path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path></g></svg>
+                                            </span>
+                                            <span class="ml-2"><b>{{m.fname + ' ' + m.lname}}</b></span>
 
-                                    </div>
-                                    <div class="sub-desc pt-5">
-                                        <p class="mb-2 text-muted">Price</p>
-                                        <div class="mt-2 d-md-flex justify-content-between ">
-                                           <h3 class="font-weight-light">₦  {{m.amount}}</h3>
-                                            <div v-if="m.status_action == null">
-                                                <button class="mx-1 btn btn-danger btn-sm" @click="reply_to_notification('notInterested',m.id)">Not Interested</button>
-                                                <button class="mx-1 btn btn-success btn-sm" @click="reply_to_notification('interested',m.id)">Interested</button>
+                                        </div>
+                                        <div class="sub-desc pt-5">
+                                            <p class="mb-2 text-muted">Price</p>
+                                            <div class="mt-2 d-md-flex justify-content-between ">
+                                            <h3 class="font-weight-light">₦  {{m.amount}}</h3>
+                                                <div v-if="m.status_action == null">
+                                                    <button class="mx-1 btn btn-danger btn-sm" @click="reply_to_notification('notInterested',m.id)">Not Interested</button>
+                                                    <button class="mx-1 btn btn-success btn-sm" @click="reply_to_notification('interested',m.id)">Interested</button>
 
-                                            </div>
-                                            <div v-else>
-                                                <button 
-                                                    class="btn" 
-                                                    disabled
-                                                    :class="{
-                                                        'btn-danger': m.status_action =='notInterested',
-                                                        'btn-success': m.status_action =='interested',
-                                                    }
-                                                ">{{m.status_action}}</button>
+                                                </div>
+                                                <div v-else>
+                                                    <button 
+                                                        class="btn" 
+                                                        disabled
+                                                        :class="{
+                                                            'btn-danger': m.status_action =='notInterested',
+                                                            'btn-success': m.status_action =='interested',
+                                                        }
+                                                    ">{{m.status_action}}</button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="pt-5 desc">
-                                        <p class="mb-2 text-muted">Description</p>
+                                        <div class="pt-5 desc">
+                                            <p class="mb-2 text-muted">Description</p>
 
-                                        <h4>{{m.name}}</h4>
-                                        <span class="badge badge-info">{{m.group_name}}</span>
-                                        <p data-toggle="collapse" :data-target="'#demo'+i" class="mt-2 mb-0" style="cursor:pointer">click to view sale description</p>
-                                        <div :id="'demo'+i" class="collapse">
-                                            <p class="pt-2 text-muted">
-                                                {{m.description}}
-                                            </p>
+                                            <h4>{{m.name}}</h4>
+                                            <span class="badge badge-info">{{m.group_name}}</span>
+                                            <p data-toggle="collapse" :data-target="'#demo'+i" class="mt-2 mb-0" style="cursor:pointer">click to view sale description</p>
+                                            <div :id="'demo'+i" class="collapse">
+                                                <p class="pt-2 text-muted">
+                                                    {{m.description}}
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div v-else class="text-center alert alert-secondary">
+                                    <h4>No record found</h4>
+                                </div>
+                               
                             </v-card>
                         </v-tab-item>
                         <v-tab-item>
                             <v-card flat>
-                            <v-card-text>
-                                An awesome title
-                            </v-card-text>
-                            </v-card>
-                        </v-tab-item>
-                        <v-tab-item>
-                            <v-card flat>
-                            <v-card-text>
-                               <h1> An even better title</h1>
-                            </v-card-text>
+                                <div v-if="marketPlaceTransaction.length">
+                                    <div 
+                                        v-for="(m, i) in marketPlaceTransaction" 
+                                        :key="i"
+                                        class=" px-md-3 py-md-3 border-bottom"
+                                    >
+                                       
+                                        <div class="sub-desc pt-5">
+                                            
+                                            <div class="mt-2 ">
+                                                <div class="head">
+                                                    <h5>{{m.mp_name}} <span class="badge badge-info badge-pill">{{m.group_name}}</span></h5>
+                                                    
+                                                    <!-- <span class="ml-2"><b>{{m.buyer_fname + ' ' + m.buyer_lname}}</b></span> -->
+                                                    <p class="mb-1 mt-4 text-muted">Price</p>
+                                                    <h5 class="font-weight-light">₦  {{Number(m.amount).toLocaleString()}}</h5>
+                                                    <p class="mt-5 mb-1 text-muted">Interactors</p>
+                                                    <table 
+                                                        v-if="m.interactors.length"
+                                                        style="width:100% !important" 
+                                                        class=" table table-responsive-sm table-hover table-striped">
+                                                        <tr>
+                                                            <th>Contact Info</th>
+                                                            <th>Status</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                        <tr v-for="(inv, index) in m.interactors" :key="index">
+                                                            <td>
+                                                                <p class="text-muted mb-1">{{inv.buyer_fname + ' ' + inv.buyer_lname}}</p>
+                                                                <p class="text-muted mb-1">{{inv.buyer_email}}</p>
+
+                                                            </td>
+                                                            <td>
+                                                                <span
+                                                                    class="badge badge-spill"
+                                                                    :class="{
+                                                                        'badge-danger': inv.status_action =='notInterested',
+                                                                        'badge-warning': inv.status_action =='interested',
+                                                                    }"
+                                                                    
+                                                                >
+                                                                    {{inv.status_action =='notInterested' ? 'Not Interested' : inv.status_action}}
+                                                                </span>
+                                                            </td>
+                                                            <td>
+                                                                <button 
+                                                                    :disabled="inv.status_action =='notInterested'" 
+                                                                    class="btn btn-success btn-sm"
+                                                                    @click="
+                                                                        openConfirm1=true;
+                                                                        currentMarketPlaceTransaction={
+                                                                            quick_sale_id:m.id,
+                                                                            user_id: m.owner_id,
+                                                                            buyer_id:inv.user_id,
+                                                                            quick_sale_history_id:inv.id,
+                                                                            status_action:inv.status_action,
+                                                                            fullName: inv.buyer_fname + ' ' + inv.buyer_lname
+                                                                        }
+                                                                    "
+                                                                >
+                                                                    Sell To
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                    <div v-else class="alert alert-secondary shadow-sm">
+                                                        <h4>No Interactors Yet</h4>
+                                                    </div>
+                                                </div>
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div v-else class="text-center alert alert-secondary">
+                                    <h4>No record found</h4>
+                                </div>
                             </v-card>
                         </v-tab-item>
                     </v-tabs-items>
@@ -97,6 +170,43 @@
                 </div>
                 </Widget>
             </b-col>
+            <!-- DIALOGS -->
+            <v-dialog
+            v-model="openConfirm1"
+            max-width="390"
+        >
+            <v-card>
+                <v-card-title class="text-h4">
+                    Confirm  Action
+                </v-card-title>
+
+                <v-card-text>
+                 Are you sure you want to sell this property to {{currentMarketPlaceTransaction.fullName}}  ?
+                </v-card-text>
+
+                <v-card-actions>
+                <v-spacer></v-spacer>
+
+                <v-btn
+                    color=" darken-1"
+                    text
+                    @click="openConfirm1 = false"
+                >
+                    No, exit
+                </v-btn>
+
+                <v-btn
+                    color="primary darken-1"
+                    text
+                    @click="openConfirm1=false;soldTo()"
+
+
+                >
+                    Yes
+                </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
         </b-row>
 
     </v-app>
@@ -115,8 +225,11 @@ export default {
         return {
             filters: {},
             loading: false,
-            data:[],
+            allMarketPlace:[],
+            marketPlaceTransaction:[],
             tabs:null,
+            openConfirm1:false,
+            currentMarketPlaceTransaction:{}
 
         }
     },
@@ -128,12 +241,12 @@ export default {
     },
     mounted() {
         this.getAuthData();
-        this.fetchData();
-
+        this.fetchMarkets();
+        this.fetchMyQuickSales();
     },
     methods: {
         ...mapActions('auth', ['getAuthData']),
-        fetchData() {
+        fetchMarkets() {
             this.loading = true
             axios
             .post(this.dynamic_route('/client/market-place/all'),
@@ -147,7 +260,29 @@ export default {
             }
             )
             .then(res => {
-                this.data=res.data[0];
+                this.allMarketPlace=res.data;
+            })
+            .catch(err => {
+            })
+            .finally(() => {
+                this.loading = false
+            })
+        },
+        fetchMyQuickSales() {
+            this.loading = true
+            axios
+            .post(this.dynamic_route('/client/market-place/my-quick-sales'),
+            {
+                id: this.auth_data.id
+            },
+            {
+                headers:{
+                    authorization: `Bearer ${this.auth_token}`
+                }
+            }
+            )
+            .then(res => {
+                this.marketPlaceTransaction=res.data;
             })
             .catch(err => {
             })
@@ -156,11 +291,11 @@ export default {
             })
         },
         reply_to_notification(msg,id){
-            this.fetchData();
+            this.fetchMarkets();
             let payload = {
                 msg,
                 id,
-                userId: this.authData.id
+                userId: this.auth_data.id
             }
 
             axios.post(this.dynamic_route('/client/my-investments/reply-sale-notification'),payload,{
@@ -169,7 +304,7 @@ export default {
                 }
             })
             .then(res => {
-                this.fetchData();
+                this.fetchMarkets();
             }).catch(err => {
                 if(err.response.status == 401 && err.response.statusText == "Unauthorized") {
                 return this.logoutUser();
@@ -193,6 +328,51 @@ export default {
         view_single_Marketplace(id)
         {
             this.$router.push({name: 'ViewMarketplace', params:{id: id}})
+        },
+        soldTo(){
+            delete this.currentMarketPlaceTransaction.fullName
+            console.log(this.currentMarketPlaceTransaction);
+            axios.post(this.dynamic_route('/client/market-place/final-quick-sale'),this.currentMarketPlaceTransaction,{
+                headers:{
+                authorization: `Bearer ${this.authToken}`
+                }
+            })
+            .then(res => {
+                this.$toast.success('COngratulations. You have successfully sold this property!', {
+                position: 'top-center',
+                timeout: 5000,
+                closeOnClick: true,
+                pauseOnFocusLoss: true,
+                pauseOnHover: true,
+                draggable: true,
+                draggablePercent: 0.6,
+                showCloseButtonOnHover: false,
+                hideProgressBar: true,
+                closeButton: 'button',
+                icon: true,
+                rtl: false,
+                })
+                this.fetchMarkets();
+                this.fetchMyQuickSales();
+            }).catch(err => {
+                if(err.response.status == 401 && err.response.statusText == "Unauthorized") {
+                return this.logoutUser();
+                }
+                this.$toast.error('Something went wrong, please try again later!', {
+                position: 'top-center',
+                timeout: 5000,
+                closeOnClick: true,
+                pauseOnFocusLoss: true,
+                pauseOnHover: true,
+                draggable: true,
+                draggablePercent: 0.6,
+                showCloseButtonOnHover: false,
+                hideProgressBar: true,
+                closeButton: 'button',
+                icon: true,
+                rtl: false,
+                })
+            })
         }
     },
 }
