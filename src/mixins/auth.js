@@ -5,14 +5,14 @@ export default {
     },
   methods: {
     dynamic_route(endUrl) { 
-        return `http://localhost:1000/api${endUrl}`;
+        return `http://127.0.0.1:8000/api${endUrl}`;
         console.log(process.env.VUE_APP_BASE_AUTH_URL);
 
         return process.env.VUE_APP_BASE_URL+endUrl
       },
       dynamic_auth_route(endUrl) {
         // return `http://api.diimtech.com/api/${endUrl}`;
-        return `http://localhost:1000/api/auth${endUrl}`;
+        return `http://127.0.0.1:8000/api/auth${endUrl}`;
         console.log(process.env);
         return process.env.VUE_APP_BASE_AUTH_URL+endUrl
       },
