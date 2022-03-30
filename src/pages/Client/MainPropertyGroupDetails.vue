@@ -101,7 +101,7 @@
                                                 </li>
                                                  <li>
                                                     <span class="type-name">Appreciated Amount (%)</span>
-                                                    <span class="type-value">{{getAppPercentAmount().toLocaleString()}}</span>
+                                                    <!-- <span class="type-value">{{getAppPercentAmount().toLocaleString()}}</span> -->
                                                 </li>
                                             </ul>
                                             <ul class="right-table" v-if="data.more_infos != null">

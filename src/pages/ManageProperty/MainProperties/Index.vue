@@ -73,12 +73,12 @@
                                     {{Number(p.price).toLocaleString()}}
                                 </td>
                                 <td class="text-center">
-                                    {{ getAppYear(p).value }} 
+                                    <!-- {{ getAppYear(p).value }}  -->
                                 </td>
                                  <td class="text-center">
                                     
-                                    {{ getAppPercentAmount(p).toLocaleString() }}
-                                    ({{ getAppPercent(p).value }}%)
+                                    <!-- {{ getAppPercentAmount(p).toLocaleString() }} -->
+                                    <!-- ({{ getAppPercent(p).value }}%) -->
                                 </td>
                                 <td class="text-center">
                                     {{p.groups}}
@@ -533,7 +533,7 @@ export default {
                 return ele.name.toLowerCase() == 'percent' 
             })
             console.log(data.price);
-            return (Number(data.price)/100) * Number(appreciate.value)+data.price
+            // return (Number(data.price)/100) * Number(appreciate.value)+data.price
             
         },
         getAppPercent(data){

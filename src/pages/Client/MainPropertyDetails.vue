@@ -5,7 +5,7 @@
                 <div>
                     <div class="row">
                         <div class="col-md-3 p-0" v-for="(im,i) in 4" :key="i">
-                            <img :src="data.image[i].image" class="w-100" style="height:400px">
+                            <!-- <img :src="data.image[i].image" class="w-100" style="height:400px"> -->
                         </div>
                        
                     </div>
@@ -73,7 +73,7 @@
                                                 </li>
                                                  <li>
                                                     <span class="type-name">Amount (%)</span>
-                                                    <span class="type-value">{{getAppPercentAmount()}}</span>
+                                                    <!-- <span class="type-value">{{getAppPercentAmount()}}</span> -->
                                                 </li>
                                             </ul>
                                              <ul class="right-table" v-if="data.more_infos != null">
@@ -163,8 +163,8 @@
                                     <b-link :to="{name:'MainPropertyGroupDetails', params:{mainGroupPropertyId: g.id}}" target="_blank">
                                         <div class="ta-pic set-bg"  :style="`background-image: url(&quot;${data.image[0].image}&quot;);`"></div>
                                         <div class="ta-text">
-                                            <h6><a href="#">Group {{ i + 1}}</a>  <span v-if="g.group_open" class="float-right badge d-inline text-white " style="background:#00C89E">Open</span>
-                                            <span v-else class="float-right badge d-inline text-white badge-primary">Closed</span></h6>
+                                            <h6><a href="#">Group {{ i + 1}}</a>  <span v-if="g.group_open" class="float-right badge d-inline text-white " style="background:#017db3">Open</span>
+                                            <span v-else class="float-right badge d-inline text-white badge-warning">Closed</span></h6>
                                             <span>Slot <b>{{g.no_of_people}}</b> &nbsp; &nbsp; Available <b>{{g.no_of_people - g.no_of_people_reg}}</b></span>
                                             <div class="ta-num mb-2">
                                                 Price ₦{{g.group_price.toLocaleString()}}
@@ -243,7 +243,7 @@ a:hover {
 .pd-text .pd-title .pt-price {
     font-size: 20px;
     font-weight: 700;
-    color: #00C89E;
+    color: #017db3;
     margin-bottom: 10px;
     display: inline-block;
 }
@@ -265,7 +265,7 @@ a:hover {
     font-weight: 500;
 }
 .pd-text .pd-title p span {
-    color: #00C89E;
+    color: #017db3;
 }
 .pd-text .pd-social {
     text-align: right;
@@ -280,13 +280,13 @@ a:hover {
     font-size: 18px;
 }
 .btn-special:hover {
-    background: #06a784;
+    background: #017db3;
 }
 .pd-text .pd-board {
     margin-bottom: 65px;
 }
 .pd-text .pd-board .tab-board .nav-tabs {
-    background: #113220;
+    background: #012838;
     border-bottom: none;
     border-top-left-radius: 0 !important;
     border-top-right-radius: 0 !important;
@@ -296,7 +296,7 @@ a:hover {
 }
 .pd-text .pd-board .tab-board .nav-tabs .nav-item a.active {
     color: #ffffff;
-    background: #00C89E;
+    background-image: linear-gradient(243deg, #343a40, #01a1e3);
     border-top-right-radius: 0 !important;
 }
 .pd-text .pd-board .tab-board .nav-tabs .nav-item a {
@@ -341,7 +341,7 @@ ul, ol {
     display: inline-block;
 }
 .pd-text .pd-board .tab-board .tab-content .tab-details ul li .type-value {
-    color: #00C89E;
+    color: #017db3;
     display: inline-block;
 }
 .pd-text .pd-board .tab-board .tab-content .tab-details ul.right-table li:nth-child(odd) {
@@ -374,7 +374,7 @@ ul, ol {
     /* top: -9px; */
     width: 5px;
     /* height: 46px; */
-    background: #00C89E;
+    background: #017db3;
     content: "";
 }
 .property-sidebar .single-sidebar .top-agent .ta-item {
@@ -415,8 +415,8 @@ ul, ol {
 }
 .property-sidebar .single-sidebar .top-agent .ta-item .ta-text .ta-num {
     font-size: 14px;
-    color: #00C89E;
-    font-weight: 500;
+    color: #017db3;
+    font-weight: 550;
 }
 .pd-text .pd-board .tab-board .tab-content .tab-desc {
     border: 1px solid #e1e1e1;
