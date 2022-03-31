@@ -85,7 +85,7 @@
                     >
                         <v-text-field
                             v-model="form.appreciate"
-                            type="number"
+                            type="date"
                             label="Main Property Appreciation year *"
                             :rules="appreciate"
                             required
