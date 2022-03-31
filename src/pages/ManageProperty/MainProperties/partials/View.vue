@@ -36,25 +36,23 @@
                         sm="6"
                         md="6"
                     >
-                        <v-text-field
-                        label="Groups No*"
-                        v-model="form.groups"
-                        disabled
-                        ></v-text-field>
-                    </v-col>
-                    <v-col
-                        cols="12"
-                        sm="6"
-                        md="6"
-                    >
-                         <v-text-field
-                            v-model="form.price"
-                            type="number"
-                            label="Price *"
-                            disabled
-                        ></v-text-field>
-                    </v-col>
-                    <v-col
+                        <v-row>
+                            <v-col cols="12">
+                                <v-text-field
+                                label="Groups No*"
+                                v-model="form.groups"
+                                disabled
+                                ></v-text-field>
+                            </v-col>
+                             <v-col cols="12">
+                                <v-text-field
+                                    v-model="form.price"
+                                    type="number"
+                                    label="Price *"
+                                    disabled
+                                ></v-text-field>
+                            </v-col>
+                            <v-col
                         cols="12"
                         sm="12"
                         md="12"
@@ -70,6 +68,28 @@
                             dense
                         ></v-select>
                     </v-col>
+                        </v-row>
+                       
+                    </v-col>
+                     <v-col
+                        cols="6"
+                    >
+                        <div class="table-responsive mt-4">
+                            <b>More Information</b>
+                            <table class="table table-hover table-sm mb-0 requests-table">
+                                <thead>
+                                    <tr v-for="(m,i) in form.more_infos" :key="i"> 
+                                        <th class="hidden-sm-down">{{m.name}}</th>
+                                        <td class="hidden-sm-down">{{m.value}}</td>
+                                        <td class="hidden-sm-down"><span @click="removeMoreInfo(i)" class="text-danger">X</span></td>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </v-col>
+                   
+                    
+                   
                     <v-col
                         cols="12"
                         sm="12"
@@ -110,6 +130,17 @@ export default {
         closeMe() {
             this.$bvModal.hide("view");
         },
+        removeMoreInfo(){
+
+        },
     }
 }
 </script>
+<style scoped>
+    .requests-table td {
+        font-size: 14px;
+        vertical-align: middle;
+        padding-top: 1px !important;
+        padding-bottom: 1px !important;
+    }
+</style>

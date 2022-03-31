@@ -83,12 +83,14 @@
                             <div class="pi-text">
                                 <div class="pt-price">$ {{p.price.toLocaleString()}}</div>
                                 <h5><b-link :to="{ name: 'MainPropertyDetails', params: { mainPropertyId: p.id}}">{{p.name}}</b-link></h5>
-                                <p><span class="mdi mdi-map-marker-outline"></span> 3 Middle Winchendon Rd, Rindge, NH 03461</p>
+                                <p><span class="mdi mdi-map-marker-outline"></span> {{getLocation(p) && getLocation(p).value}}</p>
                                 <ul>
-                                    <li><i class="fa fa-object-group"></i> 2,283</li>
-                                    <li><i class="fa fa-bathtub"></i> 03</li>
-                                    <li><i class="fa fa-bed"></i> 05</li>
-                                    <li><i class="fa fa-automobile"></i> 01</li>
+                                    <li v-for="(m,i) in p.more_infos" :key="i">
+                                        <span v-if="m.name.toLowerCase() != 'location'">
+                                            {{m.value +' ' + m.name}}
+
+                                        </span>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -124,7 +126,13 @@ export default {
                 this.data = res.data.data.original.data;
             }).catch(() => {
             })
-        }
+        },
+        getLocation(data) {
+            var dt = data.more_infos.find((el) => {
+                return el.name.toLowerCase() == "location"
+            });
+            return (typeof dt == 'undefined')?null:dt
+        },
     }, 
     mounted (){
         this.getPropertiesAnalytics(this.dynamic_route('/analytic/properties'));

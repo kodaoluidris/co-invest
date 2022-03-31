@@ -4,18 +4,10 @@
             <div class="wrapper">
                 <div>
                     <div class="row">
-                        <div class="col-md-3 p-0">
-                            <img src="/img/property/slider/ps-2.jpg" alt="">
+                        <div class="col-md-3 p-0" v-for="(im,i) in 4" :key="i">
+                            <!-- <img :src="data.image[i].image" class="w-100" style="height:400px"> -->
                         </div>
-                        <div class="col-md-3 p-0">
-                            <img src="/img/property/slider/ps-2.jpg" alt="">
-                        </div>
-                        <div class="col-md-3 p-0">
-                            <img src="/img/property/slider/ps-4.jpg" alt="">
-                        </div>
-                        <div class="col-md-3 p-0">
-                            <img src="/img/property/slider/ps-5.jpg" alt="">
-                        </div>
+                       
                     </div>
                 </div>
             </div>
@@ -78,6 +70,10 @@
                                                 <li>
                                                     <span class="type-name">Status</span>
                                                     <span class="type-value">{{data.status}}</span>
+                                                </li>
+                                                 <li>
+                                                    <span class="type-name">Amount (%)</span>
+                                                    <!-- <span class="type-value">{{getAppPercentAmount()}}</span> -->
                                                 </li>
                                             </ul>
                                              <ul class="right-table" v-if="data.more_infos != null">
@@ -221,7 +217,15 @@ export default {
             }).catch(() => {
 
             })
-        }
+        },
+        getAppPercentAmount(){
+             var appreciate = this.data.more_infos.find(ele=>{
+                return ele.name.toLowerCase() == 'percent' 
+            });
+
+            return (Number(this.data.price)/100) * Number(appreciate.value)+this.data.price
+            
+        },
     }
 }
 </script>
