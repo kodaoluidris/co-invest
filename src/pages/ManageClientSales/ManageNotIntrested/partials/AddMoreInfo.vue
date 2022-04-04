@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 <template>
     <div class="_body">
-        <form action="" class="p" @submit.prevent="save" v-if="data.length">
+        <form action="" class="p" @submit.prevent="save">
             <VueElementLoading
             :active="loading"
             spinner="bar-fade-scale"
@@ -9,8 +9,11 @@
             text="Loading.."
             duration="0.6"
           />
-            <div class="alert alert-secondary shadow-sm  mb-3" v-for="(l,i) in main_property.groups" :key="i">
-                <p class="p-0 m-0">For Group <b>{{i +1}}</b></p>
+           <p class="text-right">
+               <span title="Add more" style="font-size:30px;cursor:pointer" @click="generateJson"><i class="mdi mdi-plus" ></i></span>
+           </p>
+            <div class="alert alert-secondary shadow-sm  mb-3" v-for="(l,i) in data" :key="i">
+                <!-- <p class="p-0 m-0">For Group <b>{{i +1}}</b></p> -->
                 <v-row>
                     <v-col
                         cols="12"
@@ -18,10 +21,10 @@
                         md="6"
                     >
                         <v-text-field
-                        label="No of people *"
+                        label="Title *"
                         :rules="nameRules"
-                        v-model="data[i].no_of_people"
-                        type="number"
+                        v-model="data[i].name"
+                        type="text"
                         required
                         ></v-text-field>
                     </v-col>
@@ -31,15 +34,20 @@
                         md="6"
                     >
                         <v-text-field
-                        type="number"
-                        label="Group price *"
-                        :rules="groupRules"
-                        v-model="data[i].group_price"
-                        disabled
+                        type="text"
+                        label="Value *"
+                        :rules="valueRules"
+                        v-model="data[i].value"
+                        required
                         ></v-text-field>
                     </v-col>
 
                 </v-row>
+                <p class="text-right m-0 p-0">
+                    <span title="Remove" @click="remove(i)" style="cursor:pointer;font-size:25px">
+                        <i class="mdi mdi-delete-forever"></i>
+                    </span>
+                </p>
             </div>
             <v-card-actions style="margin-top:100px">
                 <v-spacer></v-spacer>
@@ -54,7 +62,7 @@
                     class="btn btn-primary"
                     type="submit"
                 >
-                    Update
+                    Save
                 </button>
             </v-card-actions>
 
@@ -75,42 +83,42 @@ export default {
             loading:false,
             dialog_modal:this.dialog,
             nameRules: [
-                v => !!v || 'No of people is required',
+                v => !!v || 'Title is  required',
             ],
-            groupRules: [
-                v => !!v || 'Group price is required',
+            valueRules: [
+                v => !!v || 'Value  is required',
             ],
             form:{},
-            data:[],
+            data:[
+                {name: '', value:''}
+            ],
+            num:'',
+            status:false,
         }
     },
     mounted() {
-        // eslint-disable-next-line no-console
-        for(let i =0; i < this.main_property.groups;i++) {
-            this.data.push({
-                id: this.main_property.group_allocated[i].id,
-                main_property_id: this.main_property.id,
-                groups: this.main_property.groups,
-                no_of_people: this.main_property.group_allocated[i].no_of_people,
-                group_price: this.main_property.price
-            })
-        }
     },
     methods:{
         closeMe() {
-            this.$bvModal.hide("edit_groups");
+            this.$bvModal.hide("more_info");
+        },
+        generateJson()
+        {
+            this.data.push({name:'', value:''})
+        },
+        remove(i) {
+            this.data.splice(i, 1)
         },
         save() {
-            //  let status = this.check_price(this.data);
-            // if(status) {
+             let status = this.check_price(this.data);
+            if(status) {
                 this.loading = true;
                 let payload = {
                     main_property_id: this.main_property.id,
-                    groups: this.main_property.groups,
                     values: this.data
                 }
                 axios
-                .post(this.dynamic_route(`/main_properties/manage_groups/${this.main_property.id}`), payload, {
+                .post(this.dynamic_route('/main_properties/add-more'), payload, {
                     headers:{
                       authorization: `Bearer ${this.authToken}`
     
@@ -120,7 +128,7 @@ export default {
                     this.loading = false;
                     this.closeMe()
                     this.$emit('submitted')
-                    this.$toast.success('Updated successfully!', {
+                    this.$toast.success('Added successfully!', {
                         position: 'top-center',
                         timeout: 5000,
                         closeOnClick: true,
@@ -159,31 +167,32 @@ export default {
                     this.loading = false
                 })
 
-            // }
+            }
         },
-        // check_price(pricesAr) {
-        //     let total = pricesAr.map(item =>  parseInt(item.price))
-        //     .reduce((ac, val) => ac + val,0);
-        //     if(total > parseInt(this.main_property.price)) {
-        //          this.$toast.error('The total price is greater than the actual price!', {
-        //             position: 'top-center',
-        //             timeout: 5000,
-        //             closeOnClick: true,
-        //             pauseOnFocusLoss: true,
-        //             pauseOnHover: true,
-        //             draggable: true,
-        //             draggablePercent: 0.6,
-        //             showCloseButtonOnHover: false,
-        //             hideProgressBar: true,
-        //             closeButton: 'button',
-        //             icon: true,
-        //             rtl: false,
-        //         });
-        //         return false;
-        //     } else {
-        //         return true;
-        //     }
-        // }
+        check_price(pricesAr) {
+            let total = pricesAr.map(item =>  parseInt(item.price))
+            .reduce((ac, val) => ac + val,0);
+            console.log(total);
+            if(total > parseInt(this.main_property.price)) {
+                 this.$toast.error('The total price is greater than the actual price!', {
+                    position: 'top-center',
+                    timeout: 5000,
+                    closeOnClick: true,
+                    pauseOnFocusLoss: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    draggablePercent: 0.6,
+                    showCloseButtonOnHover: false,
+                    hideProgressBar: true,
+                    closeButton: 'button',
+                    icon: true,
+                    rtl: false,
+                });
+                return false;
+            } else {
+                return true;
+            }
+        }
     }
 }
 </script>

@@ -84,14 +84,13 @@
                                 <div class="pt-price">$ {{p.price.toLocaleString()}}</div>
                                 <h5><b-link :to="{ name: 'MainPropertyDetails', params: { mainPropertyId: p.id}}">{{p.name}}</b-link></h5>
                                 <p><span class="mdi mdi-map-marker-outline"></span> {{getLocation(p) && getLocation(p).value}}</p>
-                                <ul>
-                                    <li v-for="(m,i) in p.more_infos" :key="i">
-                                        <span v-if="m.name.toLowerCase() != 'location'">
-                                            {{m.value +' ' + m.name}}
+                                <table class="table">
+                                    <tr  v-for="(m,i) in p.more_infos" :key="i">
+                                        <th v-if="m.name.toLowerCase() != 'location'">{{m.name}}</th>
+                                        <th v-if="m.name.toLowerCase() != 'location'">{{m.value }}</th>
+                                    </tr>
+                                </table>
 
-                                        </span>
-                                    </li>
-                                </ul>
                             </div>
                         </div>
                     </div>

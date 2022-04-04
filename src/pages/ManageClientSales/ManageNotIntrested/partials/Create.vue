@@ -215,12 +215,14 @@ export default {
             groupRules: [
                 v => !!v || 'Group is required',
             ],
-           
+            appreciate: [
+                v => !!v || 'This field is required',
+            ],
             statusRules:[
                 v => !!v || 'Status is required',
             ],
             appreciate:[
-                v => !!v || 'Appreciation field is required',
+                v => !!v || 'Apprciation field is required',
             ],
             appreciate_percent:[
                 v => !!v || 'Percent field is required',

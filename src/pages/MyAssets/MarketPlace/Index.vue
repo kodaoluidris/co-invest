@@ -48,9 +48,9 @@
                                             <div class="mt-2 d-md-flex justify-content-between ">
                                             <h3 class="font-weight-light">₦  {{m.amount}}</h3>
                                                 <div v-if="m.status_action == null">
-                                                    <button class="mx-1 btn btn-danger btn-sm" @click="reply_to_notification('notInterested',m.id)">Not Interested</button>
-                                                    <button class="mx-1 btn btn-success btn-sm" @click="reply_to_notification('interested',m.id)">Interested</button>
-
+                                                    <button class="mx-1 btn btn-success btn-sm" @click="reply_to_notification('interested',m.id, m.mpg_id)">Interested</button>
+                                                    <button class="mx-1 btn btn-danger btn-sm" @click="reply_to_notification('notInterested',m.id,m.mpg_id)">Not Interested</button>
+                                                    
                                                 </div>
                                                 <div v-else>
                                                     <button 
@@ -146,13 +146,23 @@
                                                                         }
                                                                     "
                                                                 >
-                                                                    Sell To
+                                                                    {{inv.status_action == 'notInterested' ? 'No Action' : 'Sell to'}}
                                                                 </button>
                                                             </td>
                                                         </tr>
                                                     </table>
+
                                                     <div v-else class="alert alert-secondary shadow-sm">
                                                         <h4>No Interactors Yet</h4>
+                                                    </div>
+                                                    <div v-if="m.no_interest" class="alert alert-info">
+                                                        <p>
+                                                            Our system has flagged this quick sale as <b>None Interactive.</b>
+                                                        </p>
+                                                        <p>
+                                                            Since no one in your group showed interest to buy, dont worry. Your quick sale details has been pushed
+                                                            to the Admin. They will take it from there.
+                                                        </p>
                                                     </div>
                                                 </div>
                                                
@@ -263,6 +273,8 @@ export default {
                 this.allMarketPlace=res.data;
             })
             .catch(err => {
+             console.log(err)
+
             })
             .finally(() => {
                 this.loading = false
@@ -285,15 +297,17 @@ export default {
                 this.marketPlaceTransaction=res.data;
             })
             .catch(err => {
+                console.log(err);
             })
             .finally(() => {
                 this.loading = false
             })
         },
-        reply_to_notification(msg,id){
+        reply_to_notification(msg,id, mpg){
             this.fetchMarkets();
             let payload = {
                 msg,
+                mpg,
                 id,
                 userId: this.auth_data.id
             }
@@ -331,14 +345,14 @@ export default {
         },
         soldTo(){
             delete this.currentMarketPlaceTransaction.fullName
-            console.log(this.currentMarketPlaceTransaction);
+
             axios.post(this.dynamic_route('/client/market-place/final-quick-sale'),this.currentMarketPlaceTransaction,{
                 headers:{
                 authorization: `Bearer ${this.authToken}`
                 }
             })
             .then(res => {
-                this.$toast.success('COngratulations. You have successfully sold this property!', {
+                this.$toast.success('Congratulations. You have successfully sold this property!', {
                 position: 'top-center',
                 timeout: 5000,
                 closeOnClick: true,
