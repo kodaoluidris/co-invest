@@ -161,7 +161,7 @@
                                                         </p>
                                                         <p>
                                                             Since no one in your group showed interest to buy, dont worry. Your quick sale details has been pushed
-                                                            to the Admin. They will take it from there
+                                                            to the Admin. They will take it from there.
                                                         </p>
                                                     </div>
                                                 </div>
