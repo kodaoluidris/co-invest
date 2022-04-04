@@ -73,12 +73,12 @@
                                     {{Number(p.price).toLocaleString()}}
                                 </td>
                                 <td class="text-center">
-                                    <!-- {{ getAppYear(p).value }}  -->
+                                    {{ getAppYear(p).value }} 
                                 </td>
                                  <td class="text-center">
                                     
-                                    <!-- {{ getAppPercentAmount(p).toLocaleString() }} -->
-                                    <!-- ({{ getAppPercent(p).value }}%) -->
+                                    {{ getAppPercentAmount(p) ? getAppPercentAmount(p).toLocaleString() : 'Not set' }}
+                                    ({{ getAppPercent(p) ? getAppPercent(p).value : 'Not set'}}%)
                                 </td>
                                 <td class="text-center">
                                     {{p.groups}}
@@ -529,16 +529,17 @@ export default {
             return appreciate;
         },
         getAppPercentAmount(data){
+            
              var appreciate = data.more_infos.find(ele=>{
-                return ele.name.toLowerCase() == 'percent' 
+                return ele.name.toLowerCase() == "appreciate_percent" 
             })
-            console.log(data.price);
-            // return (Number(data.price)/100) * Number(appreciate.value)+data.price
+            console.log(appreciate);
+            return (Number(data.price)/100) * Number(appreciate.value)+data.price
             
         },
         getAppPercent(data){
             var appreciate = data.more_infos.find(ele=>{
-                return ele.name.toLowerCase() == 'percent' 
+                return ele.name.toLowerCase() == 'appreciate_percent' 
             })
             return appreciate
         }
