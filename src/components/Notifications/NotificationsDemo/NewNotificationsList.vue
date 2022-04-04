@@ -59,14 +59,14 @@
     </b-list-group-item> -->
     <b-list-group-item class="listGroupItem shadow-sm mb-2" v-for="(n,i) in notificationsData" :key="i">
       <span class="notificationIcon thumb-sm">
-        <img class="rounded-circle" src="../../../assets/people/a5.jpg" alt="..." />
+        <!-- <img class="rounded-circle" src="../../../assets/people/a5.jpg" alt="..." /> -->
       </span>
       <p class="mb-2 overflow-hidden">
         User <span class="text-primary" style="cursor:pointer" @click="$router.push({name:'MarketPlace'})">{{n.fname}}</span> Is selling <span>{{n.gender == 'male' ? 'his' : 'her'}}</span> portion
         <!-- &nbsp;&nbsp; -->
         <div class="pt-1 d-flex justify-content-between">
-          <b-button size="xs" variant="success" @click="reply_to_notification('interested',n.id)" class="">Interested</b-button>
-          <b-button size="xs" variant="danger" @click="reply_to_notification('notInterested',n.id)">Not Interested</b-button>
+          <b-button size="xs" variant="success" @click="reply_to_notification('interested',n.id, n.mpg_id)" class="">Interested</b-button>
+          <b-button size="xs" variant="danger" @click="reply_to_notification('notInterested',n.id, n.mpg_id)">Not Interested</b-button>
 
         </div>
         <!-- <div class="text-center">
@@ -138,10 +138,11 @@ export default {
   },
   methods:{
     ...mapActions('page', ['getAuthData']),
-    reply_to_notification(msg,id){
+    reply_to_notification(msg,id,mpg){
       let payload = {
         msg,
         id,
+        mpg,
         userId: this.authData.id
       }
 

@@ -68,7 +68,34 @@
           index="sale-requests"
           isHeader
         />
-        <NavLink
+         <NavLink
+          v-if="authType.name == 'superadmin'"
+          :activeItem="activeItem"
+          header="Admin Quick Sales"
+          link="/app/manage-sales/quick-sales"
+          iconName="flaticon-user"
+          index="admin"
+          isHeader
+        />
+         <NavLink
+          v-if="authType.name == 'user'"
+          :activeItem="activeItem"
+          header="Investment"
+          link="/app/my-investments/index"
+          iconName="flaticon-home"
+          index="investment"
+          isHeader
+        />
+         <NavLink
+          v-if="authType.name == 'user'"
+          :activeItem="activeItem"
+          header="Market Place"
+          link="/app/market-place/index"
+          iconName="flaticon-home"
+          index="market"
+          isHeader
+        />
+        <!-- <NavLink
           v-if="authType.name == 'user'"
           :activeItem="activeItem"
           header="My Investment"
@@ -79,7 +106,7 @@
             { header: 'Investment', link: '/app/my-investments/index' },
             { header: 'Market Place', link: '/app/market-place/index' },
           ]"
-        />
+        /> -->
       </ul>
       <!-- <h5 class="navTitle">
       </h5>

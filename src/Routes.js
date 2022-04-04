@@ -129,6 +129,11 @@ export default new Router({
           component: MainProperty,
         },
         {
+          path: 'manage-sales/quick-sales',
+          name: 'AdminQuickSales',
+          component: () => import('@/pages/ManageClientSales/ManageNotIntrested/Index'),
+        },
+        {
           path: 'users',
           name: 'ManageUsers',
           component: Users,

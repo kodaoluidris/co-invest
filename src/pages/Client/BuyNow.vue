@@ -3,7 +3,60 @@
         <div class="details-banner" style="margin-top: 100px;">
             <div class="wrapper">
                 <div class="container" v-if="auth_data.lname">
-                   <div class="card border-0 shadow-sm">
+                    <div class="card border-0 shadow-sm" v-if="showStatus">
+                       <div class="card-body px-5">
+                           <div class="alert alert-success my-3">
+                            <p class="h4 text-center">Congratulations {{auth_data.fname + ' ' + auth_data.lname}} 
+                                You have successfully purchased this property <span style="font-size:45px; float:right; margin-top:-10px;">🤝</span> 
+                            </p>
+                           </div>
+                           <div class="row">
+                            <div class="col-md-6 my-2">
+                                <table class="p-4 border  table-response-sm table table-striped">
+                                    <tbody>
+                                        <tr class="mb-5">
+                                            <th>Main Property Name</th>
+                                            <td>{{data.name}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Property Type Name</th>
+                                            <td>{{data.p_name}}</td>
+                                        </tr>
+                                            <tr>
+                                            <th>Actual Price</th>
+                                            <td>₦{{data.price.toLocaleString()}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Group Price</th>
+                                            <td>₦{{data.group_price.toLocaleString()}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Paid Amount</th>
+                                            <td>₦{{calculatePaymentPrice}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-6 my-2">
+                                <div style="height:100%" class="d-flex  justify-content-center align-items-center text-center">
+                                    <button @click="navigateTo('Investment')"
+                                        class="shadow-sm btn btn-lg mx-3 btn-primary"
+                                    >
+                                        See My Investments 
+                                    </button>
+                                    <!-- <br> -->
+                                    <button @click="$router.push('/')"
+                                        class="shadow-sm btn btn-lg mx-3 btn-warning"
+                                    >
+                                        Continue to Invest 
+                                    </button>
+                                  
+                                </div>
+                            </div>
+                           </div>
+                       </div>
+                   </div>
+                   <div class="card border-0 shadow-sm" v-else>
                        <div class="card-body px-5">
                             <h3>Hi, {{auth_data.fname + ' ' + auth_data.lname}}</h3>
                             <div class="alert alert-secondary my-3">
@@ -43,7 +96,7 @@
                                         @click="checkout"
                                         class="shadow-sm btn btn-lg btn-block btn-success"
                                     >
-                                        Proceed <b-spinner v-if="isLoading"/>
+                                        Proceed To Payment <b-spinner v-if="isLoading"/>
                                     </button>
                                     <!-- <button @click="payWithMonnify()">Pay with Monnify</button> -->
                                 </div>
@@ -69,6 +122,7 @@ export default {
     data(){return {
         data:{},
         isLoading:false,
+        showStatus : false,
     }},
     computed:{
         ...mapState('auth', ['auth_data','auth_token']),
@@ -136,6 +190,9 @@ export default {
 
 
         },
+        navigateTo(url){
+             this.$router.push({name:url, params : {id:this.auth_data.id}})
+        },
         callback(transaction_id){
             axios.get(this.dynamic_route('/client/callback/'+transaction_id), {
                         headers : {
@@ -157,7 +214,7 @@ export default {
                         icon: true,
                         rtl: false,
                         });
-                        this.$router.push({name:'Investment'})
+                       this.showStatus = true;
                     }).catch(err=>{
                          this.$toast.error('Transaction Error', {
                             position: 'top-center',

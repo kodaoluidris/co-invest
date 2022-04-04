@@ -422,6 +422,7 @@ export default {
                     icon: true,
                     rtl: false,
                 });
+                this.$router.push({name: 'MarketPlace'})
               }
             })
             .catch(err => {
