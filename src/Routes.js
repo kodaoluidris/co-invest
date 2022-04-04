@@ -40,6 +40,8 @@ const MainPropertyGroupDetails = () => import('@/pages/Client/MainPropertyGroupD
 const BuyNow = () => import('@/pages/Client/BuyNow')
 const Users = () => import('@/pages/ManageUsers/Index')
 
+const FinalSales = () => import('@/pages/FinalSales/Index')
+
 
 Vue.use(Router);
 
@@ -130,6 +132,11 @@ export default new Router({
           path: 'users',
           name: 'ManageUsers',
           component: Users,
+        },
+        {
+          path: 'sale-requests',
+          name: 'SaleRequest',
+          component: FinalSales,
         },
         {
           path: 'my-investments/index',

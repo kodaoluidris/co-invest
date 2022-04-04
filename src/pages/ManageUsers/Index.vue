@@ -172,7 +172,7 @@
         max-width="550"
     >
         <v-card>
-            <v-card-title class="text-h5">
+            <v-card-title class="text-h5 text-success">
             {{dynamic_status == 'inactive' ? 'Deactivate' : 'Activate'}} &nbsp; <b>{{currentUser.fullname}}</b>'s account
             </v-card-title>
 
@@ -209,7 +209,7 @@
         max-width="485"
     >
         <v-card>
-            <v-card-title class="text-h5">
+            <v-card-title class="text-h5 text-success">
                 <p>Delete User account. </p>
                 <p><small><b>Note: </b> This action is irreversible and will delete all records associated with this user including transactions,
                 groups, profile etc.</small></p>
@@ -250,7 +250,7 @@
     >
         <v-card>
             <v-card-title class="text-h5">
-                <p>Reset <b>{{currentUser.fullname}}</b>'s password </p>
+                <p class="text-success">Reset <b>{{currentUser.fullname}}</b>'s password </p>
                 <p><small><b>Note: </b> This will change user password to <b>12345678</b></small></p>
             </v-card-title>
 
