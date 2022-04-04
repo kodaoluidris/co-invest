@@ -146,7 +146,7 @@
                                                                         }
                                                                     "
                                                                 >
-                                                                    Sell To
+                                                                    {{inv.status_action == 'notInterested' ? 'No Action' : 'Sell to'}}
                                                                 </button>
                                                             </td>
                                                         </tr>
