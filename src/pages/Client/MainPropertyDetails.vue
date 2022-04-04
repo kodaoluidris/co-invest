@@ -4,8 +4,8 @@
             <div class="wrapper">
                 <div>
                     <div class="row">
-                        <div class="col-md-3 p-0" v-for="(im,i) in 4" :key="i">
-                            <!-- <img :src="data.image[i].image" class="w-100" style="height:400px"> -->
+                        <div class="col-md-4 p-0" v-for="(im,i) in 3" :key="i">
+                            <img :src="data.image[i].image" class="w-100" style="height:400px">
                         </div>
                        
                     </div>
