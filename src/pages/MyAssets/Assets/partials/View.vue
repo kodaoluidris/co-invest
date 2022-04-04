@@ -9,14 +9,44 @@
 
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <button class="dropdown-item color-inherit" @click="openConfirm1=true" >Sell your portion</button>
+                <button class="dropdown-item color-inherit" v-if="propertyYearInfo[0].value == currentYear" @click="openConfirm3=true" >Sell Property</button>
+                <button class="dropdown-item color-inherit" v-else @click="openConfirm1=true" >Sell your portion</button>
                 <button class="dropdown-item" >Track quick sale history</button>
                 <button class="dropdown-item" >Something else here</button>
             </div>
         </div>
        </div>
        <div class="row px-2" style="margin-top:20px">
+            <VueElementLoading
+            :active="loading"
+            spinner="bar-fade-scale"
+            color="var(--primary)"
+            text="Loading.."
+            duration="0.6"
+          />
            <div class="col-md-8 mb-3">
+               <div class="alert alert-info" v-if="data.final_sale_user_id == this.auth_data.id">
+                   <h6>
+                       <i class="fa fa-info-circle mr-2"></i>
+                       You have initiated a sell request for this property. Awaiting confirmation from
+                       other group members
+                   </h6>
+               </div>
+               <div v-if="data.final_sale_user_id && data.final_sale_user_id != this.auth_data.id">
+                   <div class="alert alert-info pb-1" v-if="getUserStatus(data.accepts_user_id, auth_data.id) == 'pending approval'">
+                        <h6>
+                            <i class="fa fa-info-circle mr-2"></i>
+                            A sell request has been initiated for this property by a group member and awaiting your approval.
+                            <button @click="approveSale=true" class="btn btn-success font-weight-bold ml-3"><i class="fa fa-check"></i> Approve</button>
+                        </h6>
+                    </div>
+                    <div class="alert alert-warning pb-1" v-else>
+                        <h5>
+                            <i class="fa fa-info-circle mr-2"></i>
+                            You have approved the sale of this property
+                        </h5>
+                    </div>
+               </div>
                <div class="card shadow-sm border-0">
                    <div class="card-body">
                         <v-carousel v-if="items.length >0">
@@ -43,7 +73,7 @@
                             </div>
                             <div class="top-agent" v-if="data.members.length">
                                 <div class="ta-item" v-for="(member,i) in data.members" :key="i">
-                                    <div class="ta-pic set-bg"   style="background-image: url(&quot;https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiYhGP5eN3CABVLqXCjVZT_CfIC_wzNK_f4M9Bc4Yd4E6NchqqZfWegamZO77KedEldT0&usqp=CAU&quot;);"></div>
+                                    <div class="ta-pic set-bg" style="background-image: url(&quot;https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiYhGP5eN3CABVLqXCjVZT_CfIC_wzNK_f4M9Bc4Yd4E6NchqqZfWegamZO77KedEldT0&usqp=CAU&quot;);"></div>
                                     <div class="ta-text" >
                                         <h6 class="pr-1">
                                             <a href="#">{{member.fname + ' ' + member.lname}}</a>
@@ -56,7 +86,11 @@
                                         </h6>
                                         <span>Member</span>
                                         <div class="ta-num">{{member.email}}</div>
-                                        <div class="ta-num mt-1">Total Slot: {{member.total_slot}}</div>
+                                        <div class="ta-num d-flex mt-1">Total Slot: {{member.total_slot}}
+                                            <span v-if="data.accepts_user_id" style="font-size: 12px; font-weight: normal" class="badge ml-2 text-capitalize text-white badge-sm badge-warning">
+                                                {{getUserStatus(data.accepts_user_id, member.mem_user_id )}}
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -166,6 +200,79 @@
                 </v-card-text>
             </v-card>
         </v-dialog>
+        <v-dialog
+            v-model="openConfirm3"
+            max-width="560"
+        >
+            <v-card>
+                <v-card-title class="text-h5">
+                    <p>Sell Property </p>
+                    <p><small><b>Note: </b> Selling this property requires the consent and confirmation of all other group members.
+                    Your confirmation only notifies the other group members of the sale.
+                    </small></p>
+                </v-card-title>
+
+                <v-card-text>
+                    Are you sure you want to perform this operation ?
+                </v-card-text>
+
+                <v-card-actions>
+                <v-spacer></v-spacer>
+
+                <v-btn
+                    color=" darken-1"
+                    text
+                    @click="openConfirm3 = false"
+                >
+                    No, exit
+                </v-btn>
+
+                <v-btn
+                    color="primary darken-1"
+                    text
+                    @click="initializeSales();openConfirm3=false"
+                >
+                    Yes, continue
+                </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
+        <v-dialog
+            v-model="approveSale"
+            max-width="560"
+        >
+            <v-card>
+                <v-card-title class="text-h5">
+                    <p>Approve Property Sale </p>
+                    <p><small><b>Note: </b> This action cannot be reversed once initiated.
+                    </small></p>
+                </v-card-title>
+
+                <v-card-text>
+                    Are you sure you want to perform this operation ?
+                </v-card-text>
+
+                <v-card-actions>
+                <v-spacer></v-spacer>
+
+                <v-btn
+                    color=" darken-1"
+                    text
+                    @click="approveSale = false"
+                >
+                    No, exit
+                </v-btn>
+
+                <v-btn
+                    color="primary darken-1"
+                    text
+                    @click="approveSales();approveSale=false"
+                >
+                    Yes, continue
+                </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
    </v-app>
 </template>
 <script>
@@ -175,6 +282,7 @@ import Chat from './Chat.vue'
 import { mapState, mapActions } from 'vuex';
 import axios from "axios"
 export default {
+    name: 'ViewInvestemt',
     components:{
         Widget,
         VueElementLoading, 
@@ -184,10 +292,15 @@ export default {
         return {
             data:{ members:[]},
             items:[],
-            openConfirm1:false,openConfirm2:false,
+            openConfirm1:false,openConfirm2:false,openConfirm3:false,approveSale: false,
             description:'',
             loadModal:false,
             amount:0,
+            currentYear: '',
+            propertyYearInfo: {},
+            processedProperty: {},
+            group_users: [],
+            loading: false
         }
     },
     computed:{
@@ -199,7 +312,6 @@ export default {
       mounted() {
         this.getAuthData();
         this.fetchData(this.$route.params.id);
-
     },
     methods:{
         ...mapActions('auth', ['getAuthData']),
@@ -225,6 +337,10 @@ export default {
                 this.items = this.data.image.map(item => {
                     return {src: item.image}
                 })
+                const d = new Date();
+                this.currentYear = d.getFullYear();
+                this.propertyYearInfo = res.data.info.filter(el => el.name=='appreciate')
+                this.group_users = res.data.info.filter(el => el.user_id =='appreciate')
             })
             .catch(err => {
                 if(err.response.status == 401 && err.response.statusText == "Unauthorized") {
@@ -304,6 +420,7 @@ export default {
                     icon: true,
                     rtl: false,
                 });
+                this.$router.push({name: 'MarketPlace'})
               }
             })
             .catch(err => {
@@ -343,6 +460,103 @@ export default {
                 this.loadModal = false
                 this.description=""
             })
+        },
+        initializeSales(){
+            this.loading = true
+            axios.post(this.dynamic_route('/client/my-investments/property-sale/initialize'), this.data, {
+                    headers:{
+                        authorization: `Bearer ${this.auth_token}`
+                    }
+                }).then(()=> {
+                    this.$toast.success('Property sale initiated successfully!', {
+                        position: 'top-center',
+                        timeout: 3000,
+                        closeOnClick: true,
+                        pauseOnFocusLoss: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        draggablePercent: 0.6,
+                        showCloseButtonOnHover: false,
+                        hideProgressBar: true,
+                        closeButton: 'button',
+                        icon: true,
+                        rtl: false,
+                    })
+                    this.fetchData(this.$route.params.id)
+                })
+                .catch((err) => {
+                    if(err.response.status == 401 && err.response.statusText == "Unauthorized") {
+                        return this.logoutUser();
+                    }
+                    this.$toast.error('An error occurred. Please try again!', {
+                        position: 'top-center',
+                        timeout: 3000,
+                        closeOnClick: true,
+                        pauseOnFocusLoss: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        draggablePercent: 0.6,
+                        showCloseButtonOnHover: false,
+                        hideProgressBar: true,
+                        closeButton: 'button',
+                        icon: true,
+                        rtl: false,
+                    })
+                })
+                .finally(() => this.loading = false)
+        },
+        approveSales(){
+            this.loading = true
+            axios.post(this.dynamic_route('/client/my-investments/property-sale/approve'), this.data, {
+                    headers:{
+                        authorization: `Bearer ${this.auth_token}`
+                    }
+                }).then(()=> {
+                    this.$toast.success('Property sale approved successfully!', {
+                        position: 'top-center',
+                        timeout: 3000,
+                        closeOnClick: true,
+                        pauseOnFocusLoss: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        draggablePercent: 0.6,
+                        showCloseButtonOnHover: false,
+                        hideProgressBar: true,
+                        closeButton: 'button',
+                        icon: true,
+                        rtl: false,
+                    })
+                    this.fetchData(this.$route.params.id)
+                })
+                .catch((err) => {
+                    if(err.response.status == 401 && err.response.statusText == "Unauthorized") {
+                        return this.logoutUser();
+                    }
+                    this.$toast.error('An error occurred. Please try again!', {
+                        position: 'top-center',
+                        timeout: 3000,
+                        closeOnClick: true,
+                        pauseOnFocusLoss: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        draggablePercent: 0.6,
+                        showCloseButtonOnHover: false,
+                        hideProgressBar: true,
+                        closeButton: 'button',
+                        icon: true,
+                        rtl: false,
+                    })
+                })
+                .finally(() => this.loading = false)
+        },
+        getUserStatus(data, userID) {
+            let status = 'pending approval';
+            data.forEach(el => {
+                if(el.user_id == userID) {
+                    status = el.status + ' property sale'
+                }
+            });
+            return status
         },
         // confirmationFunction()
         // {
