@@ -41,6 +41,12 @@
                                      Price
                                 </th>
                                 <th class="text-center">
+                                     App. Year
+                                </th>
+                                <th class="text-center">
+                                    Amount (%)
+                                </th>
+                                <th class="text-center">
                                      Group No
                                 </th>
                                 <th class="text-center">
@@ -65,6 +71,14 @@
                                 </td>
                                 <td>
                                     {{Number(p.price).toLocaleString()}}
+                                </td>
+                                <td class="text-center">
+                                    {{ getAppYear(p).value }} 
+                                </td>
+                                 <td class="text-center">
+                                    
+                                    {{ getAppPercentAmount(p) ? getAppPercentAmount(p).toLocaleString() : 'Not set' }}
+                                    ({{ getAppPercent(p) ? getAppPercent(p).value : 'Not set'}}%)
                                 </td>
                                 <td class="text-center">
                                     {{p.groups}}
@@ -216,7 +230,7 @@
             <viewModal :my_model="$bvModal" :data="current" :property_types="property_types"  />
         </b-modal>
          <b-modal size="lg" style="background:white" title="View Main Property Image" id="view_image" hide-footer>
-            <viewImageModal :my_model="$bvModal" :data="current_img" :main_name="main_name" />
+            <viewImageModal :my_model="$bvModal" :authToken="authToken" :data="current_img" :main_name="main_name" />
         </b-modal>
         <b-modal size="lg" style="background:white" title="Edit Main Property" id="edit" hide-footer>
             <edit :my_model="$bvModal" :authToken="authToken" :data="current" :property_types="property_types" @updated="fetchData()"  />
@@ -508,6 +522,27 @@ export default {
             this.loading = false
             })
         },
+        getAppYear(data){
+            var appreciate = data.more_infos.find(ele=>{
+                return ele.name.toLowerCase() == 'appreciate' 
+            })
+            return appreciate;
+        },
+        getAppPercentAmount(data){
+            
+             var appreciate = data.more_infos.find(ele=>{
+                return ele.name.toLowerCase() == "appreciate_percent" 
+            })
+            console.log(appreciate);
+            return (Number(data.price)/100) * Number(appreciate.value)+data.price
+            
+        },
+        getAppPercent(data){
+            var appreciate = data.more_infos.find(ele=>{
+                return ele.name.toLowerCase() == 'appreciate_percent' 
+            })
+            return appreciate
+        }
     },
 }
 </script>
