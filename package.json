@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "animate.css": "^4.1.1",
-    "apexcharts": "^3.22.2",
+    "apexcharts": "^3.35.0",
     "awesome-bootstrap-checkbox": "^1.0.1",
     "axios": "^0.26.0",
     "bootstrap": "^4.5.3",

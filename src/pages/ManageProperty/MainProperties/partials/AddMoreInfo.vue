@@ -172,7 +172,6 @@ export default {
         check_price(pricesAr) {
             let total = pricesAr.map(item =>  parseInt(item.price))
             .reduce((ac, val) => ac + val,0);
-            console.log(total);
             if(total > parseInt(this.main_property.price)) {
                  this.$toast.error('The total price is greater than the actual price!', {
                     position: 'top-center',
