@@ -56,7 +56,16 @@
           header="Manage Users"
           link="/app/users"
           iconName="flaticon-user"
-          index="manage"
+          index="users"
+          isHeader
+        />
+        <NavLink
+          v-if="authType.name == 'superadmin'"
+          :activeItem="activeItem"
+          header="Final Sale Requests"
+          link="/app/sale-requests"
+          iconName="flaticon-market"
+          index="sale-requests"
           isHeader
         />
          <NavLink

@@ -86,8 +86,10 @@
                                         </h6>
                                         <span>Member</span>
                                         <div class="ta-num">{{member.email}}</div>
-                                        <div class="ta-num d-flex mt-1">Total Slot: {{member.total_slot}}
-                                            <span v-if="data.accepts_user_id" style="font-size: 12px; font-weight: normal" class="badge ml-2 text-capitalize text-white badge-sm badge-warning">
+                                        <div class="ta-num mt-1">Total Slot: {{member.total_slot}}
+                                        </div>
+                                        <div class="mt-1" style="width: 60%">
+                                            <span v-if="data.accepts_user_id" style="font-size: 12px; font-weight: normal" class="badge badge-pill text-capitalize text-white badge-sm badge-warning">
                                                 {{getUserStatus(data.accepts_user_id, member.mem_user_id )}}
                                             </span>
                                         </div>
@@ -116,7 +118,7 @@
             max-width="390"
         >
             <v-card>
-                <v-card-title class="text-h4">
+                <v-card-title class="text-h4 text-success">
                     Quick Sale
                 </v-card-title>
 
@@ -205,7 +207,7 @@
             max-width="560"
         >
             <v-card>
-                <v-card-title class="text-h5">
+                <v-card-title class="text-h5 text-success">
                     <p>Sell Property </p>
                     <p><small><b>Note: </b> Selling this property requires the consent and confirmation of all other group members.
                     Your confirmation only notifies the other group members of the sale.
@@ -242,7 +244,7 @@
             max-width="560"
         >
             <v-card>
-                <v-card-title class="text-h5">
+                <v-card-title class="text-h5 text-success">
                     <p>Approve Property Sale </p>
                     <p><small><b>Note: </b> This action cannot be reversed once initiated.
                     </small></p>
@@ -580,8 +582,8 @@ export default {
         margin-bottom: 30px;
     }
     .property-sidebar .single-sidebar .top-agent .ta-item .ta-pic {
-        height: 130px;
-        width: 130px;
+        height: 150px;
+        width: 140px;
         float: left;
     }
     .set-bg {
@@ -593,8 +595,8 @@ export default {
         overflow: hidden;
         border: 1px solid #ebebeb;
         border-left: none;
-        height: 130px;
-        padding-top: 26px;
+        height: 150px;
+        padding-top: 16px;
         padding-left: 20px;
     }
     .property-sidebar .single-sidebar .top-agent .ta-item .ta-text h6 {
