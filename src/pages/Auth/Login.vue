@@ -32,17 +32,39 @@
                     :rules="passwordRules"
                     label="Password"
                     type="password"
+                    v-if="!showPassword"
                     required
-                  ></v-text-field>
+                  >
+                    <v-icon
+                      slot="append"
+                      style="cursor: pointer"
+                      @click="togglePassword"
+                    >
+                      mdi-eye-outline
+                    </v-icon>
+                  </v-text-field>
+                  <v-text-field
+                    v-model="form.password"
+                    :rules="passwordRules"
+                    label="Password"
+                    type="text"
+                    required
+                    v-if="showPassword"
+                  >
+                    <v-icon
+                      slot="append"
+                      style="cursor: pointer"
+                      @click="togglePassword"
+                    >
+                      mdi-eye-off-outline
+                    </v-icon>
+                  </v-text-field>
                   <b-button block :disabled="!valid" type="submit" class="auth-btn mt-3 btn-lg custom-btn">Login</b-button>
                   <router-link style="color: brown !important" class="d-block mt-1 text-right" to="/forgot-password">Forgot Password ?</router-link>
                   
                 </v-form>
                 <p class="widget-auth-info text-center py-2">
                   Don't have an account? <router-link  to="/register">Sign up</router-link>
-                </p>
-                <p class="float-right mt-2">
-
                 </p>
               </div>
             </div>
@@ -81,6 +103,7 @@ export default {
         v => /.+@.+/.test(v) || 'E-mail must be valid',
       ],
       loading: false,
+      showPassword: false,
     };
   },
   methods: {
@@ -161,6 +184,9 @@ export default {
           this.loading=false;
         })
       }
+    },
+    togglePassword() {
+      this.showPassword = !this.showPassword;
     },
   },
   created() {

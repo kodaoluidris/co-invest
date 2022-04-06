@@ -49,15 +49,66 @@
                     :rules="passwordRules"
                     label="Password"
                     type="password"
+                    v-if="!showPassword"
                     required
-                  ></v-text-field>
+                  >
+                    <v-icon
+                      slot="append"
+                      style="cursor: pointer"
+                      @click="togglePassword"
+                    >
+                      mdi-eye-outline
+                    </v-icon>
+                  </v-text-field>
+                  <v-text-field
+                    v-model="form.password"
+                    :rules="passwordRules"
+                    label="Password"
+                    type="text"
+                    required
+                    v-if="showPassword"
+                  >
+                    <v-icon
+                      slot="append"
+                      style="cursor: pointer"
+                      @click="togglePassword"
+                    >
+                      mdi-eye-off-outline
+                    </v-icon>
+                  </v-text-field>
+
                   <v-text-field
                     v-model="form.password_confirmation"
-                    :rules="nameRules"
+                    :rules="passwordRules"
                     label="Confirm Password"
                     type="password"
+                    v-if="!showPassword2"
                     required
-                  ></v-text-field>
+                  >
+                    <v-icon
+                      slot="append"
+                      style="cursor: pointer"
+                      @click="togglePassword2"
+                    >
+                      mdi-eye-outline
+                    </v-icon>
+                  </v-text-field>
+                  <v-text-field
+                    v-model="form.password_confirmation"
+                    :rules="cPasswordRules"
+                    label="Confirm Password"
+                    type="text"
+                    required
+                    v-if="showPassword2"
+                  >
+                    <v-icon
+                      slot="append"
+                      style="cursor: pointer"
+                      @click="togglePassword2"
+                    >
+                      mdi-eye-off-outline
+                    </v-icon>
+                  </v-text-field>
                   <b-button block :disabled="!valid" type="submit" class="auth-btn mt-2 btn-lg custom-btn">Create Account</b-button>
                 </v-form>
                 <p class="widget-auth-info text-center py-2">
@@ -108,7 +159,12 @@ export default {
         v => !!v || 'E-mail is required',
         v => /.+@.+/.test(v) || 'E-mail must be valid',
       ],
+      cPasswordRules: {
+        // v => form.password != form.password_confirmation || 'E-mail is required'
+      },
       loading: false,
+      showPassword: false,
+      showPassword2: false,
     };
   },
   methods: {
@@ -234,6 +290,12 @@ export default {
       }).finally(() =>{
         this.loading=false;
       })
+    },
+    togglePassword() {
+      this.showPassword = !this.showPassword;
+    },
+    togglePassword2() {
+      this.showPassword2 = !this.showPassword2;
     },
   },
   created() {
