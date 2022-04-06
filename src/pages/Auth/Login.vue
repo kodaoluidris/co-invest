@@ -1,57 +1,62 @@
 <template>
-  <div class="auth-page">
-    <b-container>
-      <h5 class="auth-logo">
-        <i class="fa fa-circle text-primary"></i>
-        Co Invest
-        <i class="fa fa-circle text-danger"></i>
-      </h5>
-      <Widget class="widget-auth mx-auto" title="<h3 class='mt-0'>Login to your Web App</h3>" customHeader>
-        <p class="widget-auth-info">
-            <!-- Use your email to sign in. -->
-        </p>
-        <v-form class="mt" @submit.prevent="login">
-          <VueElementLoading
-            :active="loading"
-            spinner="bar-fade-scale"
-            color="var(--primary)"
-            text="Loading.."
-            duration="0.6"
-          />
-          <b-alert class="alert-sm" variant="danger" :show="!!errorMessage">
-            {{errorMessage}}
-          </b-alert>
-          <v-text-field
-            v-model="form.email"
-            :rules="nameRules"
-            label="Email"
-            type="email"
-            required
-          ></v-text-field>
-           <v-text-field
-            v-model="form.password"
-            :rules="nameRules"
-            label="Password"
-            type="password"
-            required
-          ></v-text-field>
-          <b-button type="submit" size="sm" class="auth-btn mb-3" variant="inverse">Login</b-button>
-          <router-link class="d-block text-left" to="/forgot-password">Forgot Password ?</router-link>
-          
-        </v-form>
-        <p class=" widget-auth-info mt-3">
-          Don't have an account? Sign up now!
-        </p>
-        <router-link class="d-block text-center" to="/register">Create an Account</router-link>
-        <p class="float-right mt-2">
+  <v-app>
+    <div class="auth-page">
+      <div class="login-wrapper">
+        <div class="card">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="mx-auto py-5 pl-md-8 login-form">
+                <div class="text-center mt-10 mb-7">
+                  <img src="/img/lifecardbg.png" alt="" width="120"> 
+                </div>
+                <v-form v-model="valid" @submit.prevent="login">
+                  <VueElementLoading
+                    :active="loading"
+                    spinner="bar-fade-scale"
+                    color="var(--primary)"
+                    text="Loading.."
+                    duration="0.6"
+                  />
+                  <b-alert class="alert-sm" variant="danger" :show="!!errorMessage">
+                    {{errorMessage}}
+                  </b-alert>
+                  <v-text-field
+                    v-model="form.email"
+                    :rules="emailRules"
+                    label="Email"
+                    type="email"
+                    required
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="form.password"
+                    :rules="passwordRules"
+                    label="Password"
+                    type="password"
+                    required
+                  ></v-text-field>
+                  <b-button block :disabled="!valid" type="submit" class="auth-btn mt-3 btn-lg custom-btn">Login</b-button>
+                  <router-link style="color: brown !important" class="d-block mt-1 text-right" to="/forgot-password">Forgot Password ?</router-link>
+                  
+                </v-form>
+                <p class="widget-auth-info text-center py-2">
+                  Don't have an account? <router-link  to="/register">Sign up</router-link>
+                </p>
+                <p class="float-right mt-2">
 
-        </p>
-      </Widget>
-    </b-container>
-    <!-- <footer class="auth-footer">
-      2019 &copy; Sing App Vue Admin Dashboard Template - Made by <a href="https://flatlogic.com/">Flatlogic</a>
-    </footer> -->
-  </div>
+                </p>
+              </div>
+            </div>
+            <div class="col-md-8 d-lg-block d-none">
+              <img src="/img/loginbg2.png" alt="" style="width: 100%">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <footer class="auth-footer">
+        2019 &copy; Sing App Vue Admin Dashboard Template - Made by <a href="https://flatlogic.com/">Flatlogic</a>
+      </footer> -->
+    </div>
+  </v-app>
 </template>
 
 <script>
@@ -64,10 +69,16 @@ export default {
   components: { Widget,VueElementLoading },
   data() {
     return {
+      valid: false,
       errorMessage: null,
       form:{},
-      nameRules: [
-        v => !!v || 'This field  is required',
+      passwordRules: [
+        v => !!v || 'Password is required',
+        v => v.length > 11 || 'Password should be at least 11 characters',
+      ],
+      emailRules: [
+        v => !!v || 'E-mail is required',
+        v => /.+@.+/.test(v) || 'E-mail must be valid',
       ],
       loading: false,
     };
@@ -159,3 +170,43 @@ export default {
   },
 };
 </script>
+<style scoped>
+.card {
+  border-radius: 0 !important;
+  border: none !important;
+  box-shadow: 0 4px 24px 0 rgb(34 41 47 / 40%);
+
+}
+.auth-page {
+  background-image: linear-gradient(135deg, #243a9c 0%, #1F2667 100%);
+  padding-top: 10vh !important;
+}
+.login-wrapper {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 100px;
+  padding-right: 100px;
+}
+.custom-btn {
+  color: #ffffff;
+  background-image: linear-gradient(135deg, #243a9c 0%, #1F2667 100%) !important;
+}
+.widget-auth-info {
+  color: #000000 !important;
+  /* font-weight: 500; */
+  margin-top: 20px;
+  border-top: 1px solid rgb(213, 216, 222);
+}
+@media screen and (max-width: 798px) {
+  .login-wrapper {
+    width: 100%;
+    padding-left: 12px;
+    padding-top: 50px;
+    padding-right: 12px;
+  }
+  .login-form {
+    padding: 10px;
+  }
+}
+</style>
