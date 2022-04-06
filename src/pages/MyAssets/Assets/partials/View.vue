@@ -12,7 +12,7 @@
                 <button class="dropdown-item color-inherit" v-if="propertyYearInfo[0].value == currentYear" @click="openConfirm3=true" >Sell Property</button>
                 <button class="dropdown-item color-inherit" v-else @click="openConfirm1=true" >Sell your portion</button>
                 <button class="dropdown-item" >Track quick sale history</button>
-                <button class="dropdown-item" >Something else here</button>
+                <button class="dropdown-item" @click="$router.replace(data.url)" >View on website</button>
             </div>
         </div>
        </div>
