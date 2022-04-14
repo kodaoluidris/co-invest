@@ -180,7 +180,7 @@
                 </div>
                 </Widget>
             </b-col>
-            <!-- DIALOGS -->
+           
             <v-dialog
             v-model="openConfirm1"
             max-width="390"
