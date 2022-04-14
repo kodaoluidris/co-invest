@@ -232,11 +232,12 @@ export default {
                     })
 
                     return this.$router.push({name: 'MainPropertyDetails', params:{mainPropertyId: res.data.data.mp_id}})
-                }
+                }                 
                 this.data = res.data.data;
             }).catch((err) => {
                 if(err.response.status == 404) {
-                    this.$toast.error('Main property group not found!', {
+                    
+                    this.$toast.error('Group not found, it has probably been deactivated or removed', {
                         position: 'top-center',
                         timeout: 5000,
                         closeOnClick: true,
@@ -250,7 +251,23 @@ export default {
                         icon: true,
                         rtl: false,
                     })
+                    return this.$router.push({name: 'MainPropertyDetails', params:{mainPropertyId: this.$route.params.mainGroupPropertyId}})
+
                 }
+                this.$toast.error(err.response.data.message, {
+                    position: 'top-center',
+                    timeout: 5000,
+                    closeOnClick: true,
+                    pauseOnFocusLoss: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    draggablePercent: 0.6,
+                    showCloseButtonOnHover: false,
+                    hideProgressBar: true,
+                    closeButton: 'button',
+                    icon: true,
+                    rtl: false,
+                })
               
             })
         },
