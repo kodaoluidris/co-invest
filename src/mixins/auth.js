@@ -5,14 +5,24 @@ export default {
     },
   methods: {
     dynamic_route(endUrl) { 
+<<<<<<< HEAD
         // return `http://localhost:2000/api${endUrl}`;
+=======
+        return `http://co_invest_backend.test/api${endUrl}`;
+        console.log(process.env.VUE_APP_BASE_AUTH_URL);
+>>>>>>> 379b7898d1e47a7374d5760af5486cc8169d6786
 
         return process.env.VUE_APP_BASE_URL+endUrl
       },
       dynamic_auth_route(endUrl) {
         // return `http://api.diimtech.com/api/${endUrl}`;
+<<<<<<< HEAD
         // return `http://localhost:2000/api/auth${endUrl}`;
        
+=======
+        return `http://co_invest_backend.test/api/auth${endUrl}`;
+        console.log(process.env);
+>>>>>>> 379b7898d1e47a7374d5760af5486cc8169d6786
         return process.env.VUE_APP_BASE_AUTH_URL+endUrl
       },
       logoutUser() {

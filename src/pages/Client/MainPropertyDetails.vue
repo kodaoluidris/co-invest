@@ -4,7 +4,7 @@
             <div class="wrapper">
                 <div>
                     <div class="row">
-                        <div class="col-md-3 p-0" v-for="(im,i) in 4" :key="i">
+                        <div class="col-md-4 p-0" v-for="(im,i) in 3" :key="i">
                             <img :src="data.image[i].image" class="w-100 thumbnail" style="height:400px">
                         </div>
                        
@@ -91,7 +91,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="tab-pane" id="tabs-3" role="tabpanel">
+                                    <!-- <div class="tab-pane" id="tabs-3" role="tabpanel">
                                         <div class="tab-details">
                                             <ul class="left-table">
                                                 <li>
@@ -146,7 +146,7 @@
                                                 </li>
                                             </ul>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
@@ -160,10 +160,10 @@
                             </div>
                             <div class="top-agent pr-1" v-if="data.all_groups.length">
                                 <div class="ta-item" v-for="(g,i) in data.all_groups" :key="i">
-                                    <b-link :to="{name:'MainPropertyGroupDetails', params:{mainGroupPropertyId: g.id}}" target="_blank">
+                                    <b-link :to="{name:'MainPropertyGroupDetails', params:{mainPropertyId: $route.params.mainPropertyId,mainGroupPropertyId: g.id}}" target="_blank">
                                         <div class="ta-pic set-bg"  :style="`background-image: url(&quot;${data.image[0].image}&quot;);`"></div>
                                         <div class="ta-text">
-                                            <h6><a href="#">Group {{ i + 1}}</a>  <span v-if="g.group_open" class="float-right badge d-inline text-white " style="background:#017db3">Open</span>
+                                            <h6><a href="#">{{g.group_name}}</a>  <span v-if="g.group_open" class="float-right badge d-inline text-white " style="background:#017db3">Open</span>
                                             <span v-else class="float-right badge d-inline text-white badge-warning">Closed</span></h6>
                                             <span>Slot <b>{{g.no_of_people}}</b> &nbsp; &nbsp; Available <b>{{g.no_of_people - g.no_of_people_reg}}</b></span>
                                             <div class="ta-num mb-2">

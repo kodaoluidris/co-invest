@@ -4,7 +4,8 @@
             <div class="container-fluid contain">
                 <!-- Brand -->
                 <a class="navbar-brand logo" href="/home">
-                    <h5><span style="color: #017db3; font-weight: 700">Co</span><span>Invest</span></h5>
+                    <!-- <h5><span style="color: #017db3; font-weight: 700">Co</span><span>Invest</span></h5> -->
+                    <img src="/img/lifecardbg.png" alt="lifecard coinvest logo" width="100">
                 </a>
 
                 <!-- Toggler/collapsibe Button -->
