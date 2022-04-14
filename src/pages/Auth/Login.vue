@@ -96,7 +96,7 @@ export default {
       form:{},
       passwordRules: [
         v => !!v || 'Password is required',
-        v => v.length >= 5 || 'Password should be at least 8 characters',
+        v => v.length >= 8 || 'Password should be at least 8 characters',
       ],
       emailRules: [
         v => !!v || 'E-mail is required',
