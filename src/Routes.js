@@ -41,6 +41,7 @@ const BuyNow = () => import('@/pages/Client/BuyNow')
 const Users = () => import('@/pages/ManageUsers/Index')
 
 const FinalSales = () => import('@/pages/FinalSales/Index')
+const ManageGroup = () => import('@/pages/ManageGroups/Index')
 
 
 Vue.use(Router);
@@ -64,7 +65,7 @@ export default new Router({
       component: MainPropertyDetails,
     },
     {
-      path: '/home/main-property/groups/details/:mainGroupPropertyId',
+      path: '/home/main-property/groups/details/:mainPropertyId/:mainGroupPropertyId',
       name: 'MainPropertyGroupDetails',
       component: MainPropertyGroupDetails,
     },
@@ -139,6 +140,11 @@ export default new Router({
           component: Users,
         },
         {
+          path: 'manage/groups',
+          name: 'ManageGroups',
+          component: ManageGroup,
+        },
+        {
           path: 'sale-requests',
           name: 'SaleRequest',
           component: FinalSales,
@@ -194,7 +200,7 @@ export default new Router({
           name: 'GoogleMapPage',
           component: GoogleMapPage,
         },
-        { path: "/:pathMatch(.*)*", component: AnalyticsPage }
+        // { path: "/:pathMatch(.*)*", component: AnalyticsPage }
       ],
     },
   ],
