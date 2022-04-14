@@ -5,7 +5,7 @@ export default {
     },
   methods: {
     dynamic_route(endUrl) { 
-        return `http://co_invest_backend.test/api${endUrl}`;
+        return `http://co_invest_backend.test/api/auth${endUrl}`;
         console.log(process.env.VUE_APP_BASE_AUTH_URL);
 
         return process.env.VUE_APP_BASE_URL+endUrl
