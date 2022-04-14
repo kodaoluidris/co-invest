@@ -19,7 +19,7 @@
             :activeItem="activeItem"
             header="Dashboard"
             link="/app/dashboard"
-            iconName="flaticon-home"
+            iconName="flaticon-homew"
             index="dashboard"
             isHeader
         />
@@ -28,7 +28,7 @@
             v-if="authType.name == 'superadmin'"
             header="Properties"
             link="/app/manage-properties/properties"
-            iconName="flaticon-home"
+            iconName="flaticon-property"
             index="properties"
             isHeader
         />
@@ -37,7 +37,7 @@
             v-if="authType.name == 'superadmin'"
             header="Property Types"
             link="/app/manage-properties/property-types"
-            iconName="flaticon-home"
+            iconName="flaticon-property1"
             index="property-types"
             isHeader
         />
@@ -46,16 +46,25 @@
             v-if="authType.name == 'superadmin'"
             header="Main Properties"
             link="/app/manage-properties/main-properties"
-            iconName="flaticon-home"
+            iconName="flaticon-main-property"
             index="main-properties"
             isHeader
         />
         <NavLink
           v-if="authType.name == 'superadmin'"
           :activeItem="activeItem"
+          header="Manage Groups"
+          link="/app/manage/groups"
+          iconName="flaticon-groups"
+          index="groups"
+          isHeader
+        />
+        <NavLink
+          v-if="authType.name == 'superadmin'"
+          :activeItem="activeItem"
           header="Manage Users"
           link="/app/users"
-          iconName="flaticon-user"
+          iconName="sflaticon-users"
           index="users"
           isHeader
         />
@@ -73,7 +82,7 @@
           :activeItem="activeItem"
           header="Admin Quick Sales"
           link="/app/manage-sales/quick-sales"
-          iconName="flaticon-user"
+          iconName="flaticon-admin-quick"
           index="admin"
           isHeader
         />
@@ -82,7 +91,7 @@
           :activeItem="activeItem"
           header="Investment"
           link="/app/my-investments/index"
-          iconName="flaticon-home"
+          iconName="flaticon-investment"
           index="investment"
           isHeader
         />
@@ -91,7 +100,7 @@
           :activeItem="activeItem"
           header="Market Place"
           link="/app/market-place/index"
-          iconName="flaticon-home"
+          iconName="flaticon-market-place"
           index="market"
           isHeader
         />

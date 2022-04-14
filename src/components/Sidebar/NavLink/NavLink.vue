@@ -2,7 +2,19 @@
   <li v-if="!childrenLinks && isHeader" :class="{headerLink: true, className}">
     <router-link :to="link" class="sidebar-link">
       <span class="icon">
-        <i :class="fullIconName"></i>
+        <i :class="fullIconName">
+          <span class="h4"  v-if="iconName=='flaticon-groups'"><i class="mdi mdi-lightbulb-group"></i></span>
+          <span class="h4"  v-if="iconName=='flaticon-property'"><i class="mdi mdi-application"></i></span>
+          <span class="h4"  v-if="iconName=='flaticon-property1'"><i class="mdi mdi-application-edit"></i></span>
+          <span class="h4"  v-if="iconName=='flaticon-main-property'"><i class="mdi mdi-image-filter-hdr"></i></span>
+          <span class="h4"  v-if="iconName=='sflaticon-users'"><i class="mdi mdi-account-group-outline"></i></span>
+          <span class="h4"  v-if="iconName=='flaticon-market'"><i class="mdi mdi-store-marker"></i></span>
+          <span class="h4"  v-if="iconName=='flaticon-admin-quick'"><i class="mdi mdi-shield-crown"></i></span>
+          <span class="h4"  v-if="iconName=='flaticon-homew'"><i class="mdi mdi-view-dashboard"></i></span>
+          <span class="h4"  v-if="iconName=='flaticon-investment'"><i class="mdi mdi-receipt"></i></span>
+          <span class="h4"  v-if="iconName=='flaticon-market-place'"><i class="mdi mdi-cellphone-key"></i></span>
+          
+        </i>
       </span>
       {{header}} <sup v-if="label" :class="'text-' + labelColor" class="headerLabel">{{label}}</sup>
       <b-badge v-if="badge" variant="primary" pill>{{badge}}</b-badge>
