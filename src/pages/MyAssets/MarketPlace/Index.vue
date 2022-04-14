@@ -47,20 +47,27 @@
                                             <p class="mb-2 text-muted">Price</p>
                                             <div class="mt-2 d-md-flex justify-content-between ">
                                             <h3 class="font-weight-light">₦  {{m.amount}}</h3>
-                                                <div v-if="m.status_action == null">
-                                                    <button class="mx-1 btn btn-success btn-sm" @click="reply_to_notification('interested',m.id, m.mpg_id)">Interested</button>
-                                                    <button class="mx-1 btn btn-danger btn-sm" @click="reply_to_notification('notInterested',m.id,m.mpg_id)">Not Interested</button>
-                                                    
+                                                <div v-if="m.mpg_status =='active'">
+                                                    <div v-if="m.status_action == null">
+                                                        <button class="mx-1 btn btn-success btn-sm" @click="reply_to_notification('interested',m.id, m.mpg_id)">Interested</button>
+                                                        <button class="mx-1 btn btn-danger btn-sm" @click="reply_to_notification('notInterested',m.id,m.mpg_id)">Not Interested</button>
+                                                        
+                                                    </div>
+                                                    <div v-else>
+                                                        <button 
+                                                            class="btn" 
+                                                            disabled
+                                                            :class="{
+                                                                'btn-danger': m.status_action =='notInterested',
+                                                                'btn-success': m.status_action =='interested',
+                                                            }
+                                                        ">{{m.status_action}}</button>
+                                                    </div>
                                                 </div>
                                                 <div v-else>
-                                                    <button 
-                                                        class="btn" 
-                                                        disabled
-                                                        :class="{
-                                                            'btn-danger': m.status_action =='notInterested',
-                                                            'btn-success': m.status_action =='interested',
-                                                        }
-                                                    ">{{m.status_action}}</button>
+                                                    <p class="text-danger">
+                                                        Group Deactivated, no actions can be made.
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -103,66 +110,73 @@
                                                     <p class="mb-1 mt-4 text-muted">Price</p>
                                                     <h5 class="font-weight-light">₦  {{Number(m.amount).toLocaleString()}}</h5>
                                                     <p class="mt-5 mb-1 text-muted">Interactors</p>
-                                                    <table 
-                                                        v-if="m.interactors.length"
-                                                        style="width:100% !important" 
-                                                        class=" table table-responsive-sm table-hover table-striped">
-                                                        <tr>
-                                                            <th>Contact Info</th>
-                                                            <th>Status</th>
-                                                            <th>Action</th>
-                                                        </tr>
-                                                        <tr v-for="(inv, index) in m.interactors" :key="index">
-                                                            <td>
-                                                                <p class="text-muted mb-1">{{inv.buyer_fname + ' ' + inv.buyer_lname}}</p>
-                                                                <p class="text-muted mb-1">{{inv.buyer_email}}</p>
+                                                    <div v-if="m.mpg_status == 'active'">
+                                                        <table 
+                                                            v-if="m.interactors.length"
+                                                            style="width:100% !important" 
+                                                            class=" table table-responsive-sm table-hover table-striped">
+                                                            <tr>
+                                                                <th>Contact Info</th>
+                                                                <th>Status</th>
+                                                                <th>Action</th>
+                                                            </tr>
+                                                            <tr v-for="(inv, index) in m.interactors" :key="index">
+                                                                <td>
+                                                                    <p class="text-muted mb-1">{{inv.buyer_fname + ' ' + inv.buyer_lname}}</p>
+                                                                    <p class="text-muted mb-1">{{inv.buyer_email}}</p>
 
-                                                            </td>
-                                                            <td>
-                                                                <span
-                                                                    class="badge badge-spill"
-                                                                    :class="{
-                                                                        'badge-danger': inv.status_action =='notInterested',
-                                                                        'badge-warning': inv.status_action =='interested',
-                                                                    }"
-                                                                    
-                                                                >
-                                                                    {{inv.status_action =='notInterested' ? 'Not Interested' : inv.status_action}}
-                                                                </span>
-                                                            </td>
-                                                            <td>
-                                                                <button 
-                                                                    :disabled="inv.status_action =='notInterested'" 
-                                                                    class="btn btn-success btn-sm"
-                                                                    @click="
-                                                                        openConfirm1=true;
-                                                                        currentMarketPlaceTransaction={
-                                                                            quick_sale_id:m.id,
-                                                                            user_id: m.owner_id,
-                                                                            buyer_id:inv.user_id,
-                                                                            quick_sale_history_id:inv.id,
-                                                                            status_action:inv.status_action,
-                                                                            fullName: inv.buyer_fname + ' ' + inv.buyer_lname
-                                                                        }
-                                                                    "
-                                                                >
-                                                                    {{inv.status_action == 'notInterested' ? 'No Action' : 'Sell to'}}
-                                                                </button>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
+                                                                </td>
+                                                                <td>
+                                                                    <span
+                                                                        class="badge badge-spill"
+                                                                        :class="{
+                                                                            'badge-danger': inv.status_action =='notInterested',
+                                                                            'badge-warning': inv.status_action =='interested',
+                                                                        }"
+                                                                        
+                                                                    >
+                                                                        {{inv.status_action =='notInterested' ? 'Not Interested' : inv.status_action}}
+                                                                    </span>
+                                                                </td>
+                                                                <td>
+                                                                    <button 
+                                                                        :disabled="inv.status_action =='notInterested'" 
+                                                                        class="btn btn-success btn-sm"
+                                                                        @click="
+                                                                            openConfirm1=true;
+                                                                            currentMarketPlaceTransaction={
+                                                                                quick_sale_id:m.id,
+                                                                                user_id: m.owner_id,
+                                                                                buyer_id:inv.user_id,
+                                                                                quick_sale_history_id:inv.id,
+                                                                                status_action:inv.status_action,
+                                                                                fullName: inv.buyer_fname + ' ' + inv.buyer_lname
+                                                                            }
+                                                                        "
+                                                                    >
+                                                                        {{inv.status_action == 'notInterested' ? 'No Action' : 'Sell to'}}
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
 
-                                                    <div v-else class="alert alert-secondary shadow-sm">
-                                                        <h4>No Interactors Yet</h4>
+                                                        <div v-else class="alert alert-secondary shadow-sm">
+                                                            <h4>No Interactors Yet</h4>
+                                                        </div>
+                                                        <div v-if="m.no_interest" class="alert alert-info">
+                                                            <p>
+                                                                Our system has flagged this quick sale as <b>None Interactive.</b>
+                                                            </p>
+                                                            <p>
+                                                                Since no one in your group showed interest to buy, dont worry. Your quick sale details has been pushed
+                                                                to the Admin. They will take it from there.
+                                                            </p>
+                                                        </div>
                                                     </div>
-                                                    <div v-if="m.no_interest" class="alert alert-info">
-                                                        <p>
-                                                            Our system has flagged this quick sale as <b>None Interactive.</b>
-                                                        </p>
-                                                        <p>
-                                                            Since no one in your group showed interest to buy, dont worry. Your quick sale details has been pushed
-                                                            to the Admin. They will take it from there.
-                                                        </p>
+                                                    <div v-else>
+                                                        <div v-if="m.mpg_status =='inactive'" class="alert alert-danger shadow-sm">
+                                                            <h4>This group has being deactivated, contact the admin for more info</h4>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                

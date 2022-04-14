@@ -313,6 +313,8 @@ export default {
             payload.append('price', this.form.price)
             payload.append('groups', this.form.group)
             payload.append('appreciate', this.form.appreciate)
+            payload.append('appreciate_percent', this.form.appreciate_percent)
+            payload.append('location', this.form.location)
             payload.append('property_type_id', this.form.property_type_id)
             for (let i = 0; i < productImgArray.length; i++) {
                 payload.append('image[]', productImgArray[i])
