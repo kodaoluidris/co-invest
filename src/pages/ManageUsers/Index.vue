@@ -107,6 +107,14 @@
                                                 <i class="mdi mdi-square-edit-outline mr-1"></i> Edit Details
                                                 </v-list-item-title>
                                             </v-list-item>
+                                            <v-list-item>
+                                                <v-list-item-title
+                                                style="cursor:pointer"
+                                                @click="setCurrent(user); $bvModal.show('investments')"
+                                                >
+                                                <i class="mdi mdi-briefcase-account-outline mr-1"></i> View Investments
+                                                </v-list-item-title>
+                                            </v-list-item>
                                             <v-list-item v-if="user.status == 'active'">
                                                 <v-list-item-title
 
@@ -118,7 +126,6 @@
                                                     >
                                                         <i class=" mdi mdi-toggle-switch-outline"></i> <span style="font-size:13px !important"> Deactivate Account</span>
                                                     </button>
-                                                <!-- <i class="mdi mdi-toggle-switch-outline mr-1"></i> Deactivate -->
                                                 </v-list-item-title>
                                             </v-list-item>
                                             <v-list-item v-else>
@@ -131,7 +138,6 @@
                                                     >
                                                         <i class=" mdi mdi-toggle-switch-outline"></i> <span style="font-size:13px !important"> Activate Account</span>
                                                     </button>
-                                                <!-- <i class="mdi mdi-toggle-switch-outline mr-1"></i> Activate -->
                                                 </v-list-item-title>
                                             </v-list-item>
                                             <v-list-item>
@@ -164,6 +170,11 @@
     <!--  Edit user modal -->
     <b-modal size="md" style="background:white" title="Edit user details" id="edit" hide-footer>
         <edit :authToken="auth_token" :user="currentUser" @updated="getUsers" />
+    </b-modal>
+
+    <!--  User Investments modal -->
+    <b-modal size="xl" style="background:white" :title="`View ${currentUser.fullname} Investments`" id="investments" hide-footer>
+        <userInvestments :user="currentUser" />
     </b-modal>
 
     <!-- toggle status dialog -->
@@ -288,10 +299,11 @@ import VueElementLoading from 'vue-element-loading'
 import { mapState, mapActions } from 'vuex';
 import axios from "axios"
 import edit from '@/pages/ManageUsers/Partials/EditUser'
+import userInvestments from '@/pages/ManageUsers/Partials/UserInvestments'
 
 export default {
   name: 'ManageUsers',
-  components: { Widget, VueElementLoading, edit },
+  components: { Widget, VueElementLoading, edit,userInvestments },
   data() {
     return {
         loading: false,
