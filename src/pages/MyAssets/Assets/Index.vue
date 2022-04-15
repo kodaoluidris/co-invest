@@ -78,7 +78,7 @@ export default {
         fetchData() {
             this.loading = true
             axios
-            .post(this.dynamic_route('/client/my-investments/'),
+            .post(this.dynamic_route('/client/my-investments/all'),
             {
                 user_id: this.auth_data.id
             },
