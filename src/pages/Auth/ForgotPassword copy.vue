@@ -1,48 +1,50 @@
 <template>
-  <v-app>
-    <div class="auth-page">
-      <div class="login-wrapper">
-        <div class="card password-forget mx-auto">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="mx-auto py-5 px-md-8 login-form">
-                <div class="text-center mt-10 mb-7">
-                  <img src="/img/lifecardbg.png" alt="" width="120"> 
-                </div>
-                <p>
-                    Provide your email for password reset link.
-                </p>
-                <v-form class="mt" @submit.prevent="Reset">
-                  <VueElementLoading
-                    :active="loading"
-                    spinner="bar-fade-scale"
-                    color="var(--primary)"
-                    text="Loading.."
-                    duration="0.6"
-                  />
-                  <v-text-field
-                    v-model="form.email"
-                    :rules="emailRules"
-                    label="Email"
-                    type="email"
-                    required
-                  ></v-text-field>
-                  <b-button type="submit" block class="auth-btn mt-3 btn-lg custom-btn">Reset</b-button>
-                  
-                </v-form>
-                <p class="widget-auth-info text-center py-2">
-                  <router-link  to="/login">Back to Login</router-link>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- <footer class="auth-footer">
-        2019 &copy; Sing App Vue Admin Dashboard Template - Made by <a href="https://flatlogic.com/">Flatlogic</a>
-      </footer> -->
-    </div>
-  </v-app>
+  <div class="auth-page">
+    <b-container>
+      <h5 class="auth-logo">
+        <i class="fa fa-circle text-primary"></i>
+        Co Invest
+        <i class="fa fa-circle text-danger"></i>
+      </h5>
+     
+      <Widget v-if="sent" class="widget-auth mx-auto" title="<h3 class='mt-0'>Email </h3>" customHeader>
+        <p class="widget-auth-info">
+            {{message}}
+        </p>
+        <b-button  size="sm" class="auth-btn mb-3" variant="inverse">
+            <router-link class="d-block text-center" to="/login">Back to login</router-link>
+
+        </b-button>
+
+      </Widget>
+       <Widget v-else class="widget-auth mx-auto" title="<h3 class='mt-0'>Email </h3>" customHeader>
+        <p class="widget-auth-info">
+            Provide your email for password reset link.
+        </p>
+        <v-form class="mt" @submit.prevent="Reset">
+          <VueElementLoading
+            :active="loading"
+            spinner="bar-fade-scale"
+            color="var(--primary)"
+            text="Loading.."
+            duration="0.6"
+          />
+          <v-text-field
+            v-model="form.email"
+            :rules="nameRules"
+            label="Email"
+            type="email"
+            required
+          ></v-text-field>
+          <b-button type="submit" size="sm" class="auth-btn mb-3" variant="inverse">Reset</b-button>
+          
+        </v-form>
+      </Widget>
+    </b-container>
+    <!-- <footer class="auth-footer">
+      2019 &copy; Sing App Vue Admin Dashboard Template - Made by <a href="https://flatlogic.com/">Flatlogic</a>
+    </footer> -->
+  </div>
 </template>
 
 <script>
@@ -55,12 +57,10 @@ export default {
   components: { Widget,VueElementLoading },
   data() {
     return {
-      valid: false,
       errorMessage: null,
       form:{},
-      emailRules: [
-        v => !!v || 'E-mail is required',
-        v => /.+@.+/.test(v) || 'E-mail must be valid',
+      nameRules: [
+        v => !!v || 'This field  is required',
       ],
       loading: false,
       message:'',
@@ -152,49 +152,3 @@ export default {
   },
 };
 </script>
-<style scoped>
-.card {
-  border-radius: 0 !important;
-  border: none !important;
-  box-shadow: 0 4px 24px 0 rgb(34 41 47 / 40%);
-
-}
-.password-forget {
-  width: 40%;
-}
-.auth-page {
-  background-image: linear-gradient(135deg, #243a9c 0%, #1F2667 100%);
-  padding-top: 10vh !important;
-}
-.login-wrapper {
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 100px;
-  padding-right: 100px;
-}
-.custom-btn {
-  color: #ffffff;
-  background-image: linear-gradient(135deg, #243a9c 0%, #1F2667 100%) !important;
-}
-.widget-auth-info {
-  color: #000000 !important;
-  /* font-weight: 500; */
-  margin-top: 20px;
-  border-top: 1px solid rgb(213, 216, 222);
-}
-@media screen and (max-width: 798px) {
-  .login-wrapper {
-    width: 100%;
-    padding-left: 12px;
-    padding-top: 50px;
-    padding-right: 12px;
-  }
-  .login-form {
-    padding: 10px;
-  }
-  .password-forget {
-    width: 100%;
-  }
-}
-</style>
