@@ -3,12 +3,47 @@
         <div class="details-banner">
             <div class="wrapper">
                 <div>
-                    <div class="row">
-                        <div class="col-md-4 p-0" v-for="(im,i) in 3" :key="i">
+                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="carousel-item" v-bind:class="{ 'active': i==1}" v-for="(im,i) in 2" :key="i">
+                                <div class="row">
+                                    <div class="col-md-6 col-12 p-0" >
+                                        <img :src="data.image[i].image" class="w-100 thumbnail" style="height:400px">
+                                    </div>
+                                     <div class="col-md-6 col-12 p-0" >
+                                        <img :src="data.image[i+1].image" class="w-100 thumbnail" style="height:400px">
+                                    </div>
+                                </div>
+                                
+                            <!-- <img class="d-block w-100" src="..." alt="First slide"> -->
+                            </div>
+                            <!-- <div class="carousel-item">
+                            <img class="d-block w-100" src="..." alt="Second slide">
+                            </div>
+                            <div class="carousel-item">
+                            <img class="d-block w-100" src="..." alt="Third slide">
+                            </div> -->
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                    <!-- <div class="row">
+                        <div class="col-md-6 p-0" v-for="(im,i) in 2" :key="i">
                             <img :src="data.image[i].image" class="w-100 thumbnail" style="height:400px">
                         </div>
                        
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

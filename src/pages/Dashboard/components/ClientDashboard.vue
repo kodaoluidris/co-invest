@@ -8,7 +8,7 @@
                     <div class="small-box">
                         <div class="d-flex inner">
                         <div>
-                            <h3>{{Number(analytics.total_paid).toLocaleString()}}</h3>
+                            <h3>{{analytics.total_paid ? Number(analytics.total_paid).toLocaleString() : 0}}</h3>
                             <p>Amount Spent</p>
                         </div>
                         <span class="b-avatar badge-light-primary rounded-circle ml-auto" style="width: 58px; height: 58px;">
@@ -29,7 +29,7 @@
                     <div class="small-box">
                         <div class="d-flex inner">
                         <div>
-                            <h3>{{analytics.total_bought}}</h3>
+                            <h3>{{analytics.total_bought ? analytics.total_bought : 0}}</h3>
                             <p>Property Bought</p>
                         </div>
                         <span class="b-avatar badge-light-info rounded-circle ml-auto" style="width: 58px; height: 58px;">
@@ -52,7 +52,7 @@
                     <div class="small-box">
                         <div class="d-flex inner">
                         <div>
-                            <h3>{{analytics.total_groups}}</h3>
+                            <h3>{{analytics.total_groups ? analytics.total_groups : 0}}</h3>
                             <p>Groups</p>
                         </div>
                         <span class="b-avatar badge-light-danger rounded-circle ml-auto" style="width: 58px; height: 58px;">

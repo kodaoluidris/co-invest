@@ -31,10 +31,10 @@
                             <img class="avatar" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZmlsZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" style="width:100%" alt="">
                         </div>
                         <div class="profile_content">
-                            <h4 class="">Kodaolu Idris</h4>
-                            <span class="d-block my-2">User type</span>
-                            <small class="mb-3">admin@gmail.com</small>
-                            <button class="mt-5 p-2 btn btn-block btn-primary">
+                            <h4 class="">{{form.lname}}  {{form.fname}} {{form.mname}}</h4>
+                            <span class="d-block my-2">{{form.user_type.name}}</span>
+                            <small class="mb-3">{{form.email}}</small>
+                            <button class="mt-5 p-2 btn btn-block btn-primary" :disabled="disableEdit">
                                 Change Password
                             </button>
 
@@ -60,7 +60,9 @@
                         duration="0.6"
                     />
                     <p class="text-muted font-weight-light">Hi, {{form.fname}} 
-                        <button  class="float-right btn btn-primary" type="submit">Edit info</button>
+                        <span class="text text-danger ml-md-5" v-if="disableEdit">Please Click on the edit info button to enable edit 👉</span>                        
+                        <button  class="float-right btn btn-primary" type="submit" v-if="disableEdit" @click="enableEdit">Edit info</button>
+                        <button  class="float-right btn btn-primary" type="submit" v-else @click="enableEdit">Disable Fields</button>
                         
                         </p>
                     <V-form class="mt-4" @submit.prevent="save">
@@ -74,6 +76,7 @@
                                 <v-text-field
                                 label="First name*"
                                 v-model="form.fname"
+                                :disabled="disableEdit"
                                 :rules="nameRule"
                                 required
                                 ></v-text-field>
@@ -88,6 +91,7 @@
                                 label="Last name*"
                                 v-model="form.lname"
                                 :rules="nameRule"
+                                :disabled="disableEdit"
                                 required
                                 ></v-text-field>
                             </v-col>
@@ -101,6 +105,7 @@
                                 label="Middle name*"
                                 v-model="form.mname"
                                 :rules="nameRule"
+                                :disabled="disableEdit"
                                 required
                                 ></v-text-field>
                             </v-col>
@@ -115,6 +120,7 @@
                                 label="User name*"
                                 v-model="form.username"
                                 :rules="nameRule"
+                                :disabled="disableEdit"
                                 required
                                 ></v-text-field>
                             </v-col>
@@ -128,6 +134,7 @@
                                 label="Email*"
                                 v-model="form.email"
                                 :rules="nameRule"
+                                :disabled="disableEdit"
                                 required
                                 ></v-text-field>
                             </v-col>
@@ -141,6 +148,7 @@
                                 label="Phone*"
                                 v-model="form.phone"
                                 :rules="nameRule"
+                                :disabled="disableEdit"
                                 required
                                 ></v-text-field>
                             </v-col>
@@ -155,6 +163,7 @@
                                     :items="['male', 'female']"
                                     label="Gender*"
                                     :rules="nameRule"
+                                    :disabled="disableEdit"
                                 ></v-select>
                             </v-col>
                             <v-col
@@ -170,6 +179,7 @@
                                     item-text="name"
                                     item-value="name"
                                     :rules="nameRule"
+                                    :disabled="disableEdit"
                                     dense
                                 ></v-select>
                             </v-col>
@@ -177,6 +187,7 @@
                         <v-card-actions>
                             <v-spacer></v-spacer>
                             <button
+                                :disabled="disableEdit"
                                 class="btn btn-primary"
                                 type="submit"
                             >
@@ -201,6 +212,7 @@ export default {
     data(){
         return {
             loading: false,
+            disableEdit: true,
             form: {},
             countries: countries,
             nameRule: [
@@ -240,6 +252,9 @@ export default {
             .finally(() => {
             this.loading = false
             })
+        },
+        enableEdit(){
+            this.disableEdit = !this.disableEdit
         },
         
         save() {

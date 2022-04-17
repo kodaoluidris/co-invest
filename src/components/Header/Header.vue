@@ -11,16 +11,20 @@
       </b-nav-item>
     </b-nav>
     <b-nav>
-      <!-- <b-form class="d-sm-down-none ml-5" inline>
+      <b-form class="d-sm-down-none ml-5" inline>
         <b-form-group>
           <b-input-group class="input-group-no-border">
-            <template v-slot:prepend>
+            <!-- <template v-slot:prepend>
               <b-input-group-text><i class='fi flaticon-search-2'/></b-input-group-text>
-            </template>
-            <b-form-input id="search-input" placeholder="Search Dashboard" />
+            </template> -->
+            <!-- <b-form-input id="search-input" placeholder="Search Dashboard" /> -->
+            <router-link :to="'/'">
+        visit site
+      </router-link>
           </b-input-group>
         </b-form-group>
-      </b-form> -->
+      </b-form>
+      
     </b-nav>
     <!-- <a class="navbarBrand d-md-none">
       <i class="fa fa-circle text-danger" />
@@ -149,4 +153,14 @@ export default {
     left: 22%;
     border-radius: 50%;
   }
+  @media (max-width: 767.98px){
+    .d-sm-down-none {
+      display: inline-flex !important;
+    }
+
+    .notificationsMenu{
+        right: 80% !important;
+    }
+  }
+ 
 </style>

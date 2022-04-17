@@ -69,7 +69,7 @@
               </div>
             </div>
             <div class="col-md-8 d-lg-block d-none">
-              <img src="/img/loginbg2.png" alt="" style="width: 100%">
+              <img src="/img/invest6.webp" alt="" style="width: 100%; height:100%;">
             </div>
           </div>
         </div>
